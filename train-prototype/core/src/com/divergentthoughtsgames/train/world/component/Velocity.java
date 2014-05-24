@@ -1,6 +1,8 @@
 package com.divergentthoughtsgames.train.world.component;
 
-public class Velocity
+import com.divergentthoughtsgames.train.world.Component;
+
+public class Velocity implements Component
 {
 	public float maxSpeed;
 	
