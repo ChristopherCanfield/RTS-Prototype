@@ -5,13 +5,15 @@ import java.util.UUID;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.ArrayMap;
 
-public final class Entity
+public abstract class Entity
 {
 	private UUID id;
 	
 	private ArrayMap<Class<? extends Component>, Component> components;
 	
 	private Array<Controller> controllers;
+	
+	private boolean disposed;
 	
 	protected Entity()
 	{
@@ -43,5 +45,20 @@ public final class Entity
 	public void update()
 	{
 		throw new UnsupportedOperationException();
+	}
+	
+	public void dispose()
+	{
+		disposed = true;
+		onDispose();
+	}
+	
+	protected void onDispose()
+	{
+	}
+	
+	public boolean isDisposed()
+	{
+		return disposed;
 	}
 }
