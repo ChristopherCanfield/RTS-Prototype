@@ -21,23 +21,19 @@ public class KeyboardCameraController extends CameraController
 		if (Gdx.input.isKeyPressed(Keys.LEFT))
 		{
 			moveCamera(-movementPerTick, 0.f);
-			System.out.println("Camera move");
 		}
 		else if (Gdx.input.isKeyPressed(Keys.RIGHT))
 		{
 			moveCamera(movementPerTick, 0.f);
-			System.out.println("Camera move");
 		}
 
 		if (Gdx.input.isKeyPressed(Keys.UP))
 		{
 			moveCamera(0.f, movementPerTick);
-			System.out.println("Camera move");
 		}
 		else if (Gdx.input.isKeyPressed(Keys.DOWN))
 		{
 			moveCamera(0.f, -movementPerTick);
-			System.out.println("Camera move");
 		}
 	}
 }

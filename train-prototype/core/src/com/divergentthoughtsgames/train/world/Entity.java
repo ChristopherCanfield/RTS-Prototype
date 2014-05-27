@@ -23,6 +23,7 @@ public abstract class Entity
 	{
 		this.components = new ArrayMap<>(false, 4);
 		this.controllers = new Array<>(false, 1);
+		this.id = UUID.randomUUID();
 	}
 	
 	public UUID getId()
