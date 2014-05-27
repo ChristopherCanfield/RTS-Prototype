@@ -1,6 +1,8 @@
 package com.divergentthoughtsgames.train.world;
 
-public class Controller
-{
+import com.divergentthoughtsgames.train.World;
 
+public interface Controller
+{
+	void update(World world);
 }

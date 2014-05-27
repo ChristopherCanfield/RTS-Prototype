@@ -2,8 +2,10 @@ package com.divergentthoughtsgames.train.world;
 
 import java.util.UUID;
 
+import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.ArrayMap;
+import com.divergentthoughtsgames.train.World;
 
 public abstract class Entity
 {
@@ -13,9 +15,11 @@ public abstract class Entity
 	
 	private Array<Controller> controllers;
 	
+	private Sprite sprite;
+	
 	private boolean disposed;
 	
-	protected Entity()
+	protected Entity(World world)
 	{
 		this.components = new ArrayMap<>(false, 4);
 		this.controllers = new Array<>(false, 1);
@@ -42,9 +46,22 @@ public abstract class Entity
 		controllers.add(controller);
 	}
 	
-	public void update()
+	protected void setSprite(Sprite sprite)
 	{
-		throw new UnsupportedOperationException();
+		this.sprite = sprite;
+	}
+	
+	public Sprite getSprite()
+	{
+		return sprite;
+	}
+	
+	public void update(World world)
+	{
+		for (final Controller c : controllers)
+		{
+			c.update(world);
+		}
 	}
 	
 	public void dispose()
