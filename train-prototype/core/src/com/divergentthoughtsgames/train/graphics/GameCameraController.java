@@ -15,11 +15,25 @@ public class GameCameraController extends InputListener
 	private boolean moveRight;
 	private boolean moveUp;
 	private boolean moveDown;
+
+	private float movementPerTick = 0.5f;
+	
+	private Camera camera;
 	
 	public GameCameraController(Camera camera)
 	{
 		super();
+		
+		this.camera = camera;
 	}
 
-	
+	public void update()
+	{
+		if (moveLeft)
+		{
+			
+		}
+		camera.position.set(Math.round(tankX), Math.round(tankY), 0.f);
+		camera.update();
+	}
 }
