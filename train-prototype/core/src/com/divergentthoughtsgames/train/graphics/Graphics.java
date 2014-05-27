@@ -7,22 +7,30 @@ import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
+import com.badlogic.gdx.graphics.glutils.ShapeRenderer.ShapeType;
 import com.badlogic.gdx.utils.Array;
 import com.divergentthoughtsgames.train.World;
 import com.divergentthoughtsgames.train.world.Entity;
 
 public class Graphics
 {
-	private Array<Sprite> sprites = new Array<>();
-	private SpriteBatch batch = new SpriteBatch();
+	private final Array<Sprite> sprites = new Array<>();
+	private final SpriteBatch batch = new SpriteBatch();
+	private final ShapeRenderer shapeRenderer = new ShapeRenderer();
 	
 	private Camera camera;
 	
-	private Array<CameraController> cameraControllers = new Array<CameraController>();
+	private final Array<CameraController> cameraControllers = new Array<CameraController>();
 	
 	private World world;
 	
 	private Texture tempTexture;
+	
+	private float selectionRectStartX;
+	private float selectionRectStartY;
+	private float selectionRectEndX;
+	private float selectionRectEndY;
 	
 	public Graphics()
 	{
@@ -61,6 +69,23 @@ public class Graphics
 		cameraControllers.add(c);
 	}
 	
+	public void setSelectionRectStart(float x, float y)
+	{
+		selectionRectStartX = x;
+		selectionRectStartY = y;
+	}
+	
+	public void setSelectionRectEnd(float x, float y)
+	{
+		selectionRectEndX = x;
+		selectionRectEndY = y;
+	}
+	
+	public void resetSelectionRect()
+	{
+		selectionRectStartX = selectionRectStartY = selectionRectEndX = selectionRectEndY = 0;
+	}
+	
 	public void render()
 	{
 		Gdx.gl.glClearColor(1, 0, 0, 1);
@@ -72,7 +97,14 @@ public class Graphics
 		}
 		camera.update();
 		batch.setProjectionMatrix(camera.combined);
+		shapeRenderer.setProjectionMatrix(camera.combined);
 		
+		drawSprites();
+		drawPrimitives();
+	}
+	
+	private void drawSprites()
+	{
 		batch.begin();
 		
 		for (Entity e : world.getEntities())
@@ -86,5 +118,19 @@ public class Graphics
 		}
 		
 		batch.end();
+	}
+	
+	private void drawPrimitives()
+	{
+		if (!(selectionRectStartX == 0 && selectionRectStartY == 0) &&
+				!(selectionRectEndX == 0 && selectionRectEndY == 0))
+		{
+			shapeRenderer.begin(ShapeType.Line);
+			
+			shapeRenderer.rect(selectionRectStartX, selectionRectStartY,
+					selectionRectEndX - selectionRectStartX, selectionRectEndY - selectionRectStartY);
+			
+			shapeRenderer.end();
+		}
 	}
 }

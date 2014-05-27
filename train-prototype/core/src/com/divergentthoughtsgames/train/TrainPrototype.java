@@ -27,7 +27,7 @@ public class TrainPrototype extends ApplicationAdapter
 		graphics.addCameraController(kc);
 		
 		InputMultiplexer inputProcessors = new InputMultiplexer();
-		inputProcessors.addProcessor(new SelectionInputProcessor());
+		inputProcessors.addProcessor(new SelectionInputProcessor(graphics));
 		Gdx.input.setInputProcessor(inputProcessors);
 	}
 
