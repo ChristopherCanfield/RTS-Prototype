@@ -8,6 +8,8 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.utils.Array;
+import com.divergentthoughtsgames.train.World;
+import com.divergentthoughtsgames.train.world.Entity;
 
 public class Graphics
 {
@@ -16,13 +18,37 @@ public class Graphics
 	
 	private Camera camera;
 	
+	private Array<CameraController> cameraControllers = new Array<CameraController>();
+	
+	private World world;
+	
 	private Texture tempTexture;
 	
-	public Graphics(int windowWidth, int windowHeight)
+	public Graphics()
 	{
-		camera = new OrthographicCamera(windowWidth, windowHeight);
+		camera = new OrthographicCamera(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
 		tempTexture = new Texture("badlogic.jpg");
-		addSprite(new Sprite(tempTexture));
+		
+		Sprite sprite = new Sprite(tempTexture);
+		sprite.setPosition(0, 0);
+		addSprite(sprite);
+		
+		batch.getProjectionMatrix().setToOrtho2D(
+				0f, 0f, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
+
+		camera.position.set(Gdx.graphics.getWidth() / 2.f, Gdx.graphics.getHeight() / 2.f, 0.f);
+		camera.update();
+		batch.setProjectionMatrix(camera.combined);
+	}
+	
+	public Camera getCamera()
+	{
+		return camera;
+	}
+	
+	public void setWorld(World world)
+	{
+		this.world = world;
 	}
 	
 	public void addSprite(Sprite sprite)
@@ -30,13 +56,29 @@ public class Graphics
 		sprites.add(sprite);
 	}
 	
+	public void addCameraController(CameraController c)
+	{
+		cameraControllers.add(c);
+	}
+	
 	public void render()
 	{
 		Gdx.gl.glClearColor(1, 0, 0, 1);
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 		
-//		batch.setProjectionMatrix(camera.combined);
+		for (CameraController c : cameraControllers)
+		{
+			c.update();
+		}
+		camera.update();
+		batch.setProjectionMatrix(camera.combined);
+		
 		batch.begin();
+		
+		for (Entity e : world.getEntities())
+		{
+			e.getSprite().draw(batch);
+		}
 		
 		for (Sprite sprite : sprites)
 		{

@@ -17,6 +17,11 @@ public class World
 		entityMap.put(e.getId(), e);
 	}
 	
+	public Array<Entity> getEntities()
+	{
+		return entities;
+	}
+	
 	public void update()
 	{
 		for (final Entity e : entities)
