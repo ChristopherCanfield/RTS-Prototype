@@ -1,6 +1,7 @@
 package com.divergentthoughtsgames.train;
 
 import com.divergentthoughtsgames.train.graphics.Graphics;
+import com.divergentthoughtsgames.train.world.SelectedEntities;
 
 
 public abstract class App
@@ -10,4 +11,6 @@ public abstract class App
 	
 	public static Graphics graphics;
 	public static World world;
+	
+	public static SelectedEntities selected = new SelectedEntities(); 
 }

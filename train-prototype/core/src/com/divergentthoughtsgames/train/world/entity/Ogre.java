@@ -36,7 +36,7 @@ public class Ogre extends Entity
 	{
 		stationaryNorth = new TextureRegion(App.graphics.getTexture(Textures.OrcOgre), 5, 0, 64, 54);
 		sprite = new Sprite(stationaryNorth);
-		sprite.setPosition(300, 400);
+		setPosition(300, 400);
 		
 		walkNorth = new Animation(0.095f, 
 				stationaryNorth,

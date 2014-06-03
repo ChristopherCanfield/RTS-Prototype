@@ -67,6 +67,13 @@ public abstract class Entity
 		return rect;
 	}
 	
+	public void setPosition(float x, float y)
+	{
+		rect.x = x;
+		rect.y = y;
+		sprite.setPosition(x, y);
+	}
+	
 //	protected void addComponent(Component component)
 //	{
 //		components.put(component.getClass(), component);

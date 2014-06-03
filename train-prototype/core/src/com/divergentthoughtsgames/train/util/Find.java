@@ -14,7 +14,10 @@ public abstract class Find
 		ArrayList<Entity> found = new ArrayList<Entity>();
 		for (Entity e : entities)
 		{
-			found.add(e);
+			if (rect.overlaps(e.getRect()))
+			{
+				found.add(e);
+			}
 		}
 		
 		return found;

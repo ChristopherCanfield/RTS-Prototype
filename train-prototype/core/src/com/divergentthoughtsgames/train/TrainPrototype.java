@@ -1,5 +1,6 @@
 package com.divergentthoughtsgames.train;
 
+import com.badlogic.gdx.Application;
 import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.InputMultiplexer;
@@ -35,6 +36,8 @@ public class TrainPrototype extends ApplicationAdapter
 		App.world = world;
 		
 		world.add(new Ogre(world));
+		
+		Gdx.app.setLogLevel(Application.LOG_DEBUG);
 	}
 
 	@Override

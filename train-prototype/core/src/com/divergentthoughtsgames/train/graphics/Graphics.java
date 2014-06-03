@@ -30,7 +30,7 @@ public class Graphics
 	
 	private World world;
 	
-	private Texture tempTexture;
+//	private Texture tempTexture;
 	
 	private float selectionRectStartX;
 	private float selectionRectStartY;
@@ -40,11 +40,11 @@ public class Graphics
 	public Graphics()
 	{
 		camera = new OrthographicCamera(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
-		tempTexture = new Texture("badlogic.jpg");
 		
-		Sprite sprite = new Sprite(tempTexture);
-		sprite.setPosition(0, 0);
-		addSprite(sprite);
+//		tempTexture = new Texture("badlogic.jpg");
+//		Sprite sprite = new Sprite(tempTexture);
+//		sprite.setPosition(0, 0);
+//		addSprite(sprite);
 		
 		batch.getProjectionMatrix().setToOrtho2D(
 				0f, 0f, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
