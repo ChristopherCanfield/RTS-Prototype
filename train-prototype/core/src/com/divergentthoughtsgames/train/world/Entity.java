@@ -57,12 +57,12 @@ public abstract class Entity
 	 */
 //	protected abstract void setControllers();
 	
-	public UUID getId()
+	public final UUID getId()
 	{
 		return id;
 	}
 	
-	public Rectangle getRect()
+	public final Rectangle getRect()
 	{
 		return rect;
 	}
@@ -88,7 +88,7 @@ public abstract class Entity
 //		this.sprite = sprite;
 //	}
 	
-	public void draw(SpriteBatch batch)
+	public final void draw(SpriteBatch batch)
 	{
 		onDraw();
 		
@@ -101,7 +101,7 @@ public abstract class Entity
 	protected abstract void onDraw();
 	
 	
-	public void update()
+	public final void update()
 	{
 		onUpdate();
 		
@@ -116,7 +116,7 @@ public abstract class Entity
 	/**
 	 * Disposes the entity.
 	 */
-	public void dispose()
+	public final void dispose()
 	{
 		disposed = true;
 		onDispose();
@@ -131,7 +131,7 @@ public abstract class Entity
 	 * Specifies whether the entity has been disposed.
 	 * @return true if the entity has been disposed.
 	 */
-	public boolean isDisposed()
+	public final boolean isDisposed()
 	{
 		return disposed;
 	}
