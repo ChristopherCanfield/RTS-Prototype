@@ -27,6 +27,8 @@ public class Ogre extends Entity
 		super(world);
 		
 		rect = new Rectangle(300, 400, 40, 40);
+		spriteOffsetX = -10;
+		spriteOffsetY = 0;
 		selectable = true;
 		
 		setAnimations();

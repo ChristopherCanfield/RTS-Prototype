@@ -9,6 +9,12 @@ import com.divergentthoughtsgames.train.world.Entity;
 
 public abstract class Find
 {
+	/**
+	 * Returns a list of all entities that intersect with the specified rectangle.
+	 * @param rect the bounding rectangle.
+	 * @param entities the list of entities to check.
+	 * @return the list of all entities that intersect with the specified rectangle.
+	 */
 	public static List<Entity> allIntersections(Rectangle rect, Array<Entity> entities)
 	{
 		ArrayList<Entity> found = new ArrayList<Entity>();

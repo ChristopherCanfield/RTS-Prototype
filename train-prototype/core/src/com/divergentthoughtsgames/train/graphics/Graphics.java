@@ -11,6 +11,7 @@ import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer.ShapeType;
+import com.badlogic.gdx.math.Matrix4;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.utils.Array;
@@ -29,6 +30,8 @@ public class Graphics
 	private final Array<CameraController> cameraControllers = new Array<CameraController>();
 	
 	private World world;
+	
+	public boolean debug = false;
 	
 //	private Texture tempTexture;
 	
@@ -123,11 +126,6 @@ public class Graphics
 	{
 		batch.begin();
 		
-		for (Entity e : world.getEntities())
-		{
-			e.draw(batch);
-		}
-		
 		for (Sprite sprite : sprites)
 		{
 			sprite.draw(batch);
@@ -149,6 +147,21 @@ public class Graphics
 					selectionRectEndX - selectionRectStartX, selectionRectEndY - selectionRectStartY);
 			
 			shapeRenderer.end();
+		}
+		
+		if (debug)
+		{
+			Matrix4 originalProjMatrix = shapeRenderer.getProjectionMatrix();
+			shapeRenderer.setProjectionMatrix(camera.combined);
+			
+			shapeRenderer.begin(ShapeType.Line);
+			for (Entity e : world.getEntities())
+			{
+				e.drawRect(shapeRenderer);
+			}
+			shapeRenderer.end();
+			
+			shapeRenderer.setProjectionMatrix(originalProjMatrix);
 		}
 	}
 }

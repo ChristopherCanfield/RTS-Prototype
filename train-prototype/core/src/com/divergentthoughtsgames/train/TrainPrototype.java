@@ -37,7 +37,9 @@ public class TrainPrototype extends ApplicationAdapter
 		
 		world.add(new Ogre(world));
 		
+		// For debugging.
 		Gdx.app.setLogLevel(Application.LOG_DEBUG);
+		graphics.debug = true;
 	}
 
 	@Override

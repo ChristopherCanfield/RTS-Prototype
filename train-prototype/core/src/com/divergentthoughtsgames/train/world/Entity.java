@@ -4,6 +4,7 @@ import java.util.UUID;
 
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.utils.Array;
 import com.divergentthoughtsgames.train.World;
@@ -23,11 +24,17 @@ public abstract class Entity
 	// The list of controllers.
 	private Array<Controller> controllers;
 	
-	// The current sprite.
+	/** The current sprite. **/
 	protected Sprite sprite;
+	/** The bounding rect's x offset from the sprite. **/
+	protected float spriteOffsetX;
+	/** The bounding rect's y offset from the sprite. **/
+	protected float spriteOffsetY;
 	
 	protected Rectangle rect;
+	
 	protected Velocity velocity;
+	
 	protected boolean selectable;
 	
 	// Whether the entity has been disposed.
@@ -71,7 +78,6 @@ public abstract class Entity
 	{
 		rect.x = x;
 		rect.y = y;
-		sprite.setPosition(x, y);
 	}
 	
 //	protected void addComponent(Component component)
@@ -101,7 +107,16 @@ public abstract class Entity
 		
 		if (sprite != null)
 		{
+			sprite.setPosition(rect.x + spriteOffsetX, rect.y + spriteOffsetY);
 			sprite.draw(batch);
+		}
+	}
+	
+	public final void drawRect(ShapeRenderer batch)
+	{
+		if (rect != null)
+		{
+			batch.rect(rect.x, rect.y, rect.width, rect.height);
 		}
 	}
 	
