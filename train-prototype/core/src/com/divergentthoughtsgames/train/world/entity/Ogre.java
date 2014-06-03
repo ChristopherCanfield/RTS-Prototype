@@ -57,7 +57,6 @@ public class Ogre extends Entity
 	protected void onUpdate()
 	{
 		animationTime += Gdx.graphics.getRawDeltaTime();
-		System.out.println("T");
 	}
 
 	@Override

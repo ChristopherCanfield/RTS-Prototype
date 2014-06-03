@@ -11,6 +11,8 @@ import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer.ShapeType;
+import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.utils.Array;
 import com.divergentthoughtsgames.train.World;
 import com.divergentthoughtsgames.train.world.Entity;
@@ -111,7 +113,7 @@ public class Graphics
 		}
 		camera.update();
 		batch.setProjectionMatrix(camera.combined);
-		shapeRenderer.setProjectionMatrix(camera.combined);
+//		shapeRenderer.setProjectionMatrix(camera.combined);
 		
 		drawSprites();
 		drawPrimitives();
