@@ -23,12 +23,15 @@ public class TrainPrototype extends ApplicationAdapter
 		world = new World();
 		graphics.setWorld(world);
 		
-		CameraController kc = new KeyboardCameraController(graphics.getCamera());
-		graphics.addCameraController(kc);
+		CameraController kcc = new KeyboardCameraController(graphics.getCamera());
+		graphics.addCameraController(kcc);
 		
 		InputMultiplexer inputProcessors = new InputMultiplexer();
 		inputProcessors.addProcessor(new SelectionInputProcessor(graphics));
 		Gdx.input.setInputProcessor(inputProcessors);
+		
+		A.graphics = graphics;
+		A.world = world;
 	}
 
 	@Override

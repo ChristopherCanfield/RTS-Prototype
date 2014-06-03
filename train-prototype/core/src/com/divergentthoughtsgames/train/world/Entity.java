@@ -19,11 +19,14 @@ public abstract class Entity
 	
 	private boolean disposed;
 	
+	protected final World world;
+	
 	protected Entity(World world)
 	{
 		this.components = new ArrayMap<>(false, 4);
 		this.controllers = new Array<>(false, 1);
 		this.id = UUID.randomUUID();
+		this.world = world;
 	}
 	
 	public UUID getId()
