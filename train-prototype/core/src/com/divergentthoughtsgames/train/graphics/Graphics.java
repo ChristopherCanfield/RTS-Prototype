@@ -151,7 +151,7 @@ public class Graphics
 		
 		if (debug)
 		{
-			Matrix4 originalProjMatrix = shapeRenderer.getProjectionMatrix();
+			Matrix4 originalProjMatrix = shapeRenderer.getProjectionMatrix().cpy();
 			shapeRenderer.setProjectionMatrix(camera.combined);
 			
 			shapeRenderer.begin(ShapeType.Line);
