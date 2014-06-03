@@ -3,6 +3,7 @@ package com.divergentthoughtsgames.train.input;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.InputAdapter;
 import com.badlogic.gdx.math.Rectangle;
+import com.badlogic.gdx.math.Vector3;
 import com.divergentthoughtsgames.train.App;
 import com.divergentthoughtsgames.train.graphics.Graphics;
 import com.divergentthoughtsgames.train.util.Find;
@@ -23,8 +24,9 @@ public class SelectionInputProcessor extends InputAdapter
 	{
 		System.out.println("touchDown " + x + "," + y);
 		graphics.setSelectionRectStart(x, Gdx.graphics.getHeight() - y);
-		rect.x = x;
-		rect.y = Gdx.graphics.getHeight() - y;
+		Vector3 adjusted = graphics.getCamera().unproject(new Vector3(x, y, 0));
+		rect.x = adjusted.x;
+		rect.y = adjusted.y; //Gdx.graphics.getHeight() - y;
 		App.selected.clear();
 		
 		return false;
@@ -35,7 +37,10 @@ public class SelectionInputProcessor extends InputAdapter
 	{
 		System.out.println("touchUp " + x + "," + y);
 		graphics.resetSelectionRect();
-		setRectWidthHeight(x, Gdx.graphics.getHeight() - y);
+		
+		Vector3 adjusted = graphics.getCamera().unproject(new Vector3(x, y, 0));
+		setRectWidthHeight(adjusted.x, adjusted.y);
+//		setRectWidthHeight(x, Gdx.graphics.getHeight() - y);
 		App.selected.addAll(Find.allIntersections(rect, App.world.getEntities()));
 		
 		// Debug.
@@ -47,7 +52,7 @@ public class SelectionInputProcessor extends InputAdapter
 		return false;
 	}
 	
-	private void setRectWidthHeight(int endX, int endY)
+	private void setRectWidthHeight(float endX, float endY)
 	{
 		if (endX - rect.x < 0)
 		{
