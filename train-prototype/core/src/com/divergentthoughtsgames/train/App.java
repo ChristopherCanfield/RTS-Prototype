@@ -3,7 +3,7 @@ package com.divergentthoughtsgames.train;
 import com.divergentthoughtsgames.train.graphics.Graphics;
 
 
-public abstract class A
+public abstract class App
 {
 	public static final float SCREEN_WIDTH = 800;
 	public static final float SCREEN_HEIGHT = 600;

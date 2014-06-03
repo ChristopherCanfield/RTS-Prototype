@@ -1,5 +1,7 @@
 package com.divergentthoughtsgames.train.graphics;
 
+import java.util.HashMap;
+
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Camera;
 import com.badlogic.gdx.graphics.GL20;
@@ -18,6 +20,7 @@ public class Graphics
 	private final Array<Sprite> sprites = new Array<>();
 	private final SpriteBatch batch = new SpriteBatch();
 	private final ShapeRenderer shapeRenderer = new ShapeRenderer();
+	private final HashMap<String, Texture> textures = new HashMap<>();
 	
 	private Camera camera;
 	
@@ -86,9 +89,20 @@ public class Graphics
 		selectionRectStartX = selectionRectStartY = selectionRectEndX = selectionRectEndY = 0;
 	}
 	
+	public Texture getTexture(String path)
+	{
+		Texture t = textures.get(path);
+		if (t == null)
+		{
+			t = new Texture(path);
+			textures.put(path, t);
+		}
+		return t;
+	}
+	
 	public void render()
 	{
-		Gdx.gl.glClearColor(1, 0, 0, 1);
+		Gdx.gl.glClearColor(0.1f, 0.8f, 0.25f, 1.f);
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 		
 		for (CameraController c : cameraControllers)
@@ -109,13 +123,15 @@ public class Graphics
 		
 		for (Entity e : world.getEntities())
 		{
-			e.getSprite().draw(batch);
+			e.draw(batch);
 		}
 		
 		for (Sprite sprite : sprites)
 		{
 			sprite.draw(batch);
 		}
+		
+		world.draw(batch);
 		
 		batch.end();
 	}

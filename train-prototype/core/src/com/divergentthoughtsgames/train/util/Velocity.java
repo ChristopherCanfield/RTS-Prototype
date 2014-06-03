@@ -1,4 +1,4 @@
-package com.divergentthoughtsgames.train.world.component;
+package com.divergentthoughtsgames.train.util;
 
 import com.divergentthoughtsgames.train.world.Component;
 
@@ -10,6 +10,12 @@ public class Velocity implements Component
 	
 	private float speed;
 	private int direction;
+	
+	public Velocity(float maxSpeed, float accelerationRate)
+	{
+		this.maxSpeed = maxSpeed;
+		this.accelerationRate = accelerationRate;
+	}
 	
 	public float getSpeed()
 	{

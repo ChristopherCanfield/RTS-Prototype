@@ -10,6 +10,7 @@ import com.divergentthoughtsgames.train.graphics.CameraController;
 import com.divergentthoughtsgames.train.graphics.Graphics;
 import com.divergentthoughtsgames.train.graphics.KeyboardCameraController;
 import com.divergentthoughtsgames.train.input.SelectionInputProcessor;
+import com.divergentthoughtsgames.train.world.entity.Ogre;
 
 public class TrainPrototype extends ApplicationAdapter
 {
@@ -30,8 +31,10 @@ public class TrainPrototype extends ApplicationAdapter
 		inputProcessors.addProcessor(new SelectionInputProcessor(graphics));
 		Gdx.input.setInputProcessor(inputProcessors);
 		
-		A.graphics = graphics;
-		A.world = world;
+		App.graphics = graphics;
+		App.world = world;
+		
+		world.add(new Ogre(world));
 	}
 
 	@Override
