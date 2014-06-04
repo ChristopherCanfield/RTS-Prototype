@@ -8,6 +8,7 @@ import com.divergentthoughtsgames.train.graphics.CameraController;
 import com.divergentthoughtsgames.train.graphics.Graphics;
 import com.divergentthoughtsgames.train.graphics.KeyboardCameraController;
 import com.divergentthoughtsgames.train.input.SelectionInputProcessor;
+import com.divergentthoughtsgames.train.world.Entity;
 import com.divergentthoughtsgames.train.world.entity.Ogre;
 
 public class TrainPrototype extends ApplicationAdapter
@@ -33,6 +34,14 @@ public class TrainPrototype extends ApplicationAdapter
 		App.world = world;
 		
 		world.add(new Ogre(world));
+		
+		Entity ogre2 = new Ogre(world);
+		ogre2.setPosition(100, 250);
+		world.add(ogre2);
+		
+		Entity ogre3 = new Ogre(world);
+		ogre3.setPosition(600, 450);
+		world.add(ogre3);
 		
 		// For debugging.
 		Gdx.app.setLogLevel(Application.LOG_DEBUG);
