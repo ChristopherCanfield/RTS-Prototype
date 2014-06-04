@@ -1,14 +1,14 @@
 package com.divergentthoughtsgames.train.world;
 
-import java.util.ArrayList;
 import java.util.Collection;
-import java.util.List;
+import java.util.HashSet;
 
 public class SelectedEntities
 {
 	// TODO (6/3/2014): make this a singleton.
 	
-	private ArrayList<Entity> selected = new ArrayList<Entity>();
+//	private ArrayList<Entity> selected = new ArrayList<Entity>();
+	private HashSet<Entity> selected = new HashSet<>();
 	
 	public SelectedEntities add(Entity e)
 	{
@@ -21,6 +21,11 @@ public class SelectedEntities
 		
 		selected.add(e);
 		return this;
+	}
+	
+	public boolean contains(Entity e)
+	{
+		return selected.contains(e);
 	}
 	
 	public void addAll(Collection<Entity> selectedEntities)
@@ -38,8 +43,8 @@ public class SelectedEntities
 		selected.remove(e);
 	}
 	
-	public List<Entity> get()
+	public Entity[] get()
 	{
-		return selected;
+		return selected.toArray(new Entity[selected.size()]);
 	}
 }

@@ -2,11 +2,13 @@ package com.divergentthoughtsgames.train.world;
 
 import java.util.UUID;
 
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.utils.Array;
+import com.divergentthoughtsgames.train.App;
 import com.divergentthoughtsgames.train.World;
 import com.divergentthoughtsgames.train.util.Velocity;
 
@@ -31,10 +33,13 @@ public abstract class Entity
 	/** The bounding rect's y offset from the sprite. **/
 	protected float spriteOffsetY;
 	
+	/** The entity's bounding rectangle. **/
 	protected Rectangle rect;
 	
+	/** The entity's current velocity. **/
 	protected Velocity velocity;
 	
+	/** Whether the entity is selectable by the user. **/
 	protected boolean selectable;
 	
 	// Whether the entity has been disposed.
@@ -116,7 +121,23 @@ public abstract class Entity
 	{
 		if (rect != null)
 		{
-			batch.rect(rect.x, rect.y, rect.width, rect.height);
+			boolean isSelected = App.selected.contains(this);
+			Color originalColor = null;
+			if (isSelected)
+			{
+				originalColor = batch.getColor().cpy();
+				batch.setColor(Color.BLUE);
+			}
+			
+			if (isSelected || App.debug)
+			{
+				batch.rect(rect.x, rect.y, rect.width, rect.height);
+			}
+			
+			if (isSelected)
+			{
+				batch.setColor(originalColor);
+			}
 		}
 	}
 	

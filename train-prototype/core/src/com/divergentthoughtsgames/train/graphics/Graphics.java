@@ -29,8 +29,6 @@ public class Graphics
 	
 	private World world;
 	
-	public boolean debug = false;
-	
 //	private Texture tempTexture;
 	
 	private float selectionRectStartX;
@@ -147,19 +145,16 @@ public class Graphics
 			shapeRenderer.end();
 		}
 		
-		if (debug)
+		Matrix4 originalProjMatrix = shapeRenderer.getProjectionMatrix().cpy();
+		shapeRenderer.setProjectionMatrix(camera.combined);
+		
+		shapeRenderer.begin(ShapeType.Line);
+		for (Entity e : world.getEntities())
 		{
-			Matrix4 originalProjMatrix = shapeRenderer.getProjectionMatrix().cpy();
-			shapeRenderer.setProjectionMatrix(camera.combined);
-			
-			shapeRenderer.begin(ShapeType.Line);
-			for (Entity e : world.getEntities())
-			{
-				e.drawRect(shapeRenderer);
-			}
-			shapeRenderer.end();
-			
-			shapeRenderer.setProjectionMatrix(originalProjMatrix);
+			e.drawRect(shapeRenderer);
 		}
+		shapeRenderer.end();
+		
+		shapeRenderer.setProjectionMatrix(originalProjMatrix);
 	}
 }

@@ -45,7 +45,7 @@ public class TrainPrototype extends ApplicationAdapter
 		
 		// For debugging.
 		Gdx.app.setLogLevel(Application.LOG_DEBUG);
-		graphics.debug = true;
+		App.debug = true;
 	}
 
 	@Override

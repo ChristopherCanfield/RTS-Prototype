@@ -12,5 +12,7 @@ public abstract class App
 	public static Graphics graphics;
 	public static World world;
 	
-	public static SelectedEntities selected = new SelectedEntities(); 
+	public static SelectedEntities selected = new SelectedEntities();
+	
+	public static boolean debug = false;
 }
