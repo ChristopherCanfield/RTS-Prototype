@@ -54,7 +54,7 @@ public class Search
 			// the linked list of parents, and return the result.
 			if (lowestCost.equals(end))
 			{
-				return constructPath(lowestCost, start);
+				return constructPath(lowestCost);
 			}
 			
 			// Iterate through each node that is connected to the current lowest cost node.
@@ -69,8 +69,6 @@ public class Search
 				// Calculate the h (heuristic) cost of the lowest cost node
 				// to the end node.
 				float h = heuristic.calculateCost(currentNode, end);
-				
-				float cost = h + g;
 				
 				// Wrap the edge in the SearchNode decorator, so the parent and 
 				// costs can be stored with it.
@@ -93,13 +91,12 @@ public class Search
 	}
 	
 	/**
-	 * Constructs a path from the final PathNode back to the start node. This
+	 * Constructs a path from the final SearchNode back to the start node. This
 	 * should be used with the Queue<Path> returned by the A* algorithm.
 	 * @param finalNodeInPath The last node in the path returned by the A* algorithm.
-	 * @param startNode The start node (the entrance node).
 	 * @return The path, starting at the start node to the end node.
 	 */
-	private static Queue<Node> constructPath(SearchNode finalNodeInPath, Node startNode)
+	private static Queue<Node> constructPath(SearchNode finalNodeInPath)
 	{
 		Deque<Node> path = new ArrayDeque<Node>();
 		SearchNode currentPathNode = finalNodeInPath;
