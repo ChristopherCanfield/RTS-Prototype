@@ -3,6 +3,8 @@ package com.divergentthoughtsgames.train.nav;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
+
 public class Node
 {
 	private List<Edge> edges = new ArrayList<Edge>(4);
@@ -35,5 +37,10 @@ public class Node
 	public float getY()
 	{
 		return y;
+	}
+
+	public void draw(ShapeRenderer batch)
+	{
+		batch.circle(getX(), getY(), 5);
 	}
 }

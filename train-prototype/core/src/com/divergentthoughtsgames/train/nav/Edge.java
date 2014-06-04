@@ -1,12 +1,13 @@
 package com.divergentthoughtsgames.train.nav;
 
-import java.util.ArrayList;
+import com.divergentthoughtsgames.train.util.GameException;
 
 public class Edge
 {
 	public float cost;
 	
-	private ArrayList<Node> connected = new ArrayList<Node>(8);
+	private Node node1;
+	private Node node2;
 
 	public Edge(float cost)
 	{
@@ -15,15 +16,40 @@ public class Edge
 	
 	public Edge addNode(Node node)
 	{
-		for (Node n : connected)
+		if (node1 == node || node2 == node)
 		{
-			if (n == node)
-			{
-				return this;
-			}
+			return this;
 		}
 		
-		connected.add(node);
+		if (node1 == null)
+		{
+			node1 = node;
+		}
+		else if (node2 == null)
+		{
+			node2 = node;
+		}
+		else
+		{
+			throw new GameException("Edge already has two connections.");
+		}
+		
 		return this;
+	}
+	
+	public Node getOppositeNode(Node node)
+	{
+		if (node == node1)
+		{
+			return node2;
+		}
+		else if (node == node2)
+		{
+			return node1;
+		}
+		else
+		{
+			throw new GameException("Node is not connected to this edge.");
+		}
 	}
 }
