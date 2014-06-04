@@ -1,6 +1,8 @@
 package com.divergentthoughtsgames.train.input;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input.Buttons;
+import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.InputAdapter;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector3;
@@ -23,11 +25,28 @@ public class SelectionInputProcessor extends InputAdapter
 	public boolean touchDown(int x, int y, int pointer, int button)
 	{
 		System.out.println("touchDown " + x + "," + y);
-		graphics.setSelectionRectStart(x, Gdx.graphics.getHeight() - y);
-		Vector3 adjusted = graphics.getCamera().unproject(new Vector3(x, y, 0));
-		rect.x = adjusted.x;
-		rect.y = adjusted.y; //Gdx.graphics.getHeight() - y;
-		App.selected.clear();
+		
+		if (button == Buttons.LEFT)
+		{
+			if (App.selected.isEmpty() || 
+					Gdx.input.isKeyPressed(Keys.SHIFT_LEFT) || Gdx.input.isKeyPressed(Keys.SHIFT_RIGHT))
+			{
+				graphics.setSelectionRectStart(x, Gdx.graphics.getHeight() - y);
+				Vector3 adjusted = graphics.getCamera().unproject(new Vector3(x, y, 0));
+				rect.x = adjusted.x;
+				rect.y = adjusted.y; //Gdx.graphics.getHeight() - y;
+			}
+			else
+			{
+				// Send move command(s).
+			}
+		}
+		else if (button == Buttons.RIGHT)
+		{
+			App.selected.clear();
+			rect.x = rect.y = 0;
+			graphics.resetSelectionRect();
+		}
 		
 		return false;
 	}
@@ -35,18 +54,20 @@ public class SelectionInputProcessor extends InputAdapter
 	@Override
 	public boolean touchUp(int x, int y, int pointer, int button)
 	{
-		System.out.println("touchUp " + x + "," + y);
-		graphics.resetSelectionRect();
-		
-		Vector3 adjusted = graphics.getCamera().unproject(new Vector3(x, y, 0));
-		setRectWidthHeight(adjusted.x, adjusted.y);
-//		setRectWidthHeight(x, Gdx.graphics.getHeight() - y);
-		App.selected.addAll(Find.allIntersections(rect, App.world.getEntities()));
-		
-		// Debug.
-		for (Entity e : App.selected.get())
+		if (button == Buttons.LEFT)
 		{
-			Gdx.app.debug("Selection Test", e.toString());
+			System.out.println("touchUp " + x + "," + y);
+			graphics.resetSelectionRect();
+			
+			Vector3 adjusted = graphics.getCamera().unproject(new Vector3(x, y, 0));
+			setRectWidthHeight(adjusted.x, adjusted.y);
+			App.selected.addAll(Find.allIntersections(rect, App.world.getEntities()));
+			
+			// Debug.
+			for (Entity e : App.selected.get())
+			{
+				Gdx.app.debug("Selection Test", e.toString());
+			}
 		}
 		
 		return false;
