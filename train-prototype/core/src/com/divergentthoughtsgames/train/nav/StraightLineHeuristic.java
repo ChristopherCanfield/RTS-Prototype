@@ -14,7 +14,7 @@ public class StraightLineHeuristic implements SearchHeuristic
 		float rowSquared = (startRow - endRow) * (startRow - endRow);
 		float columnSquared = (startColumn - endColumn) * (startColumn - endColumn);
 
-		return std::sqrt(rowSquared + columnSquared);
+		return (float)Math.sqrt(rowSquared + columnSquared);
 	}
 
 }
