@@ -5,6 +5,8 @@ import java.util.HashSet;
 
 public class UnitGroups
 {
+	// Checked in the methods below.
+	@SuppressWarnings("unchecked")
 	private HashSet<Entity>[] units = new HashSet[10];
 	
 	public UnitGroups add(int unitIndex, Entity e)
