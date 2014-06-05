@@ -2,7 +2,7 @@ package com.divergentthoughtsgames.train.desktop;
 
 import com.badlogic.gdx.backends.lwjgl.LwjglApplication;
 import com.badlogic.gdx.backends.lwjgl.LwjglApplicationConfiguration;
-import com.divergentthoughtsgames.train.TrainPrototype;
+import com.divergentthoughtsgames.rts.TrainPrototype;
 
 public class DesktopLauncher
 {
