@@ -1,29 +1,38 @@
 package com.divergentthoughtsgames.rts.graphics;
 
 import com.badlogic.gdx.graphics.Camera;
+import com.badlogic.gdx.graphics.OrthographicCamera;
 
 public abstract class CameraController
 {
-	private Camera camera;
+	private OrthographicCamera camera;
 
-	protected CameraController(Camera camera)
+	protected CameraController(OrthographicCamera camera)
 	{
 		this.camera = camera;
 	}
 	
-	protected void moveCamera(float xOffset, float offsetY)
+	protected void move(float xOffset, float offsetY)
 	{
-	// Ensure the camera stays within the world boundaries. This example world is
-	// 2024 pixels wide, and 2024 pixels tall.
-	if (xOffset != 0)
-	{
-		camera.translate(xOffset, 0.f, 0.f);
+		if (xOffset != 0)
+		{
+			camera.translate(xOffset, 0.f, 0.f);
+		}
+		
+		if (offsetY != 0)
+		{
+			camera.translate(0.f, offsetY, 0.f);
+		}
 	}
 	
-	if (offsetY != 0)
+	protected void zoom(float zoomFactor)
 	{
-		camera.translate(0.f, offsetY, 0.f);
+		camera.zoom *= zoomFactor;
 	}
+	
+	protected void resetZoom()
+	{
+		camera.zoom = 1.f;
 	}
 	
 	public abstract void update();

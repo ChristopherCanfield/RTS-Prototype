@@ -4,10 +4,12 @@ import com.badlogic.gdx.Application;
 import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.InputMultiplexer;
+import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.divergentthoughtsgames.rts.graphics.CameraController;
 import com.divergentthoughtsgames.rts.graphics.Graphics;
-import com.divergentthoughtsgames.rts.graphics.KeyboardCameraController;
 import com.divergentthoughtsgames.rts.input.DebugKeyProcessor;
+import com.divergentthoughtsgames.rts.input.KeyboardCameraController;
+import com.divergentthoughtsgames.rts.input.MouseCameraController;
 import com.divergentthoughtsgames.rts.input.SelectionInputProcessor;
 import com.divergentthoughtsgames.rts.input.UnitGroupKeyProcessor;
 import com.divergentthoughtsgames.rts.world.Entity;
@@ -15,21 +17,18 @@ import com.divergentthoughtsgames.rts.world.entity.Footman;
 import com.divergentthoughtsgames.rts.world.entity.Ogre;
 
 public class RtsPrototype extends ApplicationAdapter
-{
-	private Graphics graphics;
-	private World world;
-	
+{	
 	@Override
 	public void create()
 	{
-		graphics = new Graphics();
-		world = new World();
+		Graphics graphics = new Graphics();
+		World world = new World();
 		graphics.setWorld(world);
 		
-		CameraController kcc = new KeyboardCameraController(graphics.getCamera());
+		CameraController kcc = new KeyboardCameraController((OrthographicCamera)graphics.getCamera());
 		graphics.addCameraController(kcc);
 		
-		setInputProcessors();
+		setInputProcessors(graphics);
 		
 		App.setGraphics(graphics);
 		App.setWorld(world);
@@ -53,19 +52,20 @@ public class RtsPrototype extends ApplicationAdapter
 		App.setDebug(true);
 	}
 	
-	private void setInputProcessors()
+	private static void setInputProcessors(Graphics graphics)
 	{
 		InputMultiplexer inputProcessors = new InputMultiplexer();
 		inputProcessors.addProcessor(new SelectionInputProcessor(graphics));
 		inputProcessors.addProcessor(new DebugKeyProcessor());
 		inputProcessors.addProcessor(new UnitGroupKeyProcessor());
+		inputProcessors.addProcessor(new MouseCameraController((OrthographicCamera)graphics.getCamera()));
 		Gdx.input.setInputProcessor(inputProcessors);
 	}
 
 	@Override
 	public void render()
 	{
-		graphics.render();
-		world.update();
+		App.graphics.render();
+		App.world.update();
 	}
 }
