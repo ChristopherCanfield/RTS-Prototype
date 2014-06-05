@@ -14,7 +14,7 @@ import com.divergentthoughtsgames.rts.world.Entity;
 import com.divergentthoughtsgames.rts.world.entity.Footman;
 import com.divergentthoughtsgames.rts.world.entity.Ogre;
 
-public class TrainPrototype extends ApplicationAdapter
+public class RtsPrototype extends ApplicationAdapter
 {
 	private Graphics graphics;
 	private World world;

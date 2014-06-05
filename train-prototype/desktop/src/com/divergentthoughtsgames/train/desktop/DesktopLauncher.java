@@ -2,7 +2,7 @@ package com.divergentthoughtsgames.train.desktop;
 
 import com.badlogic.gdx.backends.lwjgl.LwjglApplication;
 import com.badlogic.gdx.backends.lwjgl.LwjglApplicationConfiguration;
-import com.divergentthoughtsgames.rts.TrainPrototype;
+import com.divergentthoughtsgames.rts.RtsPrototype;
 
 public class DesktopLauncher
 {
@@ -11,6 +11,6 @@ public class DesktopLauncher
 		LwjglApplicationConfiguration config = new LwjglApplicationConfiguration();
 		config.width = 800;
 		config.height = 600;
-		new LwjglApplication(new TrainPrototype(), config);
+		new LwjglApplication(new RtsPrototype(), config);
 	}
 }
