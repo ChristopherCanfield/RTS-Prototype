@@ -3,6 +3,9 @@ package com.divergentthoughtsgames.rts.world;
 import static org.junit.Assert.*;
 import static org.mockito.Mockito.mock;
 
+import java.util.ArrayList;
+
+import org.junit.Before;
 import org.junit.Test;
 
 import com.divergentthoughtsgames.rts.World;
@@ -11,8 +14,14 @@ import com.divergentthoughtsgames.rts.world.entity.Ogre;
 
 public class SelectedEntitiesTest
 {
-	private SelectedEntities selected = new SelectedEntities();
-
+	private SelectedEntities selected;
+	
+	@Before
+	public void setup()
+	{
+		selected = new SelectedEntities();
+	}
+	
 	@Test
 	public void addContains()
 	{
@@ -24,7 +33,16 @@ public class SelectedEntitiesTest
 	@Test
 	public void testAddAll()
 	{
-		fail("Not yet implemented");
+		ArrayList<Entity> list = new ArrayList<Entity>();
+		list.add(new MockEntity());
+		list.add(new MockEntity());
+		
+		selected.addAll(list);
+		
+		for (Entity e : list)
+		{
+			assertTrue(selected.contains(e));
+		}
 	}
 
 	@Test
@@ -49,6 +67,9 @@ public class SelectedEntitiesTest
 	@Test
 	public void testGet()
 	{
-		fail("Not yet implemented");
+		Entity ent = new MockEntity();
+		selected.add(ent);
+		
+		assertTrue(selected.get().contains(ent));
 	}
 }
