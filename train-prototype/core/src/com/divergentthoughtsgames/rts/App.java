@@ -11,7 +11,16 @@ public abstract class App
 	public static final float SCREEN_HEIGHT = 600;
 	
 	public static Graphics graphics;
+	public static void setGraphics(Graphics g)
+	{
+		graphics = g;
+	}
+	
 	public static World world;
+	public static void setWorld(World w)
+	{
+		world = w;
+	}
 	
 	public static SelectedEntities selected = new SelectedEntities();
 	public static UnitGroups unitGroups = new UnitGroups();

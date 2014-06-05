@@ -31,8 +31,8 @@ public class RtsPrototype extends ApplicationAdapter
 		
 		setInputProcessors();
 		
-		App.graphics = graphics;
-		App.world = world;
+		App.setGraphics(graphics);
+		App.setWorld(world);
 		
 		world.add(new Ogre(world));
 		
