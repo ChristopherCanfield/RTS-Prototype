@@ -9,6 +9,7 @@ import com.divergentthoughtsgames.rts.graphics.Graphics;
 import com.divergentthoughtsgames.rts.graphics.KeyboardCameraController;
 import com.divergentthoughtsgames.rts.input.DebugKeyProcessor;
 import com.divergentthoughtsgames.rts.input.SelectionInputProcessor;
+import com.divergentthoughtsgames.rts.input.UnitGroupKeyProcessor;
 import com.divergentthoughtsgames.rts.world.Entity;
 import com.divergentthoughtsgames.rts.world.entity.Footman;
 import com.divergentthoughtsgames.rts.world.entity.Ogre;
@@ -28,10 +29,7 @@ public class TrainPrototype extends ApplicationAdapter
 		CameraController kcc = new KeyboardCameraController(graphics.getCamera());
 		graphics.addCameraController(kcc);
 		
-		InputMultiplexer inputProcessors = new InputMultiplexer();
-		inputProcessors.addProcessor(new SelectionInputProcessor(graphics));
-		inputProcessors.addProcessor(new DebugKeyProcessor());
-		Gdx.input.setInputProcessor(inputProcessors);
+		setInputProcessors();
 		
 		App.graphics = graphics;
 		App.world = world;
@@ -52,7 +50,16 @@ public class TrainPrototype extends ApplicationAdapter
 		
 		// For debugging.
 		Gdx.app.setLogLevel(Application.LOG_DEBUG);
-		App.debug = true;
+		App.setDebug(true);
+	}
+	
+	private void setInputProcessors()
+	{
+		InputMultiplexer inputProcessors = new InputMultiplexer();
+		inputProcessors.addProcessor(new SelectionInputProcessor(graphics));
+		inputProcessors.addProcessor(new DebugKeyProcessor());
+		inputProcessors.addProcessor(new UnitGroupKeyProcessor());
+		Gdx.input.setInputProcessor(inputProcessors);
 	}
 
 	@Override

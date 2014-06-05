@@ -112,7 +112,6 @@ public class Graphics
 		}
 		camera.update();
 		batch.setProjectionMatrix(camera.combined);
-//		shapeRenderer.setProjectionMatrix(camera.combined);
 		
 		drawSprites();
 		drawPrimitives();

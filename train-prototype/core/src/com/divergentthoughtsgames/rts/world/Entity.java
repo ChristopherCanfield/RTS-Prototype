@@ -129,7 +129,7 @@ public abstract class Entity
 				batch.setColor(Color.BLUE);
 			}
 			
-			if (isSelected || App.debug)
+			if (isSelected || App.debugEnabled())
 			{
 				batch.rect(rect.x, rect.y, rect.width, rect.height);
 			}

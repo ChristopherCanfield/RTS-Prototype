@@ -11,7 +11,7 @@ public class DebugKeyProcessor extends InputAdapter
 	{
 		if (keycode == Keys.F1)
 		{
-			App.debug = !App.debug;
+			App.setDebug(!App.debugEnabled());
 		}
 		
 		return false;

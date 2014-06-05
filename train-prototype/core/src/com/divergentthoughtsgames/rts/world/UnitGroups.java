@@ -7,24 +7,32 @@ public class UnitGroups
 {
 	// Checked in the methods below.
 	@SuppressWarnings("unchecked")
-	private HashSet<Entity>[] units = new HashSet[10];
+	private HashSet<Entity>[] groups = new HashSet[10];
+	
+	public UnitGroups()
+	{
+		for (int i = 0; i < groups.length; ++i)
+		{
+			groups[i] = new HashSet<Entity>();
+		}
+	}
 	
 	public UnitGroups add(int unitIndex, Entity e)
 	{
 		// Confirm that the selected list does not already contain the entity, and the entity
 		// is selectable.
-		if (!e.selectable || units[unitIndex].contains(e))
+		if (!e.selectable || groups[unitIndex].contains(e))
 		{
 			return this;
 		}
 		
-		units[unitIndex].add(e);
+		groups[unitIndex].add(e);
 		return this;
 	}
 	
 	public boolean contains(int unitIndex, Entity e)
 	{
-		return units[unitIndex].contains(e);
+		return groups[unitIndex].contains(e);
 	}
 	
 	public void addAll(int unitIndex, Collection<Entity> selectedEntities)
@@ -37,16 +45,21 @@ public class UnitGroups
 	
 	public void clear(int unitIndex)
 	{
-		units[unitIndex].clear();
+		groups[unitIndex].clear();
 	}
 	
 	public void remove(int unitIndex, Entity e)
 	{
-		units[unitIndex].remove(e);
+		groups[unitIndex].remove(e);
 	}
 	
-	public Entity[] get(int unitIndex)
+	public Entity[] toArray(int unitIndex)
 	{
-		return units[unitIndex].toArray(new Entity[units[unitIndex].size()]);
+		return groups[unitIndex].toArray(new Entity[groups[unitIndex].size()]);
+	}
+	
+	public Collection<Entity> get(int unitIndex)
+	{
+		return groups[unitIndex];
 	}
 }

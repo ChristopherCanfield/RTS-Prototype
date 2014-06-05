@@ -12,8 +12,8 @@ public class SelectedEntities
 	
 	public SelectedEntities add(Entity e)
 	{
-		// Confirm that the selected list does not already contain the entity, and the entity
-		// is selectable.
+		// Confirm that the selected list does not already contain the entity, 
+		// and the entity is selectable.
 		if (!e.selectable)
 		{
 			return this;
@@ -51,9 +51,14 @@ public class SelectedEntities
 		selected.remove(e);
 	}
 	
-	public Entity[] get()
+	public Entity[] toArray()
 	{
 		return selected.toArray(new Entity[selected.size()]);
+	}
+	
+	public Collection<Entity> get()
+	{
+		return selected;
 	}
 	
 	public boolean isEmpty()

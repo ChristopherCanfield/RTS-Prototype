@@ -6,18 +6,28 @@ import com.divergentthoughtsgames.rts.App;
 
 public class UnitGroupKeyProcessor extends InputAdapter
 {
-	private boolean controlIsDown = false;
+	private boolean controlKeyIsDown = false;
 	
 	@Override
 	public boolean keyUp(int keycode)
 	{
-		if (keycode == Keys.F1)
+		if (keycode == Keys.CONTROL_LEFT || keycode == Keys.CONTROL_RIGHT)
 		{
-			App.debug = !App.debug;
+			controlKeyIsDown = false;
 		}
-		else if (keycode == Keys.CONTROL_LEFT || keycode == Keys.CONTROL_RIGHT)
+		else if (keycode >= Keys.NUM_0 && keycode <= Keys.NUM_9)
 		{
-			controlIsDown = false;
+			int unitIndex = keycode - Keys.NUM_0;
+			if (controlKeyIsDown)
+			{
+				App.unitGroups.clear(unitIndex);
+				App.unitGroups.addAll(unitIndex, App.selected.get());
+			}
+			else
+			{
+				App.selected.clear();
+				App.selected.addAll(App.unitGroups.get(unitIndex));
+			}
 		}
 		
 		return false;
@@ -28,7 +38,7 @@ public class UnitGroupKeyProcessor extends InputAdapter
 	{
 		if (keycode == Keys.CONTROL_LEFT || keycode == Keys.CONTROL_RIGHT)
 		{
-			controlIsDown = true;
+			controlKeyIsDown = true;
 		}
 		
 		return false;
