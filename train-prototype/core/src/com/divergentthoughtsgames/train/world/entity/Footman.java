@@ -11,24 +11,21 @@ import com.divergentthoughtsgames.train.World;
 import com.divergentthoughtsgames.train.graphics.Textures;
 import com.divergentthoughtsgames.train.world.Entity;
 
-public class Ogre extends Entity
+public class Footman extends Entity
 {
 	private TextureRegion stationaryNorth;
-	private TextureRegion stationarySouth;
-	private TextureRegion stationaryEast;
-	private TextureRegion stationaryWest;
 	
-	private Animation walkNorth;
+	private Animation attackNorth;
 	
 	private float animationTime;
 
-	public Ogre(World world)
+	public Footman(World world)
 	{
 		super(world);
 		
 		rect = new Rectangle(300, 400, 40, 40);
-		spriteOffsetX = -10;
-		spriteOffsetY = 0;
+		spriteOffsetX = -13;
+		spriteOffsetY = -8;
 		selectable = true;
 		
 		setAnimations();
@@ -36,23 +33,24 @@ public class Ogre extends Entity
 	
 	private void setAnimations()
 	{
-		stationaryNorth = new TextureRegion(App.graphics.getTexture(Textures.OrcOgre), 5, 0, 64, 54);
+		stationaryNorth = new TextureRegion(App.graphics.getTexture(Textures.HumanFootman), 2, 0, 57, 58);
 		sprite = new Sprite(stationaryNorth);
 		setPosition(300, 400);
 		
-		walkNorth = new Animation(0.095f, 
+		attackNorth = new Animation(0.095f, 
 				stationaryNorth,
-				new TextureRegion(App.graphics.getTexture(Textures.OrcOgre), 5, 78, 64, 54),
-				new TextureRegion(App.graphics.getTexture(Textures.OrcOgre), 5, 149, 64, 54),
-				new TextureRegion(App.graphics.getTexture(Textures.OrcOgre), 5, 226, 64, 54),
-				new TextureRegion(App.graphics.getTexture(Textures.OrcOgre), 5, 297, 64, 54));
-		walkNorth.setPlayMode(PlayMode.LOOP);		
+				new TextureRegion(App.graphics.getTexture(Textures.HumanFootman), 2, 0, 57, 58),
+				new TextureRegion(App.graphics.getTexture(Textures.HumanFootman), 2, 276, 57, 58),
+				new TextureRegion(App.graphics.getTexture(Textures.HumanFootman), 2, 324, 57, 69),
+				new TextureRegion(App.graphics.getTexture(Textures.HumanFootman), 2, 397, 57, 55),
+				new TextureRegion(App.graphics.getTexture(Textures.HumanFootman), 2, 451, 57, 58));
+		attackNorth.setPlayMode(PlayMode.LOOP);		
 	}
 
 	@Override
 	protected void onDraw()
 	{
-		sprite.setRegion(walkNorth.getKeyFrame(animationTime));
+		sprite.setRegion(attackNorth.getKeyFrame(animationTime));
 	}
 
 	@Override

@@ -7,8 +7,10 @@ import com.badlogic.gdx.InputMultiplexer;
 import com.divergentthoughtsgames.train.graphics.CameraController;
 import com.divergentthoughtsgames.train.graphics.Graphics;
 import com.divergentthoughtsgames.train.graphics.KeyboardCameraController;
+import com.divergentthoughtsgames.train.input.DebugKeyProcessor;
 import com.divergentthoughtsgames.train.input.SelectionInputProcessor;
 import com.divergentthoughtsgames.train.world.Entity;
+import com.divergentthoughtsgames.train.world.entity.Footman;
 import com.divergentthoughtsgames.train.world.entity.Ogre;
 
 public class TrainPrototype extends ApplicationAdapter
@@ -28,6 +30,7 @@ public class TrainPrototype extends ApplicationAdapter
 		
 		InputMultiplexer inputProcessors = new InputMultiplexer();
 		inputProcessors.addProcessor(new SelectionInputProcessor(graphics));
+		inputProcessors.addProcessor(new DebugKeyProcessor());
 		Gdx.input.setInputProcessor(inputProcessors);
 		
 		App.graphics = graphics;
@@ -42,6 +45,10 @@ public class TrainPrototype extends ApplicationAdapter
 		Entity ogre3 = new Ogre(world);
 		ogre3.setPosition(600, 450);
 		world.add(ogre3);
+		
+		Entity footman1 = new Footman(world);
+		footman1.setPosition(225, 500);
+		world.add(footman1);
 		
 		// For debugging.
 		Gdx.app.setLogLevel(Application.LOG_DEBUG);

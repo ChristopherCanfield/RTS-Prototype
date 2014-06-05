@@ -24,7 +24,7 @@ public class SelectionInputProcessor extends InputAdapter
 	@Override
 	public boolean touchDown(int x, int y, int pointer, int button)
 	{
-		System.out.println("touchDown " + x + "," + y);
+		Gdx.app.debug("SELECTION", "touchDown " + x + "," + y);
 		
 		if (button == Buttons.LEFT)
 		{
@@ -56,7 +56,7 @@ public class SelectionInputProcessor extends InputAdapter
 	{
 		if (button == Buttons.LEFT)
 		{
-			System.out.println("touchUp " + x + "," + y);
+			Gdx.app.debug("SELECTION", "touchUp " + x + "," + y);
 			graphics.resetSelectionRect();
 			
 			Vector3 adjusted = graphics.getCamera().unproject(new Vector3(x, y, 0));
