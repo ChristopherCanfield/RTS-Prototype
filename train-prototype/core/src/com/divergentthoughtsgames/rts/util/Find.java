@@ -5,7 +5,9 @@ import java.util.List;
 
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.utils.Array;
+import com.divergentthoughtsgames.rts.nav.Node;
 import com.divergentthoughtsgames.rts.world.Entity;
+import com.divergentthoughtsgames.rts.world.WorldMap;
 
 public abstract class Find
 {
@@ -27,5 +29,10 @@ public abstract class Find
 		}
 		
 		return found;
+	}
+	
+	public static Node node(WorldMap map, int x, int y)
+	{
+		return WorldMap.getNode(map, x, y);
 	}
 }
