@@ -1,4 +1,4 @@
-package com.divergentthoughtsgames.train.desktop;
+package com.divergentthoughtsgames.rts.desktop;
 
 import com.badlogic.gdx.backends.lwjgl.LwjglApplication;
 import com.badlogic.gdx.backends.lwjgl.LwjglApplicationConfiguration;
@@ -6,6 +6,7 @@ import com.divergentthoughtsgames.rts.RtsPrototype;
 
 public class DesktopLauncher
 {
+	@SuppressWarnings("unused")
 	public static void main(String[] arg)
 	{
 		LwjglApplicationConfiguration config = new LwjglApplicationConfiguration();

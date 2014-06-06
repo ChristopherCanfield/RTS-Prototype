@@ -9,12 +9,12 @@
 	<classpathentry exported="true" kind="lib" path="C:/Users/Canfield/.gradle/caches/modules-2/files-2.1/com.badlogicgames.box2dlights/box2dlights/1.2/8b3baf8bd6d5fdf7052d9798977133f46a9e7a05/box2dlights-1.2.jar" sourcepath="C:/Users/Canfield/.gradle/caches/modules-2/files-2.1/com.badlogicgames.box2dlights/box2dlights/1.2/50b3097b9588b328c53bc2e21fd115e89fc06265/box2dlights-1.2-sources.jar"/>
 	<classpathentry kind="lib" path="lib/apache-commons-io/commons-io-2.4.jar">
 		<attributes>
-			<attribute name="javadoc_location" value="jar:file:/C:/Users/Canfield/Documents/GitHub/Train-Prototype/train-prototype/core/lib/apache-commons-io/commons-io-2.4-javadoc.jar!/"/>
+			<attribute name="javadoc_location" value="jar:platform:/resource/rts-prototype-core/lib/apache-commons-io/commons-io-2.4-javadoc.jar!/"/>
 		</attributes>
 	</classpathentry>
 	<classpathentry kind="lib" path="lib/apache-commons-lang/commons-lang3-3.3.2.jar">
 		<attributes>
-			<attribute name="javadoc_location" value="jar:file:/C:/Users/Canfield/Documents/GitHub/Train-Prototype/train-prototype/core/lib/apache-commons-lang/commons-lang3-3.3.2-javadoc.jar!/"/>
+			<attribute name="javadoc_location" value="jar:platform:/resource/rts-prototype-core/lib/apache-commons-lang/commons-lang3-3.3.2-javadoc.jar!/"/>
 		</attributes>
 	</classpathentry>
 	<classpathentry kind="lib" path="lib/google-guava/guava-17.0.jar">
