@@ -1,6 +1,5 @@
 package com.divergentthoughtsgames.rts.graphics;
 
-import com.badlogic.gdx.graphics.Camera;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 
 public abstract class CameraController

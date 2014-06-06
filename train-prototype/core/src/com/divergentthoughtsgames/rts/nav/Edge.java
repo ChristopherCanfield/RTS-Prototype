@@ -14,6 +14,13 @@ public class Edge
 		this.cost = cost;
 	}
 	
+	public Edge(Node node1, Node node2, float cost)
+	{
+		this.cost = cost;
+		this.node1 = node1;
+		this.node2 = node2;
+	}
+	
 	public Edge addNode(Node node)
 	{
 		if (node1 == node || node2 == node)

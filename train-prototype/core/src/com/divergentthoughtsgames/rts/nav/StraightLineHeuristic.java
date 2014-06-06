@@ -2,7 +2,13 @@ package com.divergentthoughtsgames.rts.nav;
 
 public class StraightLineHeuristic implements SearchHeuristic
 {
-
+	private static StraightLineHeuristic instance = new StraightLineHeuristic();
+	
+	public static StraightLineHeuristic getInstance()
+	{
+		return instance;
+	}
+	
 	@Override
 	public float calculateCost(Node start, Node end)
 	{
@@ -16,5 +22,4 @@ public class StraightLineHeuristic implements SearchHeuristic
 
 		return (float)Math.sqrt(rowSquared + columnSquared);
 	}
-
 }

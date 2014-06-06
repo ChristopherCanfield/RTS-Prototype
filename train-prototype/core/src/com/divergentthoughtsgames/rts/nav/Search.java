@@ -12,7 +12,7 @@ import java.util.Set;
  * Contains a method that implements the A* search algorithm.
  * @author Christopher D. Canfield
  */
-public class Search
+public abstract class Search
 {
 	/**
 	 * Performs an A* search between the start and end node. Returns a a SearchResult
