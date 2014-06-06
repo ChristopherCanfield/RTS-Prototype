@@ -14,9 +14,9 @@ public class SearchNode extends Node implements Comparable<SearchNode>
 	private SearchNode parent;
 	
 	// The node's cumulative cost from the start node to this node.
-	private float g;
+	private double g;
 	// The node's heuristic cost to the end node.
-	private float h;
+	private double h;
 	
 	/**
 	 * Wraps a Node with additional information needed during the A* search.
@@ -25,7 +25,7 @@ public class SearchNode extends Node implements Comparable<SearchNode>
 	 * @param g The node's cumulative cost from the start node to this node.
 	 * @param h The node's heuristic cost to the end node.
 	 */
-	public SearchNode(Node underlyingNode, SearchNode parent, float g, float h)
+	public SearchNode(Node underlyingNode, SearchNode parent, double g, double h)
 	{
 		super(underlyingNode.getX(), underlyingNode.getY());
 		this.parent = parent;
@@ -47,7 +47,7 @@ public class SearchNode extends Node implements Comparable<SearchNode>
 	 * Returns the cumulative cost from the start node to this node.
 	 * @return The cumulative cost from the start node to this node.
 	 */
-	public float getG()
+	public double getG()
 	{
 		return g;
 	}
@@ -56,7 +56,7 @@ public class SearchNode extends Node implements Comparable<SearchNode>
 	 * Returns the heuristic cost from the end node to this node.
 	 * @return The heuristic cost from the end node to this node.
 	 */
-	public float getH()
+	public double getH()
 	{
 		return h;
 	}
@@ -77,8 +77,8 @@ public class SearchNode extends Node implements Comparable<SearchNode>
 	@Override
 	public int compareTo(SearchNode other)
 	{
-		float cost = g + h;
-		float otherCost = other.g + other.h;
+		double cost = g + h;
+		double otherCost = other.g + other.h;
 		return (cost < otherCost) ? -1 : 
 				(cost > otherCost) ? 1 : 0;
 	}

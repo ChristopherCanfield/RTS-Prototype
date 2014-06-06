@@ -17,7 +17,7 @@ public class HeuristicTest
 		Node node1 = new Node(5, 1);
 		Node node2 = new Node(15, 21);
 
-		float heuristicDistance = new StraightLineHeuristic().cost(node1, node2);
+		double heuristicDistance = new StraightLineHeuristic().cost(node1, node2);
 		assertEquals(22.36f, heuristicDistance, 0.01f);
 	}
 	
@@ -27,7 +27,7 @@ public class HeuristicTest
 		Node node1 = new Node(5, 1);
 		Node node2 = new Node(15, 11);
 
-		float heuristicDistance = new StraightLineHeuristic().cost(node1, node2);
+		double heuristicDistance = new StraightLineHeuristic().cost(node1, node2);
 		assertEquals(14.14f, heuristicDistance, 0.01f);
 	}
 	
@@ -37,7 +37,7 @@ public class HeuristicTest
 		Node node1 = new Node(5, 1);
 		Node node2 = new Node(25, 21);
 
-		float heuristicDistance = new StraightLineHeuristic().cost(node1, node2);
+		double heuristicDistance = new StraightLineHeuristic().cost(node1, node2);
 		assertEquals(28.28f, heuristicDistance, 0.01f);
 	}
 	
@@ -47,7 +47,7 @@ public class HeuristicTest
 		Node node1 = new Node(25, 21);
 		Node node2 = new Node(5, 1);
 
-		float heuristicDistance = new StraightLineHeuristic().cost(node1, node2);
+		double heuristicDistance = new StraightLineHeuristic().cost(node1, node2);
 		assertEquals(28.28f, heuristicDistance, 0.01f);
 	}
 }

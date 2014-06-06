@@ -10,16 +10,16 @@ public class StraightLineHeuristic implements SearchHeuristic
 	}
 	
 	@Override
-	public float cost(Node start, Node end)
+	public double cost(Node start, Node end)
 	{
-		float startRow = start.getY();
-		float endRow = end.getY();
-		float startColumn = start.getX();
-		float endColumn = end.getX();
+		double startRow = start.getY();
+		double endRow = end.getY();
+		double startColumn = start.getX();
+		double endColumn = end.getX();
 
-		float rowSquared = (startRow - endRow) * (startRow - endRow);
-		float columnSquared = (startColumn - endColumn) * (startColumn - endColumn);
+		double rowSquared = (startRow - endRow) * (startRow - endRow);
+		double columnSquared = (startColumn - endColumn) * (startColumn - endColumn);
 
-		return (float)Math.sqrt(rowSquared + columnSquared);
+		return Math.sqrt(rowSquared + columnSquared);
 	}
 }

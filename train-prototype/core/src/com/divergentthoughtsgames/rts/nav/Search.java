@@ -66,11 +66,11 @@ public abstract class Search
 				
 				// Calculate the g (from start) cost of the lowest cost node by 
 				// taking the parent's g cost and adding 1 to it.
-				float g = edge.cost + lowestCost.getG();
+				double g = edge.cost + lowestCost.getG();
 
 				// Calculate the h (heuristic) cost of the lowest cost node
 				// to the end node.
-				float h = heuristic.cost(currentNode, end);
+				double h = heuristic.cost(currentNode, end);
 				
 				// Wrap the edge in the SearchNode decorator, so the parent and 
 				// costs can be stored with it.

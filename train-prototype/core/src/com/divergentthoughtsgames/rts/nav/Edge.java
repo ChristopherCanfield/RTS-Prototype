@@ -4,17 +4,17 @@ import com.divergentthoughtsgames.rts.util.GameException;
 
 public class Edge
 {
-	public float cost;
+	public double cost;
 	
 	private Node node1;
 	private Node node2;
 
-	public Edge(float cost)
+	public Edge(double cost)
 	{
 		this.cost = cost;
 	}
 	
-	public Edge(Node node1, Node node2, float cost)
+	public Edge(Node node1, Node node2, double cost)
 	{
 		this.cost = cost;
 		this.node1 = node1;
@@ -23,7 +23,7 @@ public class Edge
 	
 	public Edge addNode(Node node)
 	{
-		if (node1.equals(node) || node2.equals(node))
+		if (node.equals(node1) || node.equals(node2))
 		{
 			return this;
 		}

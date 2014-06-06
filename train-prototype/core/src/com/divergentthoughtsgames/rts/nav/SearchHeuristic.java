@@ -12,5 +12,5 @@ public interface SearchHeuristic
 	 * @param target The end node.
 	 * @return
 	 */
-	public float cost(Node start, Node end);
+	public double cost(Node start, Node end);
 }
