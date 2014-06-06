@@ -2,6 +2,7 @@ package com.divergentthoughtsgames.rts.world;
 
 import java.util.UUID;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
@@ -90,7 +91,13 @@ public abstract class Entity
 	public void rotateToFace(int x, int y)
 	{
 		float angle = GameMath.angleToFace((int)rect.x, (int)rect.y, x, y) * MathUtils.radiansToDegrees;
+		sprite.rotate(0);
 		sprite.rotate(angle);
+	}
+	
+	public void logRotation()
+	{
+		Gdx.app.debug("Entity Rotation", toString() + ": " + sprite.getRotation());
 	}
 	
 //	protected void addComponent(Component component)

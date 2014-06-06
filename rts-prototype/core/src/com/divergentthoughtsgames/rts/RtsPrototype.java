@@ -11,6 +11,7 @@ import com.divergentthoughtsgames.rts.input.DebugKeyProcessor;
 import com.divergentthoughtsgames.rts.input.KeyboardCameraController;
 import com.divergentthoughtsgames.rts.input.MouseCameraController;
 import com.divergentthoughtsgames.rts.input.SelectionInputProcessor;
+import com.divergentthoughtsgames.rts.input.UnitControlInputProcessor;
 import com.divergentthoughtsgames.rts.input.UnitGroupKeyProcessor;
 import com.divergentthoughtsgames.rts.world.Entity;
 import com.divergentthoughtsgames.rts.world.entity.Footman;
@@ -56,9 +57,10 @@ public class RtsPrototype extends ApplicationAdapter
 	{
 		InputMultiplexer inputProcessors = new InputMultiplexer();
 		inputProcessors.addProcessor(new SelectionInputProcessor(graphics));
-		inputProcessors.addProcessor(new DebugKeyProcessor());
 		inputProcessors.addProcessor(new UnitGroupKeyProcessor());
+		inputProcessors.addProcessor(new UnitControlInputProcessor());
 		inputProcessors.addProcessor(new MouseCameraController((OrthographicCamera)graphics.getCamera()));
+		inputProcessors.addProcessor(new DebugKeyProcessor());
 		Gdx.input.setInputProcessor(inputProcessors);
 	}
 

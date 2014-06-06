@@ -1,5 +1,7 @@
 package com.divergentthoughtsgames.rts.input;
 
+import java.util.List;
+
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input.Buttons;
 import com.badlogic.gdx.Input.Keys;
@@ -15,6 +17,8 @@ public class SelectionInputProcessor extends InputAdapter
 {
 	private final Graphics graphics;
 	private final Rectangle rect = new Rectangle();
+	
+	private boolean isSelecting;
 	
 	public SelectionInputProcessor(Graphics graphics)
 	{
@@ -45,17 +49,20 @@ public class SelectionInputProcessor extends InputAdapter
 				graphics.setSelectionRectStart(x, Gdx.graphics.getHeight() - y);
 				Vector3 adjusted = graphics.getCamera().unproject(new Vector3(x, y, 0));
 				rect.x = adjusted.x;
-				rect.y = adjusted.y; //Gdx.graphics.getHeight() - y;
+				rect.y = adjusted.y;
+				isSelecting = true;
 			}
 			else
 			{
+				isSelecting = false;
 				// Send move command(s).
 			}
 		}
 		else if (button == Buttons.RIGHT)
 		{
+			isSelecting = false;
 			App.selected.clear();
-			rect.x = rect.y = 0;
+			resetRect();
 			graphics.resetSelectionRect();
 		}
 		
@@ -65,22 +72,35 @@ public class SelectionInputProcessor extends InputAdapter
 	@Override
 	public boolean touchUp(int x, int y, int pointer, int button)
 	{
-		if (button == Buttons.LEFT)
+		if (button == Buttons.LEFT && isSelecting)
 		{
 			Gdx.app.debug("SELECTION", "touchUp " + x + "," + y);
 			graphics.resetSelectionRect();
 			
 			Vector3 adjusted = graphics.getCamera().unproject(new Vector3(x, y, 0));
 			setRectWidthHeight(adjusted.x, adjusted.y);
-			App.selected.addAll(Find.allIntersections(rect, App.world.getEntities()));
+			List<Entity> newSelected = Find.allIntersections(rect, App.world.getEntities());
+			resetRect();
 			
-			// Debug.
-			for (Entity e : App.selected.get())
+			if (!newSelected.isEmpty())
 			{
-				Gdx.app.debug("Selection Test", e.toString());
+				App.selected.addAll(newSelected);
+				
+				// Debug.
+				if (App.debugEnabled())
+				{
+					for (Entity e : App.selected.get())
+					{
+						Gdx.app.debug("Selection Test", e.toString());
+					}
+				}
+				
+				isSelecting = false;
+				return true;
 			}
 		}
 		
+		isSelecting = false;
 		return false;
 	}
 	
@@ -106,12 +126,19 @@ public class SelectionInputProcessor extends InputAdapter
 			rect.height = endY - rect.y;
 		}
 	}
+	
+	private void resetRect()
+	{
+		rect.x = rect.y = rect.width = rect.height = 0;
+	}
 
 	@Override
 	public boolean touchDragged(int x, int y, int pointer)
 	{
-		graphics.setSelectionRectEnd(x, Gdx.graphics.getHeight() - y);
-		
+		if (isSelecting)
+		{
+			graphics.setSelectionRectEnd(x, Gdx.graphics.getHeight() - y);
+		}
 		return false;
 	}
 }

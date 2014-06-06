@@ -2,6 +2,7 @@ package com.divergentthoughtsgames.rts.world;
 
 import java.util.Collection;
 import java.util.HashSet;
+import java.util.function.Consumer;
 
 public class SelectedEntities
 {
@@ -64,5 +65,10 @@ public class SelectedEntities
 	public boolean isEmpty()
 	{
 		return selected.isEmpty();
+	}
+	
+	public void forEach(Consumer<? super Entity> function)
+	{
+		selected.forEach(function);
 	}
 }
