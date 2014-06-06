@@ -91,8 +91,8 @@ public abstract class Entity
 	public void rotateToFace(int x, int y)
 	{
 		float angle = GameMath.angleToFace((int)rect.x, (int)rect.y, x, y) * MathUtils.radiansToDegrees;
-		sprite.rotate(0);
-		sprite.rotate(angle);
+		sprite.setRotation(0);
+		sprite.rotate(angle + (MathUtils.PI / 2.f * MathUtils.radiansToDegrees));
 	}
 	
 	public void logRotation()
