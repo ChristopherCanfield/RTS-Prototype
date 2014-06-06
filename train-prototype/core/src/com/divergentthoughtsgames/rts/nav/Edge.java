@@ -23,7 +23,7 @@ public class Edge
 	
 	public Edge addNode(Node node)
 	{
-		if (node1 == node || node2 == node)
+		if (node1.equals(node) || node2.equals(node))
 		{
 			return this;
 		}
@@ -46,11 +46,11 @@ public class Edge
 	
 	public Node getOppositeNode(Node node)
 	{
-		if (node == node1)
+		if (node.equals(node1))
 		{
 			return node2;
 		}
-		else if (node == node2)
+		else if (node.equals(node2))
 		{
 			return node1;
 		}

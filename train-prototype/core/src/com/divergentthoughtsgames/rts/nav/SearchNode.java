@@ -31,6 +31,7 @@ public class SearchNode extends Node implements Comparable<SearchNode>
 		this.parent = parent;
 		this.g = g;
 		this.h = h;
+		this.edges = underlyingNode.edges;
 	}
 	
 	/**
