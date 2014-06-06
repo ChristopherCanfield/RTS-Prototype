@@ -7,25 +7,30 @@ package com.divergentthoughtsgames.rts.nav;
 
 import static org.junit.Assert.*;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Queue;
 
 import org.junit.Before;
 import org.junit.Test;
 
+import com.divergentthoughtsgames.rts.App;
+
 public class SearchTest
 {
 
-	@Before
-	public void setUp() throws Exception
-	{
-	}
-
 	@Test
-	public void aStarEmpty()
+	public void aStarEndNotConnected()
 	{
-		fail("Not yet implemented");
+		Node end = new Node(100, 10);
+		Node[] navGraph = createNavGraph1();
+		Queue<Node> path = Search.aStar(navGraph[0], end, StraightLineHeuristic.getInstance());
+	}
+	
+	@Test
+	public void aStarStartNotConnected()
+	{
+		Node start = new Node(100, 10);
+		Node[] navGraph = createNavGraph1();
+		Queue<Node> path = Search.aStar(start, navGraph[0], StraightLineHeuristic.getInstance());
 	}
 	
 	@Test
@@ -33,6 +38,7 @@ public class SearchTest
 	{
 		Node[] navGraph = createNavGraph1();
 
+		App.setDebug(true);
 		Queue<Node> path = Search.aStar(navGraph[0], navGraph[7], StraightLineHeuristic.getInstance());
 
 		Node node = null;
@@ -42,10 +48,10 @@ public class SearchTest
 		}
 
 		assertNotNull(node);
-		assertSame(navGraph[7], node);
+		assertEquals(navGraph[7], node);
 	}
 
-	private Node[] createNavGraph1()
+	private static Node[] createNavGraph1()
 	{
 		Node[] navGraph = new Node[12];
 		navGraph[0] = new Node(0, 0);	// 0
@@ -103,7 +109,7 @@ public class SearchTest
 		return navGraph;
 	}
 	
-	Node[] createNavGraph2()
+	static Node[] createNavGraph2()
 	{
 		Node[] navGraph = new Node[9];
 		navGraph[0] = new Node(0, 0);	// 0

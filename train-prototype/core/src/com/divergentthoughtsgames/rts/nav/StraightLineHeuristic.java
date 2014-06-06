@@ -10,7 +10,7 @@ public class StraightLineHeuristic implements SearchHeuristic
 	}
 	
 	@Override
-	public float calculateCost(Node start, Node end)
+	public float cost(Node start, Node end)
 	{
 		float startRow = start.getY();
 		float endRow = end.getY();

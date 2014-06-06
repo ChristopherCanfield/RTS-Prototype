@@ -10,10 +10,10 @@ public class Node
 {
 	protected List<Edge> edges = new ArrayList<Edge>(4);
 	
-	private float x;
-	private float y;
+	private int x;
+	private int y;
 	
-	public Node(float x, float y)
+	public Node(int x, int y)
 	{
 		this.x = x;
 		this.y = y;
@@ -30,12 +30,12 @@ public class Node
 		return edges;
 	}
 	
-	public float getX()
+	public int getX()
 	{
 		return x;
 	}
 	
-	public float getY()
+	public int getY()
 	{
 		return y;
 	}

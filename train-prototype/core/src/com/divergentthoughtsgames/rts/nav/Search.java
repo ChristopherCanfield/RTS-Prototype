@@ -8,6 +8,8 @@ import java.util.PriorityQueue;
 import java.util.Queue;
 import java.util.Set;
 
+import com.divergentthoughtsgames.rts.App;
+
 /**
  * Contains a method that implements the A* search algorithm.
  * @author Christopher D. Canfield
@@ -35,7 +37,7 @@ public abstract class Search
 		
 		// Wrap the start node in the SearchNode decorator.
 		SearchNode startNode = 
-				new SearchNode(start, null, 0, heuristic.calculateCost(start, end));
+				new SearchNode(start, null, 0, heuristic.cost(start, end));
 		
 		// Add the start node to the frontier priority queue and the searched set.
 		// The searched set ensures that the start node isn't searched
@@ -68,7 +70,7 @@ public abstract class Search
 
 				// Calculate the h (heuristic) cost of the lowest cost node
 				// to the end node.
-				float h = heuristic.calculateCost(currentNode, end);
+				float h = heuristic.cost(currentNode, end);
 				
 				// Wrap the edge in the SearchNode decorator, so the parent and 
 				// costs can be stored with it.
@@ -106,6 +108,11 @@ public abstract class Search
 		{
 			// Add the current node to the path.
 			path.addFirst(currentPathNode);
+			
+			if (App.debugEnabled())
+			{
+				System.out.print("(" + currentPathNode.getX() + "," + currentPathNode.getY() + ") ");
+			}
 			
 			// Set the current node reference to the parent of the 
 			// node that was just added.
