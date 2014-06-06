@@ -6,10 +6,12 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
+import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.utils.Array;
 import com.divergentthoughtsgames.rts.App;
 import com.divergentthoughtsgames.rts.World;
+import com.divergentthoughtsgames.rts.util.GameMath;
 import com.divergentthoughtsgames.rts.util.Velocity;
 
 /**
@@ -85,6 +87,12 @@ public abstract class Entity
 		rect.y = y;
 	}
 	
+	public void rotateToFace(int x, int y)
+	{
+		float angle = GameMath.angleToFace((int)rect.x, (int)rect.y, x, y) * MathUtils.radiansToDegrees;
+		sprite.rotate(angle);
+	}
+	
 //	protected void addComponent(Component component)
 //	{
 //		components.put(component.getClass(), component);
@@ -99,6 +107,11 @@ public abstract class Entity
 	protected void addController(Controller controller)
 	{
 		controllers.add(controller);
+	}
+	
+	protected static void initializeSprite(Sprite sprite)
+	{
+		sprite.setOriginCenter();
 	}
 	
 //	protected void setSprite(Sprite sprite)

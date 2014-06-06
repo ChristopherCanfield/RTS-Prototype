@@ -36,6 +36,7 @@ public class Footman extends Entity
 		stationaryNorth = new TextureRegion(App.graphics.getTexture(Textures.HumanFootman), 2, 0, 57, 58);
 		sprite = new Sprite(stationaryNorth);
 		setPosition(300, 400);
+		initializeSprite(sprite);
 		
 		attackNorth = new Animation(0.095f, 
 				stationaryNorth,
