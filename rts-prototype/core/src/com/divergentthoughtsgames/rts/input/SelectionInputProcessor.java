@@ -22,6 +22,17 @@ public class SelectionInputProcessor extends InputAdapter
 	}
 	
 	@Override
+	public boolean keyDown(int keycode)
+	{
+		if (keycode == Keys.ESCAPE)
+		{
+			App.selected.clear();
+		}
+		
+		return false;
+	}
+	
+	@Override
 	public boolean touchDown(int x, int y, int pointer, int button)
 	{
 		Gdx.app.debug("SELECTION", "touchDown " + x + "," + y);
