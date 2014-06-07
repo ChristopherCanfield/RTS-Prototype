@@ -15,6 +15,7 @@ import com.divergentthoughtsgames.rts.input.UnitControlInputProcessor;
 import com.divergentthoughtsgames.rts.input.UnitGroupKeyProcessor;
 import com.divergentthoughtsgames.rts.world.Entity;
 import com.divergentthoughtsgames.rts.world.entity.Footman;
+import com.divergentthoughtsgames.rts.world.entity.HumanFarm;
 import com.divergentthoughtsgames.rts.world.entity.Ogre;
 
 public class RtsPrototype extends ApplicationAdapter
@@ -47,6 +48,18 @@ public class RtsPrototype extends ApplicationAdapter
 		Entity footman1 = new Footman(world);
 		footman1.setPosition(225, 500);
 		world.add(footman1);
+		
+		Entity humanFarm = new HumanFarm(world);
+		humanFarm.setPosition(700, 550);
+		world.add(humanFarm);
+		
+		humanFarm = new HumanFarm(world);
+		humanFarm.setPosition(636, 550);
+		world.add(humanFarm);
+		
+		humanFarm = new HumanFarm(world);
+		humanFarm.setPosition(636, 614);
+		world.add(humanFarm);
 		
 		// For debugging.
 		Gdx.app.setLogLevel(Application.LOG_DEBUG);

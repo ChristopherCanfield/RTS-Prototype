@@ -18,7 +18,7 @@ public class HumanFarm extends Entity
 	
 	private Animation buildingAnimation;
 	
-	private float animationTime;
+	private float buildAnimationTime;
 
 	public HumanFarm(World world)
 	{
@@ -34,29 +34,28 @@ public class HumanFarm extends Entity
 	
 	private void setAnimations()
 	{
-		built = new TextureRegion(App.graphics.getTexture(Textures.HumanFootman), 398, 3, 64, 64);
+		built = new TextureRegion(App.graphics.getTexture(Textures.HumanBuildingsSummer), 398, 3, 64, 64);
 		building = new TextureRegion(App.graphics.getTexture(Textures.HumanBuildingsSummer), 398, 68, 64, 64);
 		
 		sprite = new Sprite(built);
-		setPosition(700, 550);
 		initializeSprite(sprite);
 		
-		buildingAnimation = new Animation(0.095f, 
+		buildingAnimation = new Animation(6.f, 
 				building,
 				built);
-		buildingAnimation.setPlayMode(PlayMode.LOOP);		
+		buildingAnimation.setPlayMode(PlayMode.NORMAL);		
 	}
 
 	@Override
 	protected void onDraw()
 	{
-		sprite.setRegion(buildingAnimation.getKeyFrame(animationTime));
+//		sprite.setRegion(buildingAnimation.getKeyFrame(animationTime));
 	}
 
 	@Override
 	protected void onUpdate()
 	{
-		animationTime += Gdx.graphics.getRawDeltaTime();
+		buildAnimationTime += Gdx.graphics.getRawDeltaTime();
 	}
 
 	@Override
