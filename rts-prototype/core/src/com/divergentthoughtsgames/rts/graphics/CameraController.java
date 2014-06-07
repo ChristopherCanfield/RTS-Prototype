@@ -15,6 +15,8 @@ public abstract class CameraController
 	
 	protected void move(float xOffset, float yOffset)
 	{
+		// TODO (6/7/2014): adjust to take into account zoom.
+		
 		if (xOffset != 0)
 		{
 //			camera.translate(xOffset, 0.f, 0.f);
@@ -45,40 +47,41 @@ public abstract class CameraController
 		System.out.println("Camera x: " + camera.position.x);
 		System.out.println("Camera width: " + camera.viewportWidth / 2.f);
 		
-		float cameraX = camera.position.x - camera.viewportWidth / 2.f;
-		if (cameraX <= 0 && xOffset < 0)
+		float newCameraX = 0;
+		if ((camera.position.x - camera.viewportWidth / 2.f) <= 0 && xOffset < 0)
 		{
-			cameraX = camera.viewportWidth / 2.f;
+			newCameraX = camera.viewportWidth / 2.f;
 		}
-		// TODO (6/7/2014): Restrict to world width.
+		else if (camera.position.x + camera.viewportWidth / 2.f >= App.world.getWidth() &&
+				xOffset > 0)
+		{
+			newCameraX = App.world.getWidth() - camera.viewportWidth / 2.f;
+		}
 		else
 		{
-			cameraX = camera.position.x + xOffset;
+			newCameraX = camera.position.x + xOffset;
 		}
-//		else if (cameraX > App.world.getWidth() - camera.viewportWidth / 2.f)
-//		{
-//			// Ensure that screen doesn't go negative if the world is smaller than the camera.
-//			float newCameraX = App.world.getWidth() - camera.viewportWidth / 2.f;
-//			cameraX = (newCameraX >= 0) ? newCameraX : 0;
-//		}
 
-		return cameraX;
+		return newCameraX;
 	}
 
 	private static float calculateCameraY(Camera camera, float yOffset)
 	{
-		float cameraY = camera.position.y + yOffset;
-		if (cameraY < 0)
+		float newCameraY = 0;
+		if ((camera.position.y - camera.viewportHeight / 2.f) <= 0 && yOffset < 0)
 		{
-			cameraY = 0;
+			newCameraY = camera.viewportHeight / 2.f;
 		}
-		else if (cameraY > App.world.getHeight() - camera.viewportHeight)
+		else if (camera.position.y + camera.viewportHeight / 2.f >= App.world.getHeight() &&
+				yOffset > 0)
 		{
-			// Ensure that screen doesn't go negative if the world is smaller than the camera.
-			float newCameraY = App.world.getHeight() - camera.viewportHeight;
-			cameraY = (newCameraY >= 0) ? newCameraY : 0;
+			newCameraY = App.world.getHeight() - camera.viewportHeight / 2.f;
+		}
+		else
+		{
+			newCameraY = camera.position.y + yOffset;
 		}
 
-		return cameraY;
+		return newCameraY;
 	}
 }
