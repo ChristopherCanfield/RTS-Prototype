@@ -27,7 +27,30 @@ public abstract class CameraController
 	
 	protected void zoom(float zoomFactor)
 	{
-		camera.zoom *= zoomFactor;
+		final float maxZoomWidth = App.world.getWidth() / camera.viewportWidth;
+		final float maxZoomHeight = App.world.getHeight() / camera.viewportHeight;
+		final float newZoom = camera.zoom * zoomFactor;
+		
+		if (newZoom > maxZoomWidth)
+		{
+			camera.zoom = maxZoomWidth;
+		}
+		else if (newZoom > maxZoomHeight)
+		{
+			camera.zoom = maxZoomHeight;
+		}
+		else
+		{
+			camera.zoom *= zoomFactor;
+		}
+		
+		move(-0.0001f, -0.0001f);
+		move(0.0001f, 0.0001f);
+//		if (cam.viewportWidth * zoomFactor * cam.zoom <= maxWidth ||
+//				cam.viewportHeight * zoomFactor * cam.zoom >= maxHeight)
+//		{
+//			camera.zoom *= zoomFactor;
+//		}
 	}
 	
 	protected void resetZoom()
