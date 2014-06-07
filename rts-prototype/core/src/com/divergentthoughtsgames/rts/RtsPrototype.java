@@ -39,6 +39,14 @@ public class RtsPrototype extends ApplicationAdapter
 		
 		world.add(new Ogre(world));
 		
+		Entity ogre = new Ogre(world);
+		ogre.setPosition(0, 0);
+		world.add(ogre);
+		
+		ogre = new Ogre(world);
+		ogre.setPosition(2000, 2000);
+		world.add(ogre);
+		
 		Entity ogre2 = new Ogre(world);
 		ogre2.setPosition(100, 250);
 		world.add(ogre2);

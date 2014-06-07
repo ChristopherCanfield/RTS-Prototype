@@ -13,6 +13,8 @@ public class World
 	
 	private Array<Entity> entitiesToRemove = new Array<Entity>();
 	
+	private NavMap navMap;
+	
 	public void add(Entity e)
 	{
 		entities.add(e);
@@ -22,6 +24,42 @@ public class World
 	public Array<Entity> getEntities()
 	{
 		return entities;
+	}
+	
+	public void setNavMap(NavMap navMap)
+	{
+		this.navMap = navMap;
+	}
+	
+	public NavMap getNavMap()
+	{
+		return navMap;
+	}
+	
+	public int getWidth()
+	{
+		// Temporary check during testing.
+		if (navMap != null)
+		{
+			return navMap.width;
+		}
+		else
+		{
+			return 2000;
+		}
+	}
+	
+	public int getHeight()
+	{
+		// Temporary check during testing.
+		if (navMap != null)
+		{
+			return navMap.height;
+		}
+		else
+		{
+			return 2000;
+		}
 	}
 	
 	public void update()
