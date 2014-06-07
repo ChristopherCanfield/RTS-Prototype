@@ -28,8 +28,8 @@ public class Node
 	}
 	
 	/**
-	 * Adds the specified edge, if it is not already connected to this node.
-	 * Note: does not call edge.addNode.
+	 * Adds the specified edge, if it is not already connected to this node. 
+	 * Also calls edge.addNode to add this edge to the node, if it doesn't already exist.
 	 * @param edge the edge to connect to this node.
 	 * @return reference to this node.
 	 */
@@ -38,6 +38,7 @@ public class Node
 		if (!edges.contains(edge))
 		{
 			edges.add(edge);
+			edge.addNode(this);
 		}
 		return this;
 	}
