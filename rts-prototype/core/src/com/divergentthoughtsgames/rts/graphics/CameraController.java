@@ -46,11 +46,6 @@ public abstract class CameraController
 		
 		move(-0.0001f, -0.0001f);
 		move(0.0001f, 0.0001f);
-//		if (cam.viewportWidth * zoomFactor * cam.zoom <= maxWidth ||
-//				cam.viewportHeight * zoomFactor * cam.zoom >= maxHeight)
-//		{
-//			camera.zoom *= zoomFactor;
-//		}
 	}
 	
 	protected void resetZoom()

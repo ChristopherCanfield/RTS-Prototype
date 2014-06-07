@@ -67,5 +67,4 @@ public class MouseCameraController extends CameraController implements InputProc
 		
 		return false;
 	}
-
 }
