@@ -121,11 +121,6 @@ public abstract class Entity
 		sprite.setOriginCenter();
 	}
 	
-//	protected void setSprite(Sprite sprite)
-//	{
-//		this.sprite = sprite;
-//	}
-	
 	public final void draw(SpriteBatch batch)
 	{
 		onDraw();
@@ -162,7 +157,6 @@ public abstract class Entity
 	}
 	
 	protected abstract void onDraw();
-	
 	
 	public final void update()
 	{

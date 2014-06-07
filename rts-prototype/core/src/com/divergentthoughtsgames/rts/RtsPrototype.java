@@ -80,6 +80,7 @@ public class RtsPrototype extends ApplicationAdapter
 	@Override
 	public void render()
 	{
+		App.addGameTime(Gdx.graphics.getRawDeltaTime());
 		App.graphics.render();
 		App.world.update();
 	}
