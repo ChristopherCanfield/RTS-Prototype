@@ -3,6 +3,7 @@ package com.divergentthoughtsgames.rts;
 import com.divergentthoughtsgames.rts.graphics.Graphics;
 import com.divergentthoughtsgames.rts.world.SelectedEntities;
 import com.divergentthoughtsgames.rts.world.UnitGroups;
+import com.divergentthoughtsgames.rts.world.World;
 
 
 public abstract class App

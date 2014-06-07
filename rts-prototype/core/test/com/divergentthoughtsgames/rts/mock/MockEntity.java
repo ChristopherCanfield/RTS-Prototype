@@ -1,7 +1,7 @@
 package com.divergentthoughtsgames.rts.mock;
 
-import com.divergentthoughtsgames.rts.World;
 import com.divergentthoughtsgames.rts.world.Entity;
+import com.divergentthoughtsgames.rts.world.World;
 
 public class MockEntity extends Entity
 {

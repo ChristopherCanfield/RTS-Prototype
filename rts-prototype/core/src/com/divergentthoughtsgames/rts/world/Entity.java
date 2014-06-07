@@ -11,7 +11,6 @@ import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.utils.Array;
 import com.divergentthoughtsgames.rts.App;
-import com.divergentthoughtsgames.rts.World;
 import com.divergentthoughtsgames.rts.util.GameMath;
 import com.divergentthoughtsgames.rts.util.Velocity;
 

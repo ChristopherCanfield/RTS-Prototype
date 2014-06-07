@@ -8,7 +8,6 @@ import java.util.ArrayList;
 import org.junit.Before;
 import org.junit.Test;
 
-import com.divergentthoughtsgames.rts.World;
 import com.divergentthoughtsgames.rts.mock.MockEntity;
 import com.divergentthoughtsgames.rts.world.entity.Ogre;
 

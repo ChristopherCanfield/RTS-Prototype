@@ -13,8 +13,8 @@ import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer.ShapeType;
 import com.badlogic.gdx.math.Matrix4;
 import com.badlogic.gdx.utils.Array;
-import com.divergentthoughtsgames.rts.World;
 import com.divergentthoughtsgames.rts.world.Entity;
+import com.divergentthoughtsgames.rts.world.World;
 
 public class Graphics
 {

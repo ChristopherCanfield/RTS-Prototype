@@ -7,7 +7,7 @@ package com.divergentthoughtsgames.rts.world;
 
 import com.divergentthoughtsgames.rts.nav.Node;
 
-public class WorldMap
+public class NavMap
 {
 	public final int width;
 	public final int height;
@@ -15,13 +15,13 @@ public class WorldMap
 	private final Node[] navGraph;
 	private Node[][] indexedNavGraph;
 	
-	public static Node getNode(WorldMap map, int x, int y)
+	public static Node getNode(NavMap map, int x, int y)
 	{
 		Node[][] navGraph = map.indexedNavGraph;
 		return navGraph[x / Node.SIZE][y / Node.SIZE];
 	}
 	
-	public WorldMap(Node[] navGraph, int width, int height)
+	public NavMap(Node[] navGraph, int width, int height)
 	{
 		this.navGraph = navGraph;
 		
