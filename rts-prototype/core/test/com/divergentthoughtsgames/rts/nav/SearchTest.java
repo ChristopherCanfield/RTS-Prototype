@@ -23,6 +23,7 @@ public class SearchTest
 		Node end = new Node(100, 10);
 		Node[] navGraph = createNavGraph1();
 		Queue<Node> path = Search.aStar(navGraph[0], end, StraightLineHeuristic.getInstance());
+		assertTrue(path.isEmpty());
 	}
 	
 	@Test
@@ -31,6 +32,16 @@ public class SearchTest
 		Node start = new Node(100, 10);
 		Node[] navGraph = createNavGraph1();
 		Queue<Node> path = Search.aStar(start, navGraph[0], StraightLineHeuristic.getInstance());
+		assertTrue(path.isEmpty());
+	}
+	
+	@Test
+	public void aStarSameStartEnd()
+	{
+		Node[] navGraph = createNavGraph1();
+		Queue<Node> path = Search.aStar(navGraph[10], navGraph[10], StraightLineHeuristic.getInstance());
+		assertEquals(1, path.size());
+		assertEquals(navGraph[10], path.peek());
 	}
 	
 	@Test
@@ -49,6 +60,54 @@ public class SearchTest
 
 		assertNotNull(node);
 		assertEquals(navGraph[7], node);
+	}
+	
+	@Test
+	public void aStarStraightLine_diagonal1()
+	{
+		Node[] navGraph = createNavGraph2();
+		
+		Queue<Node> path = Search.aStar(navGraph[0], navGraph[5], StraightLineHeuristic.getInstance());
+		assertEquals(3, path.size());
+		
+		Node node = path.poll();
+		assertEquals(navGraph[0], node);
+		
+		path.poll();
+		node = path.poll();
+		assertEquals(navGraph[5], node);
+	}
+	
+	@Test
+	public void aStarStraightLine_diagonal2()
+	{
+		Node[] navGraph = createNavGraph2();
+		
+		Queue<Node> path = Search.aStar(navGraph[5], navGraph[0], StraightLineHeuristic.getInstance());
+		assertEquals(3, path.size());
+		
+		Node node = path.poll();
+		assertEquals(navGraph[5], node);
+		
+		path.poll();
+		node = path.poll();
+		assertEquals(navGraph[0], node);
+	}
+	
+	@Test
+	public void aStarStraightLine_diagonal3()
+	{
+		Node[] navGraph = createNavGraph2();
+		
+		Queue<Node> path = Search.aStar(navGraph[6], navGraph[2], StraightLineHeuristic.getInstance());
+		assertEquals(3, path.size());
+		
+		Node node = path.poll();
+		assertEquals(navGraph[6], node);
+		
+		path.poll();
+		node = path.poll();
+		assertEquals(navGraph[2], node);
 	}
 
 	private static Node[] createNavGraph1()

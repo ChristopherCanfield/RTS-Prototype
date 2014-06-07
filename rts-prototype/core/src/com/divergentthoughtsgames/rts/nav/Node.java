@@ -27,9 +27,18 @@ public class Node
 		this.y = y;
 	}
 	
+	/**
+	 * Adds the specified edge, if it is not already connected to this node.
+	 * Note: does not call edge.addNode.
+	 * @param edge the edge to connect to this node.
+	 * @return reference to this node.
+	 */
 	public Node addEdge(Edge edge)
 	{
-		edges.add(edge);
+		if (!edges.contains(edge))
+		{
+			edges.add(edge);
+		}
 		return this;
 	}
 	

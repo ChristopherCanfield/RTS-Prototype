@@ -19,8 +19,17 @@ public class Edge
 		this.cost = cost;
 		this.node1 = node1;
 		this.node2 = node2;
+		
+		this.node1.addEdge(this);
+		this.node2.addEdge(this);
 	}
 	
+	/**
+	 * Connects a node to this edge. Calls node.addEdge on the node to add this edge to
+	 * the node as well.
+	 * @param node the node to connect to this edge.
+	 * @return reference to this edge.
+	 */
 	public Edge addNode(Node node)
 	{
 		if (node.equals(node1) || node.equals(node2))
@@ -31,10 +40,12 @@ public class Edge
 		if (node1 == null)
 		{
 			node1 = node;
+			node1.addEdge(this);
 		}
 		else if (node2 == null)
 		{
 			node2 = node;
+			node2.addEdge(this);
 		}
 		else
 		{
