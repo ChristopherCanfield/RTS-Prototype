@@ -1,6 +1,5 @@
 package com.divergentthoughtsgames.rts.graphics;
 
-import com.badlogic.gdx.graphics.Camera;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.divergentthoughtsgames.rts.App;
 
@@ -15,17 +14,13 @@ public abstract class CameraController
 	
 	protected void move(float xOffset, float yOffset)
 	{
-		// TODO (6/7/2014): adjust to take into account zoom.
-		
 		if (xOffset != 0)
 		{
-//			camera.translate(xOffset, 0.f, 0.f);
 			camera.position.x = calculateCameraX(camera, xOffset);
 		}
 		
 		if (yOffset != 0)
 		{
-//			camera.translate(0.f, yOffset, 0.f);
 			camera.position.y = calculateCameraY(camera, yOffset);
 		}
 	}
@@ -42,20 +37,21 @@ public abstract class CameraController
 	
 	public abstract void update();
 	
-	private static float calculateCameraX(Camera camera, float xOffset)
+	private static float calculateCameraX(OrthographicCamera camera, float xOffset)
 	{
 		System.out.println("Camera x: " + camera.position.x);
 		System.out.println("Camera width: " + camera.viewportWidth / 2.f);
 		
 		float newCameraX = 0;
-		if ((camera.position.x - camera.viewportWidth / 2.f) <= 0 && xOffset < 0)
+		final float cameraHalfWidth = camera.viewportWidth / 2.f * camera.zoom;
+		if ((camera.position.x - cameraHalfWidth) <= 0 && xOffset < 0)
 		{
-			newCameraX = camera.viewportWidth / 2.f;
+			newCameraX = cameraHalfWidth;
 		}
-		else if (camera.position.x + camera.viewportWidth / 2.f >= App.world.getWidth() &&
+		else if (camera.position.x + cameraHalfWidth >= App.world.getWidth() &&
 				xOffset > 0)
 		{
-			newCameraX = App.world.getWidth() - camera.viewportWidth / 2.f;
+			newCameraX = App.world.getWidth() - cameraHalfWidth;
 		}
 		else
 		{
@@ -65,17 +61,18 @@ public abstract class CameraController
 		return newCameraX;
 	}
 
-	private static float calculateCameraY(Camera camera, float yOffset)
+	private static float calculateCameraY(OrthographicCamera camera, float yOffset)
 	{
 		float newCameraY = 0;
-		if ((camera.position.y - camera.viewportHeight / 2.f) <= 0 && yOffset < 0)
+		final float cameraHalfHeight = camera.viewportHeight / 2.f * camera.zoom;
+		if ((camera.position.y - cameraHalfHeight) <= 0 && yOffset < 0)
 		{
-			newCameraY = camera.viewportHeight / 2.f;
+			newCameraY = cameraHalfHeight;
 		}
-		else if (camera.position.y + camera.viewportHeight / 2.f >= App.world.getHeight() &&
+		else if (camera.position.y + cameraHalfHeight >= App.world.getHeight() &&
 				yOffset > 0)
 		{
-			newCameraY = App.world.getHeight() - camera.viewportHeight / 2.f;
+			newCameraY = App.world.getHeight() - cameraHalfHeight;
 		}
 		else
 		{
