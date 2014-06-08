@@ -25,7 +25,7 @@ public abstract class GameMath
 	}
 	
 	/**
-	 * Returns true if num is between min and max, exclusive.
+	 * Returns true if num is between min and max, inclusive.
 	 * @param num
 	 * @param min
 	 * @param max
@@ -33,6 +33,6 @@ public abstract class GameMath
 	 */
 	public static boolean between(float num, float min, float max)
 	{
-		return (num > min && num < max);
+		return (num >= min && num <= max);
 	}
 }

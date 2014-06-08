@@ -7,11 +7,10 @@ import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Rectangle;
 import com.divergentthoughtsgames.rts.App;
+import com.divergentthoughtsgames.rts.graphics.SpriteRotator;
 import com.divergentthoughtsgames.rts.graphics.Textures;
 import com.divergentthoughtsgames.rts.world.Entity;
 import com.divergentthoughtsgames.rts.world.World;
-
-import static com.divergentthoughtsgames.rts.util.GameMath.between;
 
 public class Ogre extends Entity
 {
@@ -21,11 +20,9 @@ public class Ogre extends Entity
 	private TextureRegion stationarySouthEast;
 	private TextureRegion stationaryNorthEast;
 	
-	private Animation walkNorth;
-	private Animation walkSouth;
-	private Animation walkEast;
-	private Animation walkSouthEast;
-	private Animation walkNorthEast;
+	private SpriteRotator spriteRotator;
+	
+	private Animation currentAnimation;
 	
 	private float animationTime;
 
@@ -39,6 +36,7 @@ public class Ogre extends Entity
 		selectable = true;
 		
 		setAnimations();
+		currentAnimation = spriteRotator.walkNorth;
 	}
 	
 	private void setAnimations()
@@ -52,58 +50,61 @@ public class Ogre extends Entity
 		sprite = new Sprite(stationaryNorth);
 		initializeSprite(sprite);
 		
-		walkNorth = new Animation(0.095f, 
+		spriteRotator = new SpriteRotator(sprite);
+		
+		spriteRotator.walkNorth = new Animation(0.095f, 
 				stationaryNorth,
 				new TextureRegion(App.graphics.getTexture(Textures.OrcOgre), 5, 78, 64, 54),
 				new TextureRegion(App.graphics.getTexture(Textures.OrcOgre), 5, 149, 64, 54),
 				new TextureRegion(App.graphics.getTexture(Textures.OrcOgre), 5, 226, 64, 54),
 				new TextureRegion(App.graphics.getTexture(Textures.OrcOgre), 5, 297, 64, 54));
-		walkNorth.setPlayMode(PlayMode.LOOP);
+		spriteRotator.walkNorth.setPlayMode(PlayMode.LOOP);
 		
-		walkSouth = new Animation(0.095f,
+		spriteRotator.walkSouth = new Animation(0.095f,
 				stationarySouth,
 				new TextureRegion(App.graphics.getTexture(Textures.OrcOgre), 301, 78, 64, 54),
 				new TextureRegion(App.graphics.getTexture(Textures.OrcOgre), 301, 149, 64, 54),
 				new TextureRegion(App.graphics.getTexture(Textures.OrcOgre), 301, 226, 64, 54),
 				new TextureRegion(App.graphics.getTexture(Textures.OrcOgre), 301, 297, 64, 54));
-		walkSouth.setPlayMode(PlayMode.LOOP);
+		spriteRotator.walkSouth.setPlayMode(PlayMode.LOOP);
 		
-		walkEast = new Animation(0.095f,
+		spriteRotator.walkEast = new Animation(0.095f,
 				stationaryEast,
 				new TextureRegion(App.graphics.getTexture(Textures.OrcOgre), 155, 79, 64, 54),
 				new TextureRegion(App.graphics.getTexture(Textures.OrcOgre), 155, 150, 64, 54),
 				new TextureRegion(App.graphics.getTexture(Textures.OrcOgre), 155, 227, 64, 54),
 				new TextureRegion(App.graphics.getTexture(Textures.OrcOgre), 155, 298, 64, 54));
-		walkEast.setPlayMode(PlayMode.LOOP);
+		spriteRotator.walkEast.setPlayMode(PlayMode.LOOP);
 		
-		walkNorthEast = new Animation(0.095f,
+		spriteRotator.walkNorthEast = new Animation(0.095f,
 				stationaryNorthEast,
 				new TextureRegion(App.graphics.getTexture(Textures.OrcOgre), 79, 79, 64, 56),
 				new TextureRegion(App.graphics.getTexture(Textures.OrcOgre), 79, 150, 64, 56),
 				new TextureRegion(App.graphics.getTexture(Textures.OrcOgre), 79, 227, 64, 56),
 				new TextureRegion(App.graphics.getTexture(Textures.OrcOgre), 79, 298, 64, 56));
-		walkNorthEast.setPlayMode(PlayMode.LOOP);
+		spriteRotator.walkNorthEast.setPlayMode(PlayMode.LOOP);
 		
-		walkSouthEast = new Animation(0.095f,
+		spriteRotator.walkSouthEast = new Animation(0.095f,
 				stationarySouthEast,
 				new TextureRegion(App.graphics.getTexture(Textures.OrcOgre), 229, 79, 64, 56),
 				new TextureRegion(App.graphics.getTexture(Textures.OrcOgre), 229, 150, 64, 56),
 				new TextureRegion(App.graphics.getTexture(Textures.OrcOgre), 229, 227, 64, 56),
 				new TextureRegion(App.graphics.getTexture(Textures.OrcOgre), 229, 298, 64, 56));
-		walkSouthEast.setPlayMode(PlayMode.LOOP);
+		spriteRotator.walkSouthEast.setPlayMode(PlayMode.LOOP);
 	}
 
 	@Override
 	protected void onRotate()
 	{
-		float rotation = sprite.getRotation();
-		Animation animation = between(rotation, )
+		currentAnimation = spriteRotator.onRotate();
 	}
 	
 	@Override
 	protected void onDraw()
 	{
-		sprite.setRegion(walkNorth.getKeyFrame(animationTime));
+		boolean flipX = sprite.isFlipX();
+		sprite.setRegion(currentAnimation.getKeyFrame(animationTime));
+		sprite.flip(flipX, false);
 	}
 
 	@Override
