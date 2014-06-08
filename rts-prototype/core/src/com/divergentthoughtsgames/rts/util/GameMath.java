@@ -23,4 +23,16 @@ public abstract class GameMath
 		int deltaX = point1x - point2x;
 		return MathUtils.atan2(deltaY, deltaX);
 	}
+	
+	/**
+	 * Returns true if num is between min and max, exclusive.
+	 * @param num
+	 * @param min
+	 * @param max
+	 * @return
+	 */
+	public static boolean between(float num, float min, float max)
+	{
+		return (num > min && num < max);
+	}
 }

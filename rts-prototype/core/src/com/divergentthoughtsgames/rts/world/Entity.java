@@ -92,6 +92,16 @@ public abstract class Entity
 		float angle = GameMath.angleToFace((int)rect.x, (int)rect.y, x, y) * MathUtils.radiansToDegrees;
 		sprite.setRotation(0);
 		sprite.rotate(angle + (MathUtils.PI / 2.f * MathUtils.radiansToDegrees));
+		
+		onRotate();
+	}
+	
+	/**
+	 * Provides a hook into the rotateToFace method. Override this to receive notification when
+	 * the entity is rotated.
+	 */
+	protected void onRotate()
+	{
 	}
 	
 	public void logRotation()

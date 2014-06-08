@@ -11,6 +11,8 @@ import com.divergentthoughtsgames.rts.graphics.Textures;
 import com.divergentthoughtsgames.rts.world.Entity;
 import com.divergentthoughtsgames.rts.world.World;
 
+import static com.divergentthoughtsgames.rts.util.GameMath.between;
+
 public class Ogre extends Entity
 {
 	private TextureRegion stationaryNorth;
@@ -91,6 +93,13 @@ public class Ogre extends Entity
 		walkSouthEast.setPlayMode(PlayMode.LOOP);
 	}
 
+	@Override
+	protected void onRotate()
+	{
+		float rotation = sprite.getRotation();
+		Animation animation = between(rotation, )
+	}
+	
 	@Override
 	protected void onDraw()
 	{
