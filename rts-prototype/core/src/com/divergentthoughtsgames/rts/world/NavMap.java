@@ -5,6 +5,7 @@
  */
 package com.divergentthoughtsgames.rts.world;
 
+import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.divergentthoughtsgames.rts.nav.Node;
 
 public class NavMap
@@ -38,5 +39,10 @@ public class NavMap
 	public Node[] getNavGraph()
 	{
 		return navGraph;
+	}
+	
+	public void draw(ShapeRenderer renderer)
+	{
+		
 	}
 }

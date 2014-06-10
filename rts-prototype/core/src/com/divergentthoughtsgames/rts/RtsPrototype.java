@@ -13,8 +13,10 @@ import com.divergentthoughtsgames.rts.input.MouseCameraController;
 import com.divergentthoughtsgames.rts.input.SelectionInputProcessor;
 import com.divergentthoughtsgames.rts.input.UnitControlInputProcessor;
 import com.divergentthoughtsgames.rts.input.UnitGroupKeyProcessor;
+import com.divergentthoughtsgames.rts.nav.Node;
 import com.divergentthoughtsgames.rts.world.Entity;
 import com.divergentthoughtsgames.rts.world.World;
+import com.divergentthoughtsgames.rts.world.creator.BasicWorldCreator;
 import com.divergentthoughtsgames.rts.world.entity.Footman;
 import com.divergentthoughtsgames.rts.world.entity.HumanFarm;
 import com.divergentthoughtsgames.rts.world.entity.HumanTownCenter;
@@ -26,7 +28,7 @@ public class RtsPrototype extends ApplicationAdapter
 	public void create()
 	{
 		Graphics graphics = new Graphics();
-		World world = new World();
+		World world = BasicWorldCreator.create(Node.SIZE * 100, Node.SIZE * 100);
 		graphics.setWorld(world);
 		
 		CameraController kcc = new KeyboardCameraController((OrthographicCamera)graphics.getCamera());

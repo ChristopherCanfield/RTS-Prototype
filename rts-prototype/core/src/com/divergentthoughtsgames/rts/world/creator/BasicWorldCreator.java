@@ -19,9 +19,7 @@ import com.divergentthoughtsgames.rts.world.World;
  */
 public class BasicWorldCreator
 {
-
-	// TODO (6/7/2014): implement this.
-	public World create(int width, int height)
+	public static World create(int width, int height)
 	{
 		int rows = height / Node.SIZE - 1;
 		int columns = width / Node.SIZE - 1;
@@ -29,6 +27,7 @@ public class BasicWorldCreator
 		ArrayList<Node> nodeList = new ArrayList<Node>();
 		Node[][] nodes = new Node[rows][columns];
 		
+		// Build the navigation graph. 0,0 = top left.
 		for (int row = 0; row < rows; ++row)
 		{
 			for (int column = 0; column < columns; ++column)
@@ -60,11 +59,11 @@ public class BasicWorldCreator
 		}
 		
 		// Down
-		if (row < rows)
-		{
-			Edge edge = new Edge(1);
-			edge.addNode(node).addNode(nodes[row + 1][column]);
-		}
+//		if (row < rows)
+//		{
+//			Edge edge = new Edge(1);
+//			edge.addNode(node).addNode(nodes[row + 1][column]);
+//		}
 		
 		// Left
 		if (column > 0)
@@ -74,11 +73,11 @@ public class BasicWorldCreator
 		}
 		
 		// Right
-		if (column < columns)
-		{
-			Edge edge = new Edge(1);
-			edge.addNode(node).addNode(nodes[row][column + 1]);
-		}
+//		if (column < columns)
+//		{
+//			Edge edge = new Edge(1);
+//			edge.addNode(node).addNode(nodes[row][column + 1]);
+//		}
 		
 		// Upper-Left
 		if (row > 0 && column > 0)
@@ -88,24 +87,24 @@ public class BasicWorldCreator
 		}
 		
 		// Upper-Right
-		if (row > 0 && column < columns)
-		{
-			Edge edge = new Edge(1);
-			edge.addNode(node).addNode(nodes[row - 1][column + 1]);
-		}
+//		if (row > 0 && column < columns)
+//		{
+//			Edge edge = new Edge(1);
+//			edge.addNode(node).addNode(nodes[row - 1][column + 1]);
+//		}
 		
 		// Lower-Left
-		if (row < rows && column > 0)
-		{
-			Edge edge = new Edge(1);
-			edge.addNode(node).addNode(nodes[row + 1][column - 1]);	
-		}
+//		if (row < rows && column > 0)
+//		{
+//			Edge edge = new Edge(1);
+//			edge.addNode(node).addNode(nodes[row + 1][column - 1]);	
+//		}
 		
 		// Lower-Right
-		if (row < rows && column < columns)
-		{
-			Edge edge = new Edge(1);
-			edge.addNode(node).addNode(nodes[row + 1][column + 1]);
-		}
+//		if (row < rows && column < columns)
+//		{
+//			Edge edge = new Edge(1);
+//			edge.addNode(node).addNode(nodes[row + 1][column + 1]);
+//		}
 	}
 }

@@ -4,7 +4,9 @@ import java.util.HashMap;
 import java.util.UUID;
 
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.utils.Array;
+import com.divergentthoughtsgames.rts.App;
 
 public class World
 {
@@ -80,6 +82,11 @@ public class World
 			entityMap.remove(e.getId());
 		}
 		entitiesToRemove.clear();
+	}
+	
+	public void drawNavGraph(ShapeRenderer renderer)
+	{
+		navMap.draw(renderer);
 	}
 	
 	public void draw(SpriteBatch batch)

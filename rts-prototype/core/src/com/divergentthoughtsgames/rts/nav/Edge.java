@@ -1,5 +1,6 @@
 package com.divergentthoughtsgames.rts.nav;
 
+import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.divergentthoughtsgames.rts.util.GameException;
 
 public class Edge
@@ -68,6 +69,14 @@ public class Edge
 		else
 		{
 			throw new GameException("Node is not connected to this edge.");
+		}
+	}
+	
+	public void draw(ShapeRenderer batch)
+	{
+		if (node1 != null && node2 != null)
+		{
+			batch.line(node1.getX(), node1.getY(), node2.getX(), node2.getY());
 		}
 	}
 }
