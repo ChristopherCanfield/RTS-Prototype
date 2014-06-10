@@ -9,6 +9,7 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Rectangle;
+import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.Array;
 import com.divergentthoughtsgames.rts.App;
 import com.divergentthoughtsgames.rts.util.GameMath;
@@ -22,8 +23,6 @@ public abstract class Entity
 {
 	// The entity's unique id.
 	private UUID id;
-	
-//	private ArrayMap<Class<? extends Component>, Component> components;
 	
 	// The list of controllers.
 	private Array<Controller> controllers;
@@ -41,6 +40,11 @@ public abstract class Entity
 	/** The entity's current velocity. **/
 	protected Velocity velocity;
 	
+	protected float maxSpeed;
+	protected float speed;
+	
+	protected final Vector2 movementVector = new Vector2();
+	
 	/** Whether the entity is selectable by the user. **/
 	protected boolean selectable;
 	
@@ -57,14 +61,8 @@ public abstract class Entity
 		this.id = UUID.randomUUID();
 		this.world = world;
 		
-//		setComponents();
 //		setControllers();
 	}
-	
-	/**
-	 * Sets the entity's components. Called once, on construction.
-	 */
-//	protected abstract void setComponents();
 	
 	/**
 	 * Sets the entity's controllers. Called once, on construction.
@@ -85,6 +83,16 @@ public abstract class Entity
 	{
 		rect.x = x;
 		rect.y = y;
+	}
+	
+	public int getX()
+	{
+		return (int)rect.x;
+	}
+	
+	public int getY()
+	{
+		return (int)rect.y;
 	}
 	
 	public void rotateToFace(int x, int y)
@@ -108,17 +116,6 @@ public abstract class Entity
 	{
 		Gdx.app.debug("Entity Rotation", toString() + ": " + sprite.getRotation());
 	}
-	
-//	protected void addComponent(Component component)
-//	{
-//		components.put(component.getClass(), component);
-//	}
-//	
-//	@SuppressWarnings("unchecked")
-//	public <T extends Component> T get(Class<? extends Component> componentType)
-//	{
-//		return (T)components.get(componentType);
-//	}
 	
 	protected void addController(Controller controller)
 	{

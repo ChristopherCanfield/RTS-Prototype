@@ -5,6 +5,7 @@ import java.util.List;
 
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.utils.Array;
+import com.divergentthoughtsgames.rts.App;
 import com.divergentthoughtsgames.rts.nav.Node;
 import com.divergentthoughtsgames.rts.world.Entity;
 import com.divergentthoughtsgames.rts.world.NavMap;
@@ -31,8 +32,20 @@ public abstract class Find
 		return found;
 	}
 	
-	public static Node node(NavMap map, int x, int y)
+	/**
+	 * Finds the node that contains the specified x,y coordinate. This is a shortcut for
+	 * <code>NavMap.getNode(App.world.getNavMap(), x, y)</code>.
+	 * @param x
+	 * @param y
+	 * @return the node that contains the specified x,y coordinate.
+	 */
+	public static Node node(int x, int y)
 	{
-		return NavMap.getNode(map, x, y);
+		return NavMap.getNode(App.world.getNavMap(), x, y);
+	}
+	
+	public static Node node(Entity e)
+	{
+		return node(e.getX(), e.getY());
 	}
 }
