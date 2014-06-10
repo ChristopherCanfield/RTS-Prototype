@@ -44,6 +44,11 @@ public abstract class Find
 		return NavMap.getNode(App.world.getNavMap(), x, y);
 	}
 	
+	public static Node node(float x, float y)
+	{
+		return node((int)x, (int)y);
+	}
+	
 	public static Node node(Entity e)
 	{
 		return node(e.getX(), e.getY());

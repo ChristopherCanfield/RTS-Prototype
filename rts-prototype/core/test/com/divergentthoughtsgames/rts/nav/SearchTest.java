@@ -22,7 +22,7 @@ public class SearchTest
 	{
 		Node end = new Node(100, 10);
 		Node[] navGraph = createNavGraph1();
-		Queue<Node> path = Search.aStar(navGraph[0], end, StraightLineHeuristic.getInstance());
+		Queue<Node> path = Search.aStar(navGraph[0], end, StraightLineHeuristic.get());
 		assertTrue(path.isEmpty());
 	}
 	
@@ -31,7 +31,7 @@ public class SearchTest
 	{
 		Node start = new Node(100, 10);
 		Node[] navGraph = createNavGraph1();
-		Queue<Node> path = Search.aStar(start, navGraph[0], StraightLineHeuristic.getInstance());
+		Queue<Node> path = Search.aStar(start, navGraph[0], StraightLineHeuristic.get());
 		assertTrue(path.isEmpty());
 	}
 	
@@ -39,7 +39,7 @@ public class SearchTest
 	public void aStarSameStartEnd()
 	{
 		Node[] navGraph = createNavGraph1();
-		Queue<Node> path = Search.aStar(navGraph[10], navGraph[10], StraightLineHeuristic.getInstance());
+		Queue<Node> path = Search.aStar(navGraph[10], navGraph[10], StraightLineHeuristic.get());
 		assertEquals(1, path.size());
 		assertEquals(navGraph[10], path.peek());
 	}
@@ -50,7 +50,7 @@ public class SearchTest
 		Node[] navGraph = createNavGraph1();
 
 		App.setDebug(true);
-		Queue<Node> path = Search.aStar(navGraph[0], navGraph[7], StraightLineHeuristic.getInstance());
+		Queue<Node> path = Search.aStar(navGraph[0], navGraph[7], StraightLineHeuristic.get());
 
 		Node node = null;
 		while (!path.isEmpty())
@@ -67,7 +67,7 @@ public class SearchTest
 	{
 		Node[] navGraph = createNavGraph2();
 		
-		Queue<Node> path = Search.aStar(navGraph[0], navGraph[5], StraightLineHeuristic.getInstance());
+		Queue<Node> path = Search.aStar(navGraph[0], navGraph[5], StraightLineHeuristic.get());
 		assertEquals(3, path.size());
 		
 		Node node = path.poll();
@@ -83,7 +83,7 @@ public class SearchTest
 	{
 		Node[] navGraph = createNavGraph2();
 		
-		Queue<Node> path = Search.aStar(navGraph[5], navGraph[0], StraightLineHeuristic.getInstance());
+		Queue<Node> path = Search.aStar(navGraph[5], navGraph[0], StraightLineHeuristic.get());
 		assertEquals(3, path.size());
 		
 		Node node = path.poll();
@@ -99,7 +99,7 @@ public class SearchTest
 	{
 		Node[] navGraph = createNavGraph2();
 		
-		Queue<Node> path = Search.aStar(navGraph[6], navGraph[2], StraightLineHeuristic.getInstance());
+		Queue<Node> path = Search.aStar(navGraph[6], navGraph[2], StraightLineHeuristic.get());
 		assertEquals(3, path.size());
 		
 		Node node = path.poll();

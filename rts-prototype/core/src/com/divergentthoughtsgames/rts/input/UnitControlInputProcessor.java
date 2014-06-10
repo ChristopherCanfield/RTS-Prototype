@@ -11,6 +11,7 @@ import com.badlogic.gdx.math.Vector3;
 import com.divergentthoughtsgames.rts.App;
 import com.divergentthoughtsgames.rts.util.Coords;
 import com.divergentthoughtsgames.rts.world.Entity;
+import com.divergentthoughtsgames.rts.world.command.MoveCommand;
 
 public class UnitControlInputProcessor extends InputAdapter
 {
@@ -40,7 +41,8 @@ public class UnitControlInputProcessor extends InputAdapter
 		{
 			final Vector3 worldCoords = Coords.screenToWorld(screenX, screenY);
 			App.selected.forEach((Entity e) -> {
-				e.rotateToFace((int)worldCoords.x, (int)worldCoords.y);
+				e.rotateToFace(worldCoords.x, worldCoords.y);
+				e.setCommand(new MoveCommand(e, worldCoords.x, worldCoords.y));
 				if (App.debugEnabled()) e.logRotation();
 			});
 		}

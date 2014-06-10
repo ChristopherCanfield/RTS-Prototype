@@ -13,6 +13,8 @@ import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.Array;
 import com.divergentthoughtsgames.rts.App;
 import com.divergentthoughtsgames.rts.util.GameMath;
+import com.divergentthoughtsgames.rts.world.command.EntityCommand;
+import com.divergentthoughtsgames.rts.world.command.NullCommand;
 
 /**
  * Base class for objects in the game world.
@@ -53,12 +55,14 @@ public abstract class Entity
 	/** The game world. **/
 	protected final World world;
 	
+	private EntityCommand command;
+	
 	protected Entity(World world)
 	{
-//		this.components = new ArrayMap<>(false, 4);
 		this.controllers = new Array<>(false, 1);
 		this.id = UUID.randomUUID();
 		this.world = world;
+		this.command = NullCommand.get();
 		
 //		setControllers();
 	}
@@ -121,6 +125,11 @@ public abstract class Entity
 		onRotate();
 	}
 	
+	public void rotateToFace(float x, float y)
+	{
+		rotateToFace((int)x, (int)y);
+	}
+	
 	/**
 	 * Provides a hook into the rotateToFace method. Override this to receive notification when
 	 * the entity is rotated.
@@ -137,6 +146,11 @@ public abstract class Entity
 	protected void addController(Controller controller)
 	{
 		controllers.add(controller);
+	}
+	
+	public void setCommand(EntityCommand c)
+	{
+		command = c;
 	}
 	
 	protected static void initializeSprite(Sprite sprite)
@@ -184,6 +198,11 @@ public abstract class Entity
 	public final void update()
 	{
 		onUpdate();
+		
+		if (!command.isFinished())
+		{
+			
+		}
 		
 		for (final Controller c : controllers)
 		{

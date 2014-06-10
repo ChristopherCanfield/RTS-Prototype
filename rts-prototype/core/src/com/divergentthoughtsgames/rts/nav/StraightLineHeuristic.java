@@ -4,7 +4,7 @@ public class StraightLineHeuristic implements SearchHeuristic
 {
 	private static StraightLineHeuristic instance = new StraightLineHeuristic();
 	
-	public static StraightLineHeuristic getInstance()
+	public static StraightLineHeuristic get()
 	{
 		return instance;
 	}
