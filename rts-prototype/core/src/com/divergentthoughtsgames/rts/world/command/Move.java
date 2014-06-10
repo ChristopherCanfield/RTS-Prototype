@@ -7,7 +7,6 @@ package com.divergentthoughtsgames.rts.world.command;
 
 import java.util.Queue;
 
-import com.divergentthoughtsgames.rts.App;
 import com.divergentthoughtsgames.rts.nav.Node;
 import com.divergentthoughtsgames.rts.nav.Search;
 import com.divergentthoughtsgames.rts.nav.StraightLineHeuristic;
@@ -29,10 +28,7 @@ public class Move extends AbstractEntityCommand<Entity>
 		
 		path = Search.aStar(startNode, targetNode, StraightLineHeuristic.getInstance());
 		nextNode = path.poll();
-		if (nextNode != null)
-		{
-			entity.rotateToFace(nextNode.getX(), nextNode.getY());
-		}
+		rotateToFace(entity, nextNode);
 	}
 
 	@Override
@@ -44,8 +40,18 @@ public class Move extends AbstractEntityCommand<Entity>
 			return;
 		}
 		
-		
+		if (entity.getRect().contains(nextNode.getX(), nextNode.getY()))
+		{
+			nextNode = path.poll();
+			rotateToFace(entity, nextNode);
+		}
 	}
-
-	private void reachedNode
+	
+	private static void rotateToFace(Entity entity, Node nextNode)
+	{
+		if (nextNode != null)
+		{
+			entity.rotateToFace(nextNode.getX(), nextNode.getY());
+		}
+	}
 }

@@ -13,7 +13,6 @@ import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.Array;
 import com.divergentthoughtsgames.rts.App;
 import com.divergentthoughtsgames.rts.util.GameMath;
-import com.divergentthoughtsgames.rts.util.Velocity;
 
 /**
  * Base class for objects in the game world.
@@ -37,11 +36,11 @@ public abstract class Entity
 	/** The entity's bounding rectangle. **/
 	protected Rectangle rect;
 	
-	/** The entity's current velocity. **/
-	protected Velocity velocity;
-	
+	/** The entity's max speed. **/
 	protected float maxSpeed;
-	protected float speed;
+	
+	// The entity's current speed.
+	private float speed;
 	
 	protected final Vector2 movementVector = new Vector2();
 	
@@ -93,6 +92,24 @@ public abstract class Entity
 	public int getY()
 	{
 		return (int)rect.y;
+	}
+	
+	public float getSpeed()
+	{
+		return speed;
+	}
+	
+	public void setSpeed(float change)
+	{
+		speed += change;
+		if (speed < 0)
+		{
+			speed = 0;
+		}
+		else if (speed > maxSpeed)
+		{
+			speed = maxSpeed;
+		}
 	}
 	
 	public void rotateToFace(int x, int y)
