@@ -44,7 +44,7 @@ public abstract class Entity
 	// The entity's current speed.
 	private float speed;
 	
-	protected final Vector2 movementVector = new Vector2();
+	private final Vector2 movementVector = new Vector2();
 	
 	/** Whether the entity is selectable by the user. **/
 	protected boolean selectable;
@@ -88,10 +88,10 @@ public abstract class Entity
 		rect.y = y;
 	}
 	
-	public void move(float x, float y)
+	public void move()
 	{
-		rect.x += x;
-		rect.y += y;
+		rect.x += speed * movementVector.x;
+		rect.y += speed * movementVector.y;
 	}
 	
 	public int getX()
@@ -107,6 +107,14 @@ public abstract class Entity
 	public float getSpeed()
 	{
 		return speed;
+	}
+	
+	/**
+	 * Sets the entity's speed to its maximum.
+	 */
+	public void setSpeedMax()
+	{
+		speed = maxSpeed;
 	}
 	
 	public void setSpeed(float change)
@@ -127,6 +135,7 @@ public abstract class Entity
 		float angle = GameMath.angleToFace((int)rect.x, (int)rect.y, x, y) * MathUtils.radiansToDegrees;
 		sprite.setRotation(0);
 		sprite.rotate(angle + (MathUtils.PI / 2.f * MathUtils.radiansToDegrees));
+		setMovementVector();
 		
 		onRotate();
 	}
@@ -134,6 +143,13 @@ public abstract class Entity
 	public void rotateToFace(float x, float y)
 	{
 		rotateToFace((int)x, (int)y);
+	}
+	
+	private void setMovementVector()
+	{
+		float angle = sprite.getRotation();
+		movementVector.x = (float)Math.cos(angle);
+		movementVector.y = (float)Math.sin(angle);
 	}
 	
 	/**

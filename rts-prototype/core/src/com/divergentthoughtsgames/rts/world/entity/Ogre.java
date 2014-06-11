@@ -35,6 +35,8 @@ public class Ogre extends Entity
 		spriteOffsetY = 0;
 		selectable = true;
 		
+		maxSpeed = 1.f;
+		
 		setAnimations();
 		currentAnimation = spriteRotator.walkNorth;
 	}

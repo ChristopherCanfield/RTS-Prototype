@@ -27,8 +27,12 @@ public class MoveCommand extends AbstractEntityCommand<Entity>
 		Node targetNode = Find.node(targetX, targetY);
 		
 		path = Search.aStar(startNode, targetNode, StraightLineHeuristic.get());
-		nextNode = path.poll();
-		rotateToFace(entity, nextNode);
+		
+		// Remove the first node in the path, since the entity is already on it.
+		path.poll();
+		
+		// Get the next node, and face it.
+		nextNode = getNextNode(entity, path);
 	}
 
 	@Override
@@ -42,14 +46,20 @@ public class MoveCommand extends AbstractEntityCommand<Entity>
 		
 		if (entity.getRect().contains(nextNode.getX(), nextNode.getY()))
 		{
-			nextNode = path.poll();
-			rotateToFace(entity, nextNode);
+			nextNode = getNextNode(entity, path);
 		}
 		else
 		{
-			// Move the entity.
-			
+			entity.move();
 		}
+	}
+	
+	private static Node getNextNode(Entity entity, Queue<Node> path)
+	{
+		Node nextNode = path.poll();
+		rotateToFace(entity, nextNode);
+		entity.setSpeedMax();
+		return nextNode;
 	}
 	
 	private static void rotateToFace(Entity entity, Node nextNode)
