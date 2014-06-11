@@ -88,6 +88,12 @@ public abstract class Entity
 		rect.y = y;
 	}
 	
+	public void move(float x, float y)
+	{
+		rect.x += x;
+		rect.y += y;
+	}
+	
 	public int getX()
 	{
 		return (int)rect.x;

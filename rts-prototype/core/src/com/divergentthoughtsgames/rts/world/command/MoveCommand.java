@@ -45,6 +45,11 @@ public class MoveCommand extends AbstractEntityCommand<Entity>
 			nextNode = path.poll();
 			rotateToFace(entity, nextNode);
 		}
+		else
+		{
+			// Move the entity.
+			
+		}
 	}
 	
 	private static void rotateToFace(Entity entity, Node nextNode)
