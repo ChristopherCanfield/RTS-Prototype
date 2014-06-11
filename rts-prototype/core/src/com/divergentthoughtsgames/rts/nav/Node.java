@@ -5,6 +5,8 @@ import java.util.List;
 import java.util.Objects;
 
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
+import com.badlogic.gdx.math.Vector3;
+import com.divergentthoughtsgames.rts.util.Coords;
 
 public class Node
 {
@@ -78,7 +80,8 @@ public class Node
 
 	public void draw(ShapeRenderer renderer)
 	{
-		renderer.circle(getX(), getY(), 5);
+		Vector3 screen = Coords.worldToScreen(getX(), getY());
+		renderer.circle(screen.x, screen.y, 5);
 		for (final Edge edge : edges)
 		{
 			edge.draw(renderer);

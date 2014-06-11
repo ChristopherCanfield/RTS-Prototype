@@ -27,7 +27,7 @@ public class BasicWorldCreator
 		ArrayList<Node> nodeList = new ArrayList<Node>();
 		Node[][] nodes = new Node[rows][columns];
 		
-		// Build the navigation graph. 0,0 = top left.
+		// Build the navigation graph. 0,0 = bottom left.
 		for (int row = 0; row < rows; ++row)
 		{
 			for (int column = 0; column < columns; ++column)
@@ -35,7 +35,7 @@ public class BasicWorldCreator
 				Node node = new Node(column * Node.SIZE + Node.HALF_SIZE, row * Node.SIZE + Node.HALF_SIZE);
 				nodeList.add(node);
 				nodes[row][column] = node;
-				addEdges(nodes, row, column, rows, columns);
+				addEdges(nodes, row, column, columns);
 			}
 		}
 		
@@ -47,7 +47,7 @@ public class BasicWorldCreator
 		return world;
 	}
 	
-	private static void addEdges(Node[][] nodes, int row, int column, int rows, int columns)
+	private static void addEdges(Node[][] nodes, int row, int column, int columns)
 	{
 		Node node = nodes[row][column];
 		

@@ -1,6 +1,8 @@
 package com.divergentthoughtsgames.rts.nav;
 
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
+import com.badlogic.gdx.math.Vector3;
+import com.divergentthoughtsgames.rts.util.Coords;
 import com.divergentthoughtsgames.rts.util.GameException;
 
 public class Edge
@@ -76,7 +78,9 @@ public class Edge
 	{
 		if (node1 != null && node2 != null)
 		{
-			batch.line(node1.getX(), node1.getY(), node2.getX(), node2.getY());
+			Vector3 node1Screen = Coords.worldToScreen(node1.getX(), node1.getY());
+			Vector3 node2Screen = Coords.worldToScreen(node2.getX(), node2.getY());
+			batch.line(node1Screen.x, node1Screen.y, node2Screen.x, node2Screen.y);
 		}
 	}
 }
