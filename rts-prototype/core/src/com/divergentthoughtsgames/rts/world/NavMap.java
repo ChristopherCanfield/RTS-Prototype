@@ -43,6 +43,9 @@ public class NavMap
 	
 	public void draw(ShapeRenderer renderer)
 	{
-		
+		for (final Node node : navGraph)
+		{
+			node.draw(renderer);
+		}
 	}
 }

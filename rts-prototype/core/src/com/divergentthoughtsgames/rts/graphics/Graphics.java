@@ -4,6 +4,7 @@ import java.util.HashMap;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Camera;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
@@ -13,6 +14,7 @@ import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer.ShapeType;
 import com.badlogic.gdx.math.Matrix4;
 import com.badlogic.gdx.utils.Array;
+import com.divergentthoughtsgames.rts.App;
 import com.divergentthoughtsgames.rts.world.Entity;
 import com.divergentthoughtsgames.rts.world.World;
 
@@ -113,6 +115,16 @@ public class Graphics
 		camera.update();
 		batch.setProjectionMatrix(camera.combined);
 		
+		if (App.debugEnabled())
+		{
+			shapeRenderer.begin(ShapeType.Line);
+			Color originalColor = shapeRenderer.getColor().cpy();
+			shapeRenderer.setColor(Color.MAROON);
+			world.drawNavGraph(shapeRenderer);
+			shapeRenderer.end();
+			shapeRenderer.setColor(originalColor);
+		}
+		
 		drawSprites();
 		drawPrimitives();
 	}
@@ -121,7 +133,7 @@ public class Graphics
 	{
 		batch.begin();
 		
-		for (Sprite sprite : sprites)
+		for (final Sprite sprite : sprites)
 		{
 			sprite.draw(batch);
 		}

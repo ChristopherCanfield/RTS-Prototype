@@ -76,9 +76,13 @@ public class Node
 		return x / SIZE;
 	}
 
-	public void draw(ShapeRenderer batch)
+	public void draw(ShapeRenderer renderer)
 	{
-		batch.circle(getX(), getY(), 5);
+		renderer.circle(getX(), getY(), 5);
+		for (final Edge edge : edges)
+		{
+			edge.draw(renderer);
+		}
 	}
 	
 	@Override

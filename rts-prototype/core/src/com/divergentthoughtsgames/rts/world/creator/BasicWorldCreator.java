@@ -58,26 +58,12 @@ public class BasicWorldCreator
 			edge.addNode(node).addNode(nodes[row - 1][column]);
 		}
 		
-		// Down
-//		if (row < rows)
-//		{
-//			Edge edge = new Edge(1);
-//			edge.addNode(node).addNode(nodes[row + 1][column]);
-//		}
-		
 		// Left
 		if (column > 0)
 		{
 			Edge edge = new Edge(1);
 			edge.addNode(node).addNode(nodes[row][column - 1]);
 		}
-		
-		// Right
-//		if (column < columns)
-//		{
-//			Edge edge = new Edge(1);
-//			edge.addNode(node).addNode(nodes[row][column + 1]);
-//		}
 		
 		// Upper-Left
 		if (row > 0 && column > 0)
@@ -87,24 +73,13 @@ public class BasicWorldCreator
 		}
 		
 		// Upper-Right
-//		if (row > 0 && column < columns)
-//		{
-//			Edge edge = new Edge(1);
-//			edge.addNode(node).addNode(nodes[row - 1][column + 1]);
-//		}
-		
-		// Lower-Left
-//		if (row < rows && column > 0)
-//		{
-//			Edge edge = new Edge(1);
-//			edge.addNode(node).addNode(nodes[row + 1][column - 1]);	
-//		}
-		
-		// Lower-Right
-//		if (row < rows && column < columns)
-//		{
-//			Edge edge = new Edge(1);
-//			edge.addNode(node).addNode(nodes[row + 1][column + 1]);
-//		}
+		if (row > 0 && column < columns - 1)
+		{
+			if (nodes[row - 1][column + 1] != null)
+			{
+				Edge edge = new Edge(1);
+				edge.addNode(node).addNode(nodes[row - 1][column + 1]);
+			}
+		}
 	}
 }
