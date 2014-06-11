@@ -13,6 +13,8 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer.ShapeType;
 import com.badlogic.gdx.math.Matrix4;
+import com.badlogic.gdx.math.Rectangle;
+import com.badlogic.gdx.scenes.scene2d.utils.ScissorStack;
 import com.badlogic.gdx.utils.Array;
 import com.divergentthoughtsgames.rts.App;
 import com.divergentthoughtsgames.rts.world.Entity;
@@ -25,7 +27,7 @@ public class Graphics
 	private final ShapeRenderer shapeRenderer = new ShapeRenderer();
 	private final HashMap<String, Texture> textures = new HashMap<>();
 	
-	private Camera camera;
+	private OrthographicCamera camera;
 	
 	private final Array<CameraController> cameraControllers = new Array<CameraController>();
 	
@@ -115,6 +117,8 @@ public class Graphics
 		camera.update();
 		batch.setProjectionMatrix(camera.combined);
 		
+		setClipBounds();
+		
 		if (App.debugEnabled())
 		{
 			shapeRenderer.begin(ShapeType.Line);
@@ -127,6 +131,20 @@ public class Graphics
 		
 		drawSprites();
 		drawPrimitives();
+		
+		ScissorStack.popScissors();
+	}
+	
+	private void setClipBounds()
+	{
+		final float cameraHalfWidth = camera.viewportWidth / 2.f * camera.zoom;
+		final float cameraHalfHeight = camera.viewportHeight / 2.f * camera.zoom;
+		
+		Rectangle scissors = new Rectangle();
+		Rectangle clipBounds = new Rectangle(camera.position.x - cameraHalfWidth, camera.position.y - cameraHalfHeight, 
+				camera.viewportWidth * camera.zoom, camera.viewportHeight * camera.zoom);
+		ScissorStack.calculateScissors(camera, batch.getTransformMatrix(), clipBounds, scissors);
+		ScissorStack.pushScissors(scissors);
 	}
 	
 	private void drawSprites()
@@ -141,6 +159,7 @@ public class Graphics
 		world.draw(batch);
 		
 		batch.end();
+		batch.flush();
 	}
 	
 	private void drawPrimitives()
