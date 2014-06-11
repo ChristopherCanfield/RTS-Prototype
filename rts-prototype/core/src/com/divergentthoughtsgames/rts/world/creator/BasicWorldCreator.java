@@ -21,8 +21,8 @@ public class BasicWorldCreator
 {
 	public static World create(int width, int height)
 	{
-		int rows = height / Node.SIZE - 1;
-		int columns = width / Node.SIZE - 1;
+		int rows = height / Node.SIZE;
+		int columns = width / Node.SIZE;
 		
 		ArrayList<Node> nodeList = new ArrayList<Node>();
 		Node[][] nodes = new Node[rows][columns];

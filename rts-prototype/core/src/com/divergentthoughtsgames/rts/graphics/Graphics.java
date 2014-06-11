@@ -137,11 +137,11 @@ public class Graphics
 	
 	private void setClipBounds()
 	{
-		final float cameraHalfWidth = camera.viewportWidth / 2.f * camera.zoom;
-		final float cameraHalfHeight = camera.viewportHeight / 2.f * camera.zoom;
+		final float adjustedCameraX = camera.position.x - camera.viewportWidth / 2.f * camera.zoom;
+		final float adjustedCameraY = camera.position.y - camera.viewportHeight / 2.f * camera.zoom;
 		
 		Rectangle scissors = new Rectangle();
-		Rectangle clipBounds = new Rectangle(camera.position.x - cameraHalfWidth, camera.position.y - cameraHalfHeight, 
+		Rectangle clipBounds = new Rectangle(adjustedCameraX, adjustedCameraY, 
 				camera.viewportWidth * camera.zoom, camera.viewportHeight * camera.zoom);
 		ScissorStack.calculateScissors(camera, batch.getTransformMatrix(), clipBounds, scissors);
 		ScissorStack.pushScissors(scissors);
