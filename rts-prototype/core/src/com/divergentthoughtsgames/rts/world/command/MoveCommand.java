@@ -38,7 +38,7 @@ public class MoveCommand extends AbstractEntityCommand<Entity>
 	@Override
 	public void update()
 	{
-		if (nextNode == null)
+		if (nextNode == null || isFinished())
 		{
 			setFinished(true);
 			return;
