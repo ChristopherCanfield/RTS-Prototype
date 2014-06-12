@@ -37,6 +37,7 @@ public abstract class Entity
 	
 	/** The entity's bounding rectangle. **/
 	protected Rectangle rect;
+	private Rectangle centerRect;
 	
 	/** The entity's max speed. **/
 	protected float maxSpeed;
@@ -85,6 +86,17 @@ public abstract class Entity
 	public final boolean contains(int x, int y)
 	{
 		return rect.contains(x, y);
+	}
+	
+	public final boolean centerContains(int x, int y)
+	{
+		if (centerRect == null)
+		{
+			centerRect = new Rectangle(x + rect.width / 2.f, y + rect.width / 2.f, 3, 3);
+		}
+		centerRect.x = rect.x;
+		centerRect.y = rect.y;
+		return centerRect.contains(x, y);
 	}
 	
 	public final void setPosition(float x, float y)

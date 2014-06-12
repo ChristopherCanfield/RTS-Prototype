@@ -7,6 +7,7 @@ package com.divergentthoughtsgames.rts.world.command;
 
 import java.util.Queue;
 
+import com.divergentthoughtsgames.rts.App;
 import com.divergentthoughtsgames.rts.nav.Node;
 import com.divergentthoughtsgames.rts.nav.Search;
 import com.divergentthoughtsgames.rts.nav.StraightLineHeuristic;
@@ -28,9 +29,6 @@ public class MoveCommand extends AbstractEntityCommand<Entity>
 		
 		path = Search.aStar(startNode, targetNode, StraightLineHeuristic.get());
 		
-		// Remove the first node in the path, since the entity is already on it.
-		path.poll();
-		
 		// Get the next node, and face it.
 		nextNode = getNextNode(entity, path);
 	}
@@ -50,7 +48,13 @@ public class MoveCommand extends AbstractEntityCommand<Entity>
 		}
 		else
 		{
+			rotateToFace(entity, nextNode);
 			entity.move();
+		}
+		
+		if (App.debugEnabled())
+		{
+			App.graphics.drawPath(nextNode, path);
 		}
 	}
 	

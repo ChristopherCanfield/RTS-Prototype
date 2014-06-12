@@ -1,6 +1,7 @@
 package com.divergentthoughtsgames.rts.graphics;
 
 import java.util.HashMap;
+import java.util.Queue;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Camera;
@@ -17,6 +18,8 @@ import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.scenes.scene2d.utils.ScissorStack;
 import com.badlogic.gdx.utils.Array;
 import com.divergentthoughtsgames.rts.App;
+import com.divergentthoughtsgames.rts.nav.Edge;
+import com.divergentthoughtsgames.rts.nav.Node;
 import com.divergentthoughtsgames.rts.world.Entity;
 import com.divergentthoughtsgames.rts.world.World;
 
@@ -105,6 +108,26 @@ public class Graphics
 		return t;
 	}
 	
+	public void drawPath(Node nextNode, Queue<Node> path)
+	{
+		shapeRenderer.begin(ShapeType.Line);
+		shapeRenderer.setColor(Color.YELLOW);
+		Node previous = nextNode;
+		
+		for (Node node : path)
+		{
+			for(Edge edge : node.getEdges())
+			{
+				if (edge.getOppositeNode(node).equals(previous))
+				{
+					edge.draw(shapeRenderer);
+				}
+			}
+			previous = node;
+		}
+		shapeRenderer.end();
+	}
+	
 	public void render()
 	{
 		Gdx.gl.glClearColor(0.1f, 0.8f, 0.25f, 1.f);
@@ -122,11 +145,8 @@ public class Graphics
 		if (App.debugEnabled())
 		{
 			shapeRenderer.begin(ShapeType.Line);
-			Color originalColor = shapeRenderer.getColor().cpy();
-			shapeRenderer.setColor(Color.MAROON);
 			world.drawNavGraph(shapeRenderer);
 			shapeRenderer.end();
-			shapeRenderer.setColor(originalColor);
 		}
 		
 		drawSprites();
@@ -164,6 +184,7 @@ public class Graphics
 	
 	private void drawPrimitives()
 	{
+		shapeRenderer.setColor(Color.WHITE);
 		if (!(selectionRectStartX == 0 && selectionRectStartY == 0) &&
 				!(selectionRectEndX == 0 && selectionRectEndY == 0))
 		{
