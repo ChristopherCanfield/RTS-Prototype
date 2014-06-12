@@ -44,7 +44,7 @@ public class MoveCommand extends AbstractEntityCommand<Entity>
 			return;
 		}
 		
-		if (entity.getRect().contains(nextNode.getX(), nextNode.getY()))
+		if (entity.contains(nextNode.getX(), nextNode.getY()))
 		{
 			nextNode = getNextNode(entity, path);
 		}

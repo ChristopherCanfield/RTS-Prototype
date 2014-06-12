@@ -82,7 +82,12 @@ public abstract class Entity
 		return rect;
 	}
 	
-	public void setPosition(float x, float y)
+	public final boolean contains(int x, int y)
+	{
+		return rect.contains(x, y);
+	}
+	
+	public final void setPosition(float x, float y)
 	{
 		rect.x = x;
 		rect.y = y;
@@ -94,17 +99,17 @@ public abstract class Entity
 		rect.y += speed * movementVector.y;
 	}
 	
-	public int getX()
+	public final int getX()
 	{
 		return (int)rect.x;
 	}
 	
-	public int getY()
+	public final int getY()
 	{
 		return (int)rect.y;
 	}
 	
-	public float getSpeed()
+	public final float getSpeed()
 	{
 		return speed;
 	}
@@ -112,12 +117,12 @@ public abstract class Entity
 	/**
 	 * Sets the entity's speed to its maximum.
 	 */
-	public void setSpeedMax()
+	public final void setSpeedMax()
 	{
 		speed = maxSpeed;
 	}
 	
-	public void setSpeed(float change)
+	public final void setSpeed(float change)
 	{
 		speed += change;
 		if (speed < 0)
@@ -130,7 +135,7 @@ public abstract class Entity
 		}
 	}
 	
-	public void rotateToFace(int x, int y)
+	public final void rotateToFace(int x, int y)
 	{
 		float angle = GameMath.angleToFace((int)rect.x, (int)rect.y, x, y) * MathUtils.radiansToDegrees;
 		sprite.setRotation(0);
@@ -140,7 +145,7 @@ public abstract class Entity
 		onRotate();
 	}
 	
-	public void rotateToFace(float x, float y)
+	public final void rotateToFace(float x, float y)
 	{
 		rotateToFace((int)x, (int)y);
 	}
@@ -160,17 +165,17 @@ public abstract class Entity
 	{
 	}
 	
-	public void logRotation()
+	public final void logRotation()
 	{
 		Gdx.app.debug("Entity Rotation", toString() + ": " + sprite.getRotation());
 	}
 	
-	protected void addController(Controller controller)
+	protected final void addController(Controller controller)
 	{
 		controllers.add(controller);
 	}
 	
-	public void setCommand(EntityCommand c)
+	public final void setCommand(EntityCommand c)
 	{
 		command = c;
 	}
@@ -223,7 +228,7 @@ public abstract class Entity
 		
 		if (!command.isFinished())
 		{
-			
+			command.update();
 		}
 		
 		for (final Controller c : controllers)
