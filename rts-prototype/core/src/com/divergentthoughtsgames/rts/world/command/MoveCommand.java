@@ -7,6 +7,7 @@ package com.divergentthoughtsgames.rts.world.command;
 
 import java.util.Queue;
 
+import com.badlogic.gdx.Gdx;
 import com.divergentthoughtsgames.rts.App;
 import com.divergentthoughtsgames.rts.nav.Node;
 import com.divergentthoughtsgames.rts.nav.Search;
@@ -42,18 +43,20 @@ public class MoveCommand extends AbstractEntityCommand<Entity>
 			return;
 		}
 		
-		if (entity.contains(nextNode.getX(), nextNode.getY()))
+		if (entity.getNode().equals(nextNode))
 		{
 			nextNode = getNextNode(entity, path);
 		}
 		else
 		{
-			rotateToFace(entity, nextNode);
 			entity.move();
 		}
 		
 		if (App.debugEnabled())
 		{
+			Node entityNode = entity.getNode();
+			Gdx.app.debug("Entity Node", entityNode.toString());
+			Gdx.app.debug("Entity Next Node", nextNode.toString());
 			App.graphics.drawPath(nextNode, path);
 		}
 	}

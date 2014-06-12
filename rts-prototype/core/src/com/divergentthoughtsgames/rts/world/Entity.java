@@ -12,6 +12,8 @@ import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.Array;
 import com.divergentthoughtsgames.rts.App;
+import com.divergentthoughtsgames.rts.nav.Node;
+import com.divergentthoughtsgames.rts.util.Find;
 import com.divergentthoughtsgames.rts.util.GameMath;
 import com.divergentthoughtsgames.rts.world.command.EntityCommand;
 import com.divergentthoughtsgames.rts.world.command.NullCommand;
@@ -88,15 +90,20 @@ public abstract class Entity
 		return rect.contains(x, y);
 	}
 	
-	public final boolean centerContains(int x, int y)
+//	public final boolean containsAtCenter(int x, int y)
+//	{
+//		if (centerRect == null)
+//		{
+//			centerRect = new Rectangle(x + rect.width / 2.f, y + rect.width / 2.f, 3, 3);
+//		}
+//		centerRect.x = rect.x + rect.width / 2.f;
+//		centerRect.y = rect.y + rect.height / 2.f;
+//		return centerRect.contains(x, y);
+//	}
+	
+	public final Node getNode()
 	{
-		if (centerRect == null)
-		{
-			centerRect = new Rectangle(x + rect.width / 2.f, y + rect.width / 2.f, 3, 3);
-		}
-		centerRect.x = rect.x;
-		centerRect.y = rect.y;
-		return centerRect.contains(x, y);
+		return Find.node(this);
 	}
 	
 	public final void setPosition(float x, float y)
@@ -109,6 +116,11 @@ public abstract class Entity
 	{
 		rect.x += speed * movementVector.x;
 		rect.y += speed * movementVector.y;
+		
+		if (App.debugEnabled())
+		{
+			Gdx.app.debug("Entity Position", rect.x + "," + rect.y);
+		}
 	}
 	
 	public final int getX()
@@ -164,7 +176,7 @@ public abstract class Entity
 	
 	private void setMovementVector()
 	{
-		float angle = sprite.getRotation();
+		float angle = sprite.getRotation() * MathUtils.degreesToRadians;
 		movementVector.x = (float)Math.cos(angle);
 		movementVector.y = (float)Math.sin(angle);
 	}
