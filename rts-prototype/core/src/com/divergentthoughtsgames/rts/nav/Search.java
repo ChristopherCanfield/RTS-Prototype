@@ -8,7 +8,7 @@ import java.util.PriorityQueue;
 import java.util.Queue;
 import java.util.Set;
 
-import com.badlogic.gdx.Gdx;
+import com.divergentthoughtsgames.rts.App;
 
 /**
  * Contains a method that implements the A* search algorithm.
@@ -109,7 +109,7 @@ public abstract class Search
 			// Add the current node to the path.
 			path.addFirst(currentPathNode);
 			
-			Gdx.app.debug("Path", currentPathNode.toString());
+			if (App.debugEnabled()) System.out.print(currentPathNode.toString());
 			
 			// Set the current node reference to the parent of the 
 			// node that was just added.

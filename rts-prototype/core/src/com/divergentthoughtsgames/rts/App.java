@@ -78,6 +78,9 @@ public abstract class App
 	{
 		debug = val;
 		int logLevel = (val) ? Application.LOG_DEBUG : Application.LOG_NONE;
-		Gdx.app.setLogLevel(logLevel);
+		if (Gdx.app != null)
+		{
+			Gdx.app.setLogLevel(logLevel);
+		}
 	}
 }
