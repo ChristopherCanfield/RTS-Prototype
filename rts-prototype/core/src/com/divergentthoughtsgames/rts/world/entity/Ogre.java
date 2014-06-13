@@ -5,7 +5,6 @@ import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.Animation.PlayMode;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
-import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Rectangle;
 import com.divergentthoughtsgames.rts.App;
 import com.divergentthoughtsgames.rts.graphics.SpriteRotator;
@@ -41,8 +40,6 @@ public class Ogre extends Entity
 		
 		setAnimations();
 		currentAnimation = spriteRotator.walkNorth;
-		
-		setOriginToCenter(300, 400);
 	}
 	
 	private void setAnimations()
@@ -100,11 +97,10 @@ public class Ogre extends Entity
 	}
 
 	@Override
-	protected void onRotate()
+	protected void onRotate(float r)
 	{
 		currentAnimation = spriteRotator.onRotate();
-		rotation = sprite.getRotation();
-		rotation = sprite.getRotation() - (MathUtils.PI / 2.f * MathUtils.radiansToDegrees);
+		rotation = r;
 	}
 	
 	@Override

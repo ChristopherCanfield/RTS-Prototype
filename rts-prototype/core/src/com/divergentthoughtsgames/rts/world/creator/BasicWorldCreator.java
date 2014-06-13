@@ -32,7 +32,7 @@ public class BasicWorldCreator
 		{
 			for (int column = 0; column < columns; ++column)
 			{
-				Node node = new Node(column * Node.SIZE + Node.HALF_SIZE, row * Node.SIZE + Node.HALF_SIZE);
+				Node node = new Node(width - (column * Node.SIZE + Node.HALF_SIZE), height - (row * Node.SIZE + Node.HALF_SIZE));
 				nodeList.add(node);
 				nodes[row][column] = node;
 				addEdges(nodes, row, column, columns);

@@ -9,7 +9,6 @@ import java.util.Queue;
 import java.util.Set;
 
 import com.badlogic.gdx.Gdx;
-import com.divergentthoughtsgames.rts.App;
 
 /**
  * Contains a method that implements the A* search algorithm.

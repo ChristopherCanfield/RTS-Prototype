@@ -69,11 +69,6 @@ public abstract class Entity
 //		setControllers();
 	}
 	
-	protected void setOriginToCenter(float width, float height)
-	{
-		sprite.setOrigin(width / 2.f, height / 2.f);
-	}
-	
 	/**
 	 * Sets the entity's controllers. Called once, on construction.
 	 */
@@ -114,17 +109,23 @@ public abstract class Entity
 	{
 		rect.x = x;
 		rect.y = y;
+		onMove();
 	}
 	
 	public void move()
 	{
 		rect.x += speed * movementVector.x;
 		rect.y += speed * movementVector.y;
+		onMove();
 		
 		if (App.debugEnabled())
 		{
-			Gdx.app.debug("Entity Position", rect.x + "," + rect.y);
+			Gdx.app.debug("Entity Position", toString());
 		}
+	}
+	
+	protected void onMove()
+	{
 	}
 	
 	public final int getX()
@@ -166,11 +167,10 @@ public abstract class Entity
 	public final void rotateToFace(int x, int y)
 	{
 		float angle = GameMath.angleToFace((int)rect.x, (int)rect.y, x, y) * MathUtils.radiansToDegrees;
-		sprite.setRotation(0);
-		sprite.rotate(angle + (MathUtils.PI / 2.f * MathUtils.radiansToDegrees));
-		setMovementVector();
+		sprite.setRotation(angle + (MathUtils.PI / 2.f * MathUtils.radiansToDegrees));
 		
-		onRotate();
+		onRotate(angle);
+		setMovementVector();
 	}
 	
 	public final void rotateToFace(float x, float y)
@@ -181,6 +181,7 @@ public abstract class Entity
 	private void setMovementVector()
 	{
 		float angle = getRotation() * MathUtils.degreesToRadians;
+		Gdx.app.debug("Entity movement vector rotation", "Angle: " + angle);
 		movementVector.x = (float)Math.cos(angle);
 		movementVector.y = (float)Math.sin(angle);
 	}
@@ -189,7 +190,7 @@ public abstract class Entity
 	 * Provides a hook into the rotateToFace method. Override this to receive notification when
 	 * the entity is rotated.
 	 */
-	protected void onRotate()
+	protected void onRotate(@SuppressWarnings("unused") float rotation)
 	{
 	}
 	
@@ -301,9 +302,11 @@ public abstract class Entity
 		StringBuilder sb = new StringBuilder();
 		sb.append("[Entity: ")
 			.append(getId())
-			.append("; x:").append(getX()).append(",y:").append(getY())
-			.append("; rotation:").append(getRotation())
-			.append("; disposed:").append(disposed)
+			.append("; x: ").append(getX()).append(", y: ").append(getY())
+			.append("; movement-vector-x: ").append(movementVector.x)
+			.append(", movement-vector-y: ").append(movementVector.y)
+			.append("; rotation: ").append(getRotation())
+			.append("; disposed: ").append(disposed)
 			.append("]");
 		return sb.toString();
 	}

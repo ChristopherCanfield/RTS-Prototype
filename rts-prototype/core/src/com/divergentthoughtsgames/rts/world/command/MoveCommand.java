@@ -40,15 +40,18 @@ public class MoveCommand extends AbstractEntityCommand<Entity>
 		if (nextNode == null || isFinished())
 		{
 			setFinished(true);
+			Gdx.app.debug("Move Command", "Move Command is finished");
 			return;
 		}
 		
 		if (entity.getNode().equals(nextNode))
 		{
 			nextNode = getNextNode(entity, path);
+			Gdx.app.debug("Move Commmand", "Found next node");
 		}
 		else
 		{
+			rotateToFace(entity, nextNode);
 			entity.move();
 		}
 		
@@ -56,7 +59,7 @@ public class MoveCommand extends AbstractEntityCommand<Entity>
 		{
 			Node entityNode = entity.getNode();
 			Gdx.app.debug("Entity Node", entityNode.toString());
-			Gdx.app.debug("Entity Next Node", nextNode.toString());
+			if (nextNode != null) Gdx.app.debug("Entity Next Node", nextNode.toString());
 			App.graphics.drawPath(nextNode, path);
 		}
 	}
