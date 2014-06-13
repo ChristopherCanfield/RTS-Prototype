@@ -3,6 +3,7 @@ package com.divergentthoughtsgames.rts.util;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.badlogic.gdx.math.Intersector;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.utils.Array;
 import com.divergentthoughtsgames.rts.App;
@@ -44,13 +45,44 @@ public abstract class Find
 		return NavMap.getNode(App.world.getNavMap(), x, y);
 	}
 	
+	/**
+	 * Finds the node that contains the specified x,y coordinate. This is a shortcut for
+	 * <code>NavMap.getNode(App.world.getNavMap(), x, y)</code>.
+	 * @param x
+	 * @param y
+	 * @return the node that contains the specified x,y coordinate.
+	 */
 	public static Node node(float x, float y)
 	{
 		return node((int)x, (int)y);
 	}
 	
+	/**
+	 * Finds the node that contains the specified entity. This is a shortcut for
+	 * <code>NavMap.getNode(App.world.getNavMap(), entity.getX(), entity.getY())</code>.
+	 * @param x
+	 * @param y
+	 * @return the node that contains the specified entity.
+	 */
 	public static Node node(Entity e)
 	{
 		return node(e.getX(), e.getY());
+	}
+	
+	public static List<Rectangle> overlappingEntities(Entity entity, Array<Entity> entities)
+	{
+		ArrayList<Rectangle> intersections = new ArrayList<Rectangle>();
+		for (final Entity e : entities)
+		{
+			if (entity.equals(e))
+			{
+				Rectangle rect = new Rectangle();
+				if (Intersector.intersectRectangles(entity.getRect(), e.getRect(), rect))
+				{
+					intersections.add(rect);
+				}
+			}
+		}
+		return intersections;
 	}
 }

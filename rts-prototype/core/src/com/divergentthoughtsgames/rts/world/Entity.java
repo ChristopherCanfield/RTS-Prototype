@@ -1,5 +1,6 @@
 package com.divergentthoughtsgames.rts.world;
 
+import java.util.Objects;
 import java.util.UUID;
 
 import com.badlogic.gdx.Gdx;
@@ -310,5 +311,22 @@ public abstract class Entity
 			.append("; disposed: ").append(disposed)
 			.append("]");
 		return sb.toString();
+	}
+	
+	@Override
+	public boolean equals(Object o)
+	{
+		if (!(o instanceof Entity))
+		{
+			return false;
+		}
+		Entity other = (Entity)o;
+		return (other == this || other.id == id);
+	}
+
+	@Override
+	public int hashCode()
+	{
+		return Objects.hashCode(id);
 	}
 }
