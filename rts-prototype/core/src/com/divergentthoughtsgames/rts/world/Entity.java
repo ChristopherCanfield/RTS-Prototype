@@ -181,9 +181,10 @@ public abstract class Entity
 	private void setMovementVector()
 	{
 		float angle = getRotation() * MathUtils.degreesToRadians;
-		Gdx.app.debug("Entity movement vector rotation", "Angle: " + angle);
-		movementVector.x = (float)Math.cos(angle);
-		movementVector.y = (float)Math.sin(angle);
+		Gdx.app.debug("Entity movement vector rotation", "Radians: " + angle);
+		Gdx.app.debug("Entity movement vector rotation", "Degrees: " + getRotation());
+		movementVector.x = (float)-Math.cos(angle);
+		movementVector.y = (float)-Math.sin(angle);
 	}
 	
 	/**
