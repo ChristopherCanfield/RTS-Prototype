@@ -83,4 +83,15 @@ public class Edge
 			batch.line(node1Screen.x, node1Screen.y, node2Screen.x, node2Screen.y);
 		}
 	}
+	
+	@Override
+	public String toString()
+	{
+		StringBuilder sb = new StringBuilder();
+		sb.append("[Edge: " )
+				.append((node1 != null) ? node1.toString() : "")
+				.append((node2 != null) ? node2.toString() : "")
+				.append("]");
+		return sb.toString();
+	}
 }

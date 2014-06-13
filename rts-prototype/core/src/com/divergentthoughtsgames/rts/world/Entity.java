@@ -39,7 +39,6 @@ public abstract class Entity
 	
 	/** The entity's bounding rectangle. **/
 	protected Rectangle rect;
-	private Rectangle centerRect;
 	
 	/** The entity's max speed. **/
 	protected float maxSpeed;
@@ -68,6 +67,11 @@ public abstract class Entity
 		this.command = NullCommand.get();
 		
 //		setControllers();
+	}
+	
+	protected void setOriginToCenter(float width, float height)
+	{
+		sprite.setOrigin(width / 2.f, height / 2.f);
 	}
 	
 	/**
@@ -176,7 +180,7 @@ public abstract class Entity
 	
 	private void setMovementVector()
 	{
-		float angle = sprite.getRotation() * MathUtils.degreesToRadians;
+		float angle = getRotation() * MathUtils.degreesToRadians;
 		movementVector.x = (float)Math.cos(angle);
 		movementVector.y = (float)Math.sin(angle);
 	}
@@ -191,7 +195,12 @@ public abstract class Entity
 	
 	public final void logRotation()
 	{
-		Gdx.app.debug("Entity Rotation", toString() + ": " + sprite.getRotation());
+		Gdx.app.debug("Entity Rotation", toString() + ": " + getRotation());
+	}
+	
+	protected float getRotation()
+	{
+		return sprite.getRotation();
 	}
 	
 	protected final void addController(Controller controller)
@@ -284,5 +293,18 @@ public abstract class Entity
 	public final boolean isDisposed()
 	{
 		return disposed;
+	}
+	
+	@Override
+	public String toString()
+	{
+		StringBuilder sb = new StringBuilder();
+		sb.append("[Entity: ")
+			.append(getId())
+			.append("; x:").append(getX()).append(",y:").append(getY())
+			.append("; rotation:").append(getRotation())
+			.append("; disposed:").append(disposed)
+			.append("]");
+		return sb.toString();
 	}
 }

@@ -67,5 +67,4 @@ public class UnitControlInputProcessor extends InputAdapter
 	{
 		return false;
 	}
-
 }

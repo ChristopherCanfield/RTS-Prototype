@@ -8,6 +8,7 @@ import java.util.PriorityQueue;
 import java.util.Queue;
 import java.util.Set;
 
+import com.badlogic.gdx.Gdx;
 import com.divergentthoughtsgames.rts.App;
 
 /**
@@ -109,10 +110,7 @@ public abstract class Search
 			// Add the current node to the path.
 			path.addFirst(currentPathNode);
 			
-			if (App.debugEnabled())
-			{
-				System.out.print("(" + currentPathNode.getX() + "," + currentPathNode.getY() + ") ");
-			}
+			Gdx.app.debug("Path", currentPathNode.toString());
 			
 			// Set the current node reference to the parent of the 
 			// node that was just added.
