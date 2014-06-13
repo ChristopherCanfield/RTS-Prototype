@@ -69,12 +69,18 @@ public abstract class Find
 		return node(e.getX(), e.getY());
 	}
 	
+	/**
+	 * Returns a list of entity bounding rectangles that overlap with this entity.
+	 * @param entity
+	 * @param entities the list of entities to check against.
+	 * @return a list of entity bounding rectangles that overlap with this entity.
+	 */
 	public static List<Rectangle> overlappingEntities(Entity entity, Array<Entity> entities)
 	{
 		ArrayList<Rectangle> intersections = new ArrayList<Rectangle>();
 		for (final Entity e : entities)
 		{
-			if (entity.equals(e))
+			if (!entity.equals(e))
 			{
 				Rectangle rect = new Rectangle();
 				if (Intersector.intersectRectangles(entity.getRect(), e.getRect(), rect))
