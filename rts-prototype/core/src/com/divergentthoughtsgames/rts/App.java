@@ -1,5 +1,7 @@
 package com.divergentthoughtsgames.rts;
 
+import com.badlogic.gdx.Application;
+import com.badlogic.gdx.Gdx;
 import com.divergentthoughtsgames.rts.graphics.Graphics;
 import com.divergentthoughtsgames.rts.world.SelectedEntities;
 import com.divergentthoughtsgames.rts.world.UnitGroups;
@@ -75,5 +77,7 @@ public abstract class App
 	public static void setDebug(boolean val)
 	{
 		debug = val;
+		int logLevel = (val) ? Application.LOG_DEBUG : Application.LOG_NONE;
+		Gdx.app.setLogLevel(logLevel);
 	}
 }
