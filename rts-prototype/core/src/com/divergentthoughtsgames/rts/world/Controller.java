@@ -3,5 +3,5 @@ package com.divergentthoughtsgames.rts.world;
 
 public interface Controller
 {
-	void update(World world);
+	void update(Entity entity, World world);
 }

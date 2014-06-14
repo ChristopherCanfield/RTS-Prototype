@@ -10,6 +10,7 @@ import com.divergentthoughtsgames.rts.App;
 import com.divergentthoughtsgames.rts.graphics.Textures;
 import com.divergentthoughtsgames.rts.world.Entity;
 import com.divergentthoughtsgames.rts.world.World;
+import com.divergentthoughtsgames.rts.world.controller.SolidEntityController;
 
 public class HumanFarm extends Entity
 {
@@ -30,6 +31,11 @@ public class HumanFarm extends Entity
 		selectable = false;
 		
 		setAnimations();
+	}
+	
+	@Override
+	protected void setControllers()
+	{
 	}
 	
 	private void setAnimations()

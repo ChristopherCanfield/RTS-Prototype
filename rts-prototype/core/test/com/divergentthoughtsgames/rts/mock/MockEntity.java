@@ -16,6 +16,11 @@ public class MockEntity extends Entity
 		super(null);
 		rect = new Rectangle(x, y, width, height);
 	}
+	
+	@Override
+	protected void setControllers()
+	{
+	}
 
 	@Override
 	protected void onDraw()

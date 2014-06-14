@@ -15,7 +15,6 @@ import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.utils.Array;
 import com.divergentthoughtsgames.rts.mock.MockEntity;
 import com.divergentthoughtsgames.rts.world.Entity;
-import com.divergentthoughtsgames.rts.world.World;
 
 public class FindTest
 {
@@ -47,35 +46,35 @@ public class FindTest
 	@Test
 	public void testOverlappingEntities()
 	{
-		Array<Entity> entities = new Array<Entity>();
+		Array<Entity> entities = new Array<Entity>(Entity.class);
 		entities.add(new MockEntity(10, 10, 5, 5));
 		entities.add(new MockEntity(20, 10, 5, 5));
 		entities.add(new MockEntity(12, 5, 10, 10));
 		
 		Entity ent = new MockEntity(11, 10, 5, 10);
-		List<Rectangle> rects = Find.overlappingEntities(ent, entities);
+		List<EntityIntersection> rects = Find.overlappingEntities(ent, entities.toArray());
 		assertEquals(2, rects.size());
 	}
 	
 	@Test
 	public void testOverlappingEntitiesNoMatches()
 	{
-		Array<Entity> entities = new Array<Entity>();
+		Array<Entity> entities = new Array<Entity>(Entity.class);
 		entities.add(new MockEntity(100, 10, 5, 5));
 		entities.add(new MockEntity(20, 100, 5, 5));
 		
 		Entity ent = new MockEntity(11, 10, 5, 10);
-		List<Rectangle> rects = Find.overlappingEntities(ent, entities);
+		List<EntityIntersection> rects = Find.overlappingEntities(ent, entities.toArray());
 		assertEquals(0, rects.size());
 	}
 	
 	@Test
 	public void testOverlappingEntitiesEmptyList()
 	{
-		Array<Entity> entities = new Array<Entity>();
+		Array<Entity> entities = new Array<Entity>(Entity.class);
 		
 		Entity ent = new MockEntity(11, 10, 5, 10);
-		List<Rectangle> rects = Find.overlappingEntities(ent, entities);
+		List<EntityIntersection> rects = Find.overlappingEntities(ent, entities.toArray());
 		assertEquals(0, rects.size());
 	}
 }

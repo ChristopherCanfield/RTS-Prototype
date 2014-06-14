@@ -19,7 +19,7 @@ public abstract class Find
 	 * @param entities the list of entities to check.
 	 * @return the list of all entities that intersect with the specified rectangle.
 	 */
-	public static List<Entity> allIntersections(Rectangle rect, Array<Entity> entities)
+	public static List<Entity> allIntersections(Rectangle rect, Entity[] entities)
 	{
 		ArrayList<Entity> found = new ArrayList<Entity>();
 		for (Entity e : entities)
@@ -75,9 +75,9 @@ public abstract class Find
 	 * @param entities the list of entities to check against.
 	 * @return a list of entity bounding rectangles that overlap with this entity.
 	 */
-	public static List<Rectangle> overlappingEntities(Entity entity, Array<Entity> entities)
+	public static List<EntityIntersection> overlappingEntities(Entity entity, Entity[] entities)
 	{
-		ArrayList<Rectangle> intersections = new ArrayList<Rectangle>();
+		ArrayList<EntityIntersection> intersections = new ArrayList<>();
 		for (final Entity e : entities)
 		{
 			if (!entity.equals(e))
@@ -85,7 +85,7 @@ public abstract class Find
 				Rectangle rect = new Rectangle();
 				if (Intersector.intersectRectangles(entity.getRect(), e.getRect(), rect))
 				{
-					intersections.add(rect);
+					intersections.add(new EntityIntersection(e, rect));
 				}
 			}
 		}

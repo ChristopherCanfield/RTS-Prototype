@@ -11,6 +11,7 @@ import com.divergentthoughtsgames.rts.graphics.SpriteRotator;
 import com.divergentthoughtsgames.rts.graphics.Textures;
 import com.divergentthoughtsgames.rts.world.Entity;
 import com.divergentthoughtsgames.rts.world.World;
+import com.divergentthoughtsgames.rts.world.controller.SolidEntityController;
 
 public class Ogre extends Entity
 {
@@ -35,11 +36,18 @@ public class Ogre extends Entity
 		spriteOffsetX = -10;
 		spriteOffsetY = 0;
 		selectable = true;
+		solid = true;
 		
 		maxSpeed = 3.f;
 		
 		setAnimations();
 		currentAnimation = spriteRotator.walkNorth;
+	}
+	
+	@Override
+	protected void setControllers()
+	{
+		addController(SolidEntityController.get());
 	}
 	
 	private void setAnimations()

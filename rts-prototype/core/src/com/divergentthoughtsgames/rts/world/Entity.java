@@ -49,6 +49,9 @@ public abstract class Entity
 	
 	private final Vector2 movementVector = new Vector2();
 	
+	/** Specifies whether the entity is solid. Solid entities can't overlap. **/
+	protected boolean solid;
+	
 	/** Whether the entity is selectable by the user. **/
 	protected boolean selectable;
 	
@@ -67,17 +70,22 @@ public abstract class Entity
 		this.world = world;
 		this.command = NullCommand.get();
 		
-//		setControllers();
+		setControllers();
 	}
 	
 	/**
 	 * Sets the entity's controllers. Called once, on construction.
 	 */
-//	protected abstract void setControllers();
+	protected abstract void setControllers();
 	
 	public final UUID getId()
 	{
 		return id;
+	}
+	
+	public final boolean isSolid()
+	{
+		return solid;
 	}
 	
 	public final Rectangle getRect()
@@ -117,6 +125,18 @@ public abstract class Entity
 	{
 		rect.x += speed * movementVector.x;
 		rect.y += speed * movementVector.y;
+		onMove();
+		
+		if (App.debugEnabled())
+		{
+			Gdx.app.debug("Entity Position", toString());
+		}
+	}
+	
+	public void move(float x, float y)
+	{
+		rect.x += x;
+		rect.y += y;
 		onMove();
 		
 		if (App.debugEnabled())
@@ -274,7 +294,7 @@ public abstract class Entity
 		
 		for (final Controller c : controllers)
 		{
-			c.update(world);
+			c.update(this, world);
 		}
 	}
 	

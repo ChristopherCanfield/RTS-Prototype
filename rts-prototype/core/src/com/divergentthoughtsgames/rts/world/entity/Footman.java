@@ -10,6 +10,7 @@ import com.divergentthoughtsgames.rts.App;
 import com.divergentthoughtsgames.rts.graphics.Textures;
 import com.divergentthoughtsgames.rts.world.Entity;
 import com.divergentthoughtsgames.rts.world.World;
+import com.divergentthoughtsgames.rts.world.controller.SolidEntityController;
 
 public class Footman extends Entity
 {
@@ -27,8 +28,15 @@ public class Footman extends Entity
 		spriteOffsetX = -13;
 		spriteOffsetY = -8;
 		selectable = true;
+		solid = true;
 		
 		setAnimations();
+	}
+	
+	@Override
+	protected void setControllers()
+	{
+		addController(SolidEntityController.get());
 	}
 	
 	private void setAnimations()

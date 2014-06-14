@@ -9,7 +9,7 @@ import com.badlogic.gdx.utils.Array;
 
 public class World
 {
-	private Array<Entity> entities = new Array<>();
+	private Array<Entity> entities = new Array<>(false, 16, Entity.class);
 	private HashMap<UUID, Entity> entityMap = new HashMap<>();
 	
 	private Array<Entity> entitiesToRemove = new Array<Entity>();
@@ -22,9 +22,9 @@ public class World
 		entityMap.put(e.getId(), e);
 	}
 	
-	public Array<Entity> getEntities()
+	public Entity[] getEntities()
 	{
-		return entities;
+		return entities.toArray();
 	}
 	
 	public void setNavMap(NavMap navMap)
