@@ -5,7 +5,6 @@ import java.util.List;
 
 import com.badlogic.gdx.math.Intersector;
 import com.badlogic.gdx.math.Rectangle;
-import com.badlogic.gdx.utils.Array;
 import com.divergentthoughtsgames.rts.App;
 import com.divergentthoughtsgames.rts.nav.Node;
 import com.divergentthoughtsgames.rts.world.Entity;
