@@ -120,7 +120,14 @@ public class Ogre extends Entity
 	@Override
 	protected void onUpdate()
 	{
-		animationTime += Gdx.graphics.getRawDeltaTime();
+		if (getSpeed() != 0)
+		{
+			animationTime += Gdx.graphics.getRawDeltaTime();
+		}
+		else
+		{
+			animationTime = 0;
+		}
 	}
 
 	@Override

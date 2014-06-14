@@ -139,7 +139,7 @@ public abstract class Entity
 		return (int)rect.y;
 	}
 	
-	public final float getSpeed()
+	protected final float getSpeed()
 	{
 		return speed;
 	}
@@ -152,18 +152,23 @@ public abstract class Entity
 		speed = maxSpeed;
 	}
 	
-	public final void setSpeed(float change)
+	public final void stopMoving()
 	{
-		speed += change;
-		if (speed < 0)
-		{
-			speed = 0;
-		}
-		else if (speed > maxSpeed)
-		{
-			speed = maxSpeed;
-		}
+		speed = 0;
 	}
+	
+//	public final void setSpeed(float change)
+//	{
+//		speed += change;
+//		if (speed < 0)
+//		{
+//			speed = 0;
+//		}
+//		else if (speed > maxSpeed)
+//		{
+//			speed = maxSpeed;
+//		}
+//	}
 	
 	public final void rotateToFace(int x, int y)
 	{

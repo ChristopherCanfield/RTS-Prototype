@@ -40,6 +40,7 @@ public class MoveCommand extends AbstractEntityCommand<Entity>
 		if (nextNode == null || isFinished())
 		{
 			setFinished(true);
+			entity.stopMoving();
 			Gdx.app.debug("Move Command", "Move Command is finished");
 			return;
 		}
