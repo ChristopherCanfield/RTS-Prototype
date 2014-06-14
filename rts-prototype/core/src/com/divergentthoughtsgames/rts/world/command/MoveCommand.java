@@ -40,8 +40,6 @@ public class MoveCommand extends AbstractEntityCommand<Entity>
 		if (nextNode == null || isFinished())
 		{
 			setFinished(true);
-			entity.stopMoving();
-			Gdx.app.debug("Move Command", "Move Command is finished");
 			return;
 		}
 		
@@ -63,6 +61,15 @@ public class MoveCommand extends AbstractEntityCommand<Entity>
 			if (nextNode != null) Gdx.app.debug("Entity Next Node", nextNode.toString());
 			App.graphics.drawPath(nextNode, path);
 		}
+	}
+	
+	@Override
+	protected void onFinished()
+	{
+
+		entity.stopMoving();
+		Gdx.app.debug("Move Command", "Move Command is finished");
+		entity.setCommand(NullCommand.get());
 	}
 	
 	private static Node getNextNode(Entity entity, Queue<Node> path)

@@ -23,8 +23,19 @@ public abstract class AbstractEntityCommand<T extends Entity> implements EntityC
 		return finished;
 	}
 	
-	protected void setFinished(boolean finished)
+	protected final void setFinished(boolean finished)
 	{
 		this.finished = finished;
+		if (finished)
+		{
+			onFinished();
+		}
+	}
+	
+	/**
+	 * Called when true is passed to setFinished. Override this to hook into setFinished.
+	 */
+	protected void onFinished()
+	{
 	}
 }
