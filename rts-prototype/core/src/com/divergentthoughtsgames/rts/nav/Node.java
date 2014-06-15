@@ -72,6 +72,16 @@ public class Node
 		return y;
 	}
 	
+	public int getCenterX()
+	{
+		return x + HALF_SIZE;
+	}
+	
+	public int getCenterY()
+	{
+		return y + HALF_SIZE;
+	}
+	
 	public int getRowIndex()
 	{
 		return y / SIZE;

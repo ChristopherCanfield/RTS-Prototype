@@ -159,6 +159,16 @@ public abstract class Entity
 		return (int)rect.y;
 	}
 	
+	public final int getCenterX()
+	{
+		return (int)(rect.x + rect.width / 2.f);
+	}
+	
+	public final int getCenterY()
+	{
+		return (int)(rect.y + rect.height / 2.f);
+	}
+	
 	protected final float getSpeed()
 	{
 		return speed;
@@ -192,7 +202,9 @@ public abstract class Entity
 	
 	public final void rotateToFace(int x, int y)
 	{
-		float angle = GameMath.angleToFace((int)rect.x, (int)rect.y, x, y) * MathUtils.radiansToDegrees;
+		int centerX = (int)(rect.x + rect.width / 2.f);
+		int centerY = (int)(rect.y + rect.height / 2.f);
+		float angle = GameMath.angleToFace(centerX, centerY, x, y) * MathUtils.radiansToDegrees;
 		sprite.setRotation(angle + (MathUtils.PI / 2.f * MathUtils.radiansToDegrees));
 		
 		onRotate(angle);

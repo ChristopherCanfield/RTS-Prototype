@@ -65,7 +65,7 @@ public abstract class Find
 	 */
 	public static Node node(Entity e)
 	{
-		return node(e.getX(), e.getY());
+		return node(e.getCenterX(), e.getCenterY());
 	}
 	
 	/**

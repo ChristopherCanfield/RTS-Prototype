@@ -44,7 +44,8 @@ public class MoveCommand extends AbstractEntityCommand<Entity>
 			return;
 		}
 		
-		if (entity.getNode().equals(nextNode))
+//		if (entity.getNode().equals(nextNode))
+		if (entity.contains(nextNode.getCenterX(), nextNode.getCenterY()))
 		{
 			setNextNode();
 			Gdx.app.debug("Move Commmand", "Found next node");
