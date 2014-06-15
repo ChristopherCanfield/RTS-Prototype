@@ -14,7 +14,9 @@ public class Node
 	public static int SIZE = 32;
 	public static int HALF_SIZE = SIZE / 2;
 	
-	protected List<Edge> edges = new ArrayList<Edge>(4);
+	public static final Color DEFAULT_COLOR = Color.DARK_GRAY;
+	
+	protected List<Edge> edges = new ArrayList<Edge>(8);
 	
 	private int x;
 	private int y;
@@ -115,7 +117,7 @@ public class Node
 
 	public void draw(ShapeRenderer renderer)
 	{
-		Color color = passable ? Color.DARK_GRAY : Color.RED;
+		Color color = passable ? DEFAULT_COLOR : Color.RED;
 		draw(renderer, color);
 	}
 	

@@ -102,7 +102,7 @@ public class Edge
 	{
 		if (node1 != null && node2 != null)
 		{
-			if (App.getGameTime() > lastDrawn || batch.getColor().equals(Color.RED))
+			if (App.getGameTime() > lastDrawn || !batch.getColor().equals(Node.DEFAULT_COLOR))
 			{
 				Vector3 node1Screen = Coords.worldToScreen(node1.getX(), node1.getY());
 				Vector3 node2Screen = Coords.worldToScreen(node2.getX(), node2.getY());

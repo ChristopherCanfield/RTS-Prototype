@@ -40,6 +40,7 @@ public abstract class Entity
 	
 	/** The entity's bounding rectangle. **/
 	protected Rectangle rect;
+	protected Rectangle centerRect;
 	
 	/** The entity's max speed. **/
 	protected float maxSpeed;
@@ -98,16 +99,14 @@ public abstract class Entity
 		return rect.contains(x, y);
 	}
 	
-//	public final boolean containsAtCenter(int x, int y)
-//	{
-//		if (centerRect == null)
-//		{
-//			centerRect = new Rectangle(x + rect.width / 2.f, y + rect.width / 2.f, 3, 3);
-//		}
-//		centerRect.x = rect.x + rect.width / 2.f;
-//		centerRect.y = rect.y + rect.height / 2.f;
-//		return centerRect.contains(x, y);
-//	}
+	public final boolean containsAtCenter(int x, int y)
+	{
+		if (centerRect == null)
+		{
+			centerRect = new Rectangle(x + rect.width / 1.9f, y + rect.width / 1.9f, 2, 2);
+		}
+		return centerRect.contains(x, y);
+	}
 	
 	public final Node getNode()
 	{
@@ -118,6 +117,11 @@ public abstract class Entity
 	{
 		rect.x = x;
 		rect.y = y;
+		if (centerRect != null)
+		{
+			centerRect.x = x + rect.width / 1.9f;
+			centerRect.y = y + rect.width / 1.9f;
+		}
 		onMove();
 	}
 	
@@ -125,6 +129,12 @@ public abstract class Entity
 	{
 		rect.x += speed * movementVector.x;
 		rect.y += speed * movementVector.y;
+		if (centerRect != null)
+		{
+			centerRect.x += speed * movementVector.x;
+			centerRect.y += speed * movementVector.y;
+		}
+		
 		onMove();
 		
 		if (App.debugEnabled())
