@@ -11,10 +11,12 @@ public class Edge
 	
 	private Node node1;
 	private Node node2;
+	
+	private boolean passable;
 
 	public Edge(double cost)
 	{
-		this.cost = cost;
+		this(null, null, cost);
 	}
 	
 	public Edge(Node node1, Node node2, double cost)
@@ -23,8 +25,16 @@ public class Edge
 		this.node1 = node1;
 		this.node2 = node2;
 		
-		this.node1.addEdge(this);
-		this.node2.addEdge(this);
+		if (node1 != null)
+		{
+			this.node1.addEdge(this);
+		}
+		if (node2 != null)
+		{
+			this.node2.addEdge(this);
+		}
+		
+		passable = true;
 	}
 	
 	/**
@@ -72,6 +82,16 @@ public class Edge
 		{
 			throw new GameException("Node is not connected to this edge.");
 		}
+	}
+	
+	public void setPassable(boolean val)
+	{
+		passable = val;
+	}
+	
+	public boolean isPassable()
+	{
+		return passable;
 	}
 	
 	public void draw(ShapeRenderer batch)

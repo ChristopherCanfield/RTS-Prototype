@@ -62,27 +62,30 @@ public abstract class Search
 			// Iterate through each node that is connected to the current lowest cost node.
 			for (Edge edge : lowestCost.getEdges())
 			{
-				Node currentNode = edge.getOppositeNode(lowestCost);
-				
-				// Calculate the g (from start) cost of the lowest cost node by 
-				// taking the parent's g cost and adding 1 to it.
-				double g = edge.cost + lowestCost.getG();
-
-				// Calculate the h (heuristic) cost of the lowest cost node
-				// to the end node.
-				double h = heuristic.cost(currentNode, end);
-				
-				// Wrap the edge in the SearchNode decorator, so the parent and 
-				// costs can be stored with it.
-				SearchNode edgeSearchNode = new SearchNode(currentNode, lowestCost, g, h);
-				
-				// Determine if the edge has already been searched.
-				if (!searched.contains(edgeSearchNode))
+				if (edge.isPassable())
 				{
-					frontier.add(edgeSearchNode);
+					Node currentNode = edge.getOppositeNode(lowestCost);
 					
-					// Add the edge to the searched set.
-					searched.add(edgeSearchNode);
+					// Calculate the g (from start) cost of the lowest cost node by 
+					// taking the parent's g cost and adding 1 to it.
+					double g = edge.cost + lowestCost.getG();
+	
+					// Calculate the h (heuristic) cost of the lowest cost node
+					// to the end node.
+					double h = heuristic.cost(currentNode, end);
+					
+					// Wrap the edge in the SearchNode decorator, so the parent and 
+					// costs can be stored with it.
+					SearchNode edgeSearchNode = new SearchNode(currentNode, lowestCost, g, h);
+					
+					// Determine if the edge has already been searched.
+					if (!searched.contains(edgeSearchNode))
+					{
+						frontier.add(edgeSearchNode);
+						
+						// Add the edge to the searched set.
+						searched.add(edgeSearchNode);
+					}
 				}
 			}
 		}

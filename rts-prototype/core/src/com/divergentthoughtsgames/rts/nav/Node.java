@@ -19,6 +19,8 @@ public class Node
 	private int x;
 	private int y;
 	
+	private boolean passable;
+	
 	/**
 	 * Constructs a navigation graph node.
 	 * @param x the center x point of the node.
@@ -77,6 +79,27 @@ public class Node
 	public int getColumnIndex()
 	{
 		return x / SIZE;
+	}
+	
+	/**
+	 * Sets this node, and all connected edges, to passable (if true) or impassable (if false).
+	 * @param val
+	 */
+	public void setPassable(boolean val)
+	{
+		if (val != passable)
+		{
+			for (final Edge edge : edges)
+			{
+				edge.setPassable(val);
+			}
+		}
+		passable = val;
+	}
+	
+	public boolean isPassable()
+	{
+		return passable;
 	}
 
 	public void draw(ShapeRenderer renderer)
