@@ -31,6 +31,10 @@ public class SolidEntityController implements Controller
 		return instance;
 	}
 	
+	private SolidEntityController()
+	{
+	}
+	
 	@Override
 	public void update(Entity entity, World world)
 	{

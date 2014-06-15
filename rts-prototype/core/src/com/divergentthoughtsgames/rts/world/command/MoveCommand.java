@@ -17,9 +17,9 @@ import com.divergentthoughtsgames.rts.world.Entity;
 
 public class MoveCommand extends AbstractEntityCommand<Entity>
 {
+	private Node previousNode;
 	private Node nextNode;
 	private Queue<Node> path;
-	
 	
 	public MoveCommand(Entity entity, float targetX, float targetY)
 	{
@@ -28,10 +28,11 @@ public class MoveCommand extends AbstractEntityCommand<Entity>
 		Node startNode = Find.node(entity);
 		Node targetNode = Find.node(targetX, targetY);
 		
+		startNode.setPassable(true);
 		path = Search.aStar(startNode, targetNode, StraightLineHeuristic.get());
 		
 		// Get the next node, and face it.
-		nextNode = getNextNode(entity, path);
+		setNextNode();
 	}
 
 	@Override
@@ -45,7 +46,7 @@ public class MoveCommand extends AbstractEntityCommand<Entity>
 		
 		if (entity.getNode().equals(nextNode))
 		{
-			nextNode = getNextNode(entity, path);
+			setNextNode();
 			Gdx.app.debug("Move Commmand", "Found next node");
 		}
 		else
@@ -66,18 +67,24 @@ public class MoveCommand extends AbstractEntityCommand<Entity>
 	@Override
 	protected void onFinished()
 	{
-
 		entity.stopMoving();
 		Gdx.app.debug("Move Command", "Move Command is finished");
 		entity.setCommand(NullCommand.get());
 	}
 	
-	private static Node getNextNode(Entity entity, Queue<Node> path)
+	private void setNextNode()
 	{
-		Node nextNode = path.poll();
+		if (previousNode != null)
+		{
+			previousNode.setPassable(true);
+		}
+		
+		nextNode = path.poll();
 		rotateToFace(entity, nextNode);
 		entity.setSpeedMax();
-		return nextNode;
+		
+		previousNode = entity.getNode();
+		previousNode.setPassable(false);
 	}
 	
 	private static void rotateToFace(Entity entity, Node nextNode)

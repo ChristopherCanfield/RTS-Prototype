@@ -30,6 +30,7 @@ public class Node
 	{
 		this.x = x;
 		this.y = y;
+		this.passable = true;
 	}
 	
 	/**
@@ -93,8 +94,8 @@ public class Node
 			{
 				edge.setPassable(val);
 			}
+			passable = val;
 		}
-		passable = val;
 	}
 	
 	public boolean isPassable()
@@ -104,7 +105,8 @@ public class Node
 
 	public void draw(ShapeRenderer renderer)
 	{
-		draw(renderer, Color.DARK_GRAY);
+		Color color = passable ? Color.DARK_GRAY : Color.RED;
+		draw(renderer, color);
 	}
 	
 	public void draw(ShapeRenderer renderer, Color color)

@@ -1,7 +1,9 @@
 package com.divergentthoughtsgames.rts.nav;
 
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.math.Vector3;
+import com.divergentthoughtsgames.rts.App;
 import com.divergentthoughtsgames.rts.util.Coords;
 import com.divergentthoughtsgames.rts.util.GameException;
 
@@ -13,6 +15,8 @@ public class Edge
 	private Node node2;
 	
 	private boolean passable;
+	
+	private double lastDrawn;
 
 	public Edge(double cost)
 	{
@@ -98,9 +102,13 @@ public class Edge
 	{
 		if (node1 != null && node2 != null)
 		{
-			Vector3 node1Screen = Coords.worldToScreen(node1.getX(), node1.getY());
-			Vector3 node2Screen = Coords.worldToScreen(node2.getX(), node2.getY());
-			batch.line(node1Screen.x, node1Screen.y, node2Screen.x, node2Screen.y);
+			if (App.getGameTime() > lastDrawn || batch.getColor().equals(Color.RED))
+			{
+				Vector3 node1Screen = Coords.worldToScreen(node1.getX(), node1.getY());
+				Vector3 node2Screen = Coords.worldToScreen(node2.getX(), node2.getY());
+				batch.line(node1Screen.x, node1Screen.y, node2Screen.x, node2Screen.y);
+				lastDrawn = App.getGameTime();
+			}
 		}
 	}
 	

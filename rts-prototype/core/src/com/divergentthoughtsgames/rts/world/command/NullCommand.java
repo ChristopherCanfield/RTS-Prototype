@@ -25,7 +25,7 @@ public class NullCommand extends AbstractEntityCommand<Entity>
 		return instance;
 	}
 	
-	public NullCommand()
+	private NullCommand()
 	{
 		super(null);
 		setFinished(true);
