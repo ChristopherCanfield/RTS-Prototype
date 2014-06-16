@@ -102,4 +102,10 @@ public class RtsPrototype extends ApplicationAdapter
 		App.graphics.render();
 		App.world.update();
 	}
+	
+	@Override
+	public void resize (int width, int height) 
+	{
+//		App.graphics.setProjectionMatrix(App.graphics.getCamera().combined);
+	}
 }

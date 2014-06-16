@@ -10,6 +10,7 @@ import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector3;
 import com.divergentthoughtsgames.rts.App;
 import com.divergentthoughtsgames.rts.graphics.Graphics;
+import com.divergentthoughtsgames.rts.util.Coords;
 import com.divergentthoughtsgames.rts.util.Find;
 import com.divergentthoughtsgames.rts.world.Entity;
 
@@ -46,8 +47,8 @@ public class SelectionInputProcessor extends InputAdapter
 			if (App.selected.isEmpty() || 
 					Gdx.input.isKeyPressed(Keys.SHIFT_LEFT) || Gdx.input.isKeyPressed(Keys.SHIFT_RIGHT))
 			{
-				graphics.setSelectionRectStart(x, Gdx.graphics.getHeight() - y);
-				Vector3 adjusted = graphics.getCamera().unproject(new Vector3(x, y, 0));
+				Vector3 adjusted = Coords.screenToWorld(x, y);
+				graphics.setSelectionRectStart(adjusted.x, adjusted.y);
 				rect.x = adjusted.x;
 				rect.y = adjusted.y;
 				isSelecting = true;
@@ -77,7 +78,7 @@ public class SelectionInputProcessor extends InputAdapter
 			Gdx.app.debug("SELECTION", "touchUp " + x + "," + y);
 			graphics.resetSelectionRect();
 			
-			Vector3 adjusted = graphics.getCamera().unproject(new Vector3(x, y, 0));
+			Vector3 adjusted = Coords.screenToWorld(x, y);
 			setRectWidthHeight(adjusted.x, adjusted.y);
 			List<Entity> newSelected = Find.allIntersections(rect, App.world.getEntities());
 			resetRect();
@@ -137,7 +138,8 @@ public class SelectionInputProcessor extends InputAdapter
 	{
 		if (isSelecting)
 		{
-			graphics.setSelectionRectEnd(x, Gdx.graphics.getHeight() - y);
+			Vector3 adjusted = Coords.screenToWorld(x, y);
+			graphics.setSelectionRectEnd(adjusted.x, adjusted.y);
 		}
 		return false;
 	}

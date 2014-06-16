@@ -105,6 +105,12 @@ public class Graphics
 		selectionRectStartX = selectionRectStartY = selectionRectEndX = selectionRectEndY = 0;
 	}
 	
+	public void setProjectionMatrix(Matrix4 projectionMatrix)
+	{
+		batch.setProjectionMatrix(projectionMatrix);
+		shapeRenderer.setProjectionMatrix(projectionMatrix);
+	}
+	
 	public Texture getTexture(String path)
 	{
 		Texture t = textures.get(path);
