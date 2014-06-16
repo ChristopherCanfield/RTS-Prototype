@@ -168,7 +168,7 @@ public class SearchTest
 		return navGraph;
 	}
 	
-	static Node[] createNavGraph2()
+	private static Node[] createNavGraph2()
 	{
 		Node[] navGraph = new Node[9];
 		navGraph[0] = new Node(0, 0);	// 0

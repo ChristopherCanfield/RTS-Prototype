@@ -6,6 +6,7 @@ import java.util.Objects;
 
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
+import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector3;
 import com.divergentthoughtsgames.rts.util.Coords;
 
@@ -18,8 +19,10 @@ public class Node
 	
 	protected List<Edge> edges = new ArrayList<Edge>(8);
 	
-	private int x;
-	private int y;
+	private final int x;
+	private final int y;
+	
+	private final Rectangle rect;
 	
 	private boolean passable;
 	
@@ -32,6 +35,7 @@ public class Node
 	{
 		this.x = x;
 		this.y = y;
+		this.rect = new Rectangle(x, y, SIZE, SIZE);
 		this.passable = true;
 	}
 	
@@ -82,6 +86,11 @@ public class Node
 	public int getCenterY()
 	{
 		return y + HALF_SIZE;
+	}
+	
+	public boolean overlaps(Rectangle otherRect)
+	{
+		return rect.overlaps(otherRect);
 	}
 	
 	public int getRowIndex()

@@ -26,6 +26,7 @@ import com.divergentthoughtsgames.rts.world.World;
 
 public class Graphics
 {
+	// Sprites that are not directly owned by an entity.
 	private final Array<Sprite> sprites = new Array<>();
 	private final Array<Effect> effects = new Array<>();
 	
@@ -34,11 +35,11 @@ public class Graphics
 	private final HashMap<String, Texture> textures = new HashMap<>();
 	
 	private OrthographicCamera camera;
-	
 	private final Array<CameraController> cameraControllers = new Array<CameraController>();
 	
 	private World world;
 	
+	// Variables for the selection box.
 	private float selectionRectStartX;
 	private float selectionRectStartY;
 	private float selectionRectEndX;
@@ -81,16 +82,16 @@ public class Graphics
 		cameraControllers.add(c);
 	}
 	
-	public void setSelectionRectStart(float x, float y)
+	public void setSelectionRectStart(float screenX, float screenY)
 	{
-		selectionRectStartX = x;
-		selectionRectStartY = y;
+		selectionRectStartX = screenX;
+		selectionRectStartY = screenY;
 	}
 	
-	public void setSelectionRectEnd(float x, float y)
+	public void setSelectionRectEnd(float screenX, float screenY)
 	{
-		selectionRectEndX = x;
-		selectionRectEndY = y;
+		selectionRectEndX = screenX;
+		selectionRectEndY = screenY;
 	}
 	
 	public void resetSelectionRect()
@@ -109,6 +110,11 @@ public class Graphics
 //		return camera.zoom;
 //	}
 	
+	/**
+	 * Returns a reference to the specified texture. The texture is loaded if necessary.
+	 * @param path the path to the texture.
+	 * @return a reference to the specified texture.
+	 */
 	public Texture getTexture(String path)
 	{
 		Texture t = textures.get(path);
@@ -120,6 +126,11 @@ public class Graphics
 		return t;
 	}
 	
+	/**
+	 * Draws the specified path.
+	 * @param nextNode the first node.
+	 * @param path a queue of nodes that make up the path.
+	 */
 	public void drawPath(Node nextNode, Queue<Node> path)
 	{
 		shapeRenderer.begin(ShapeType.Line);

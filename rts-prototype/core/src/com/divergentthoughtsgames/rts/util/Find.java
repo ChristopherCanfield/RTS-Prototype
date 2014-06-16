@@ -20,7 +20,7 @@ public abstract class Find
 	 */
 	public static List<Entity> allIntersections(Rectangle rect, Entity[] entities)
 	{
-		ArrayList<Entity> found = new ArrayList<Entity>();
+		ArrayList<Entity> found = new ArrayList<>();
 		for (Entity e : entities)
 		{
 			if (rect.overlaps(e.getRect()))
@@ -29,6 +29,27 @@ public abstract class Find
 			}
 		}
 		
+		return found;
+	}
+	
+	/**
+	 * Returns a list of all nodes that intersect with the specified entity.
+	 * @param entity the entity to check the nodes against.
+	 * @return list of all nodes that intersect with the specified entity.
+	 */
+	public static List<Node> allNodes(Entity entity)
+	{
+		ArrayList<Node> found = new ArrayList<>();
+		Rectangle entRect = entity.getRect();
+		Node[] navGraph = App.world.getNavMap().getNavGraph();
+		
+		for (Node node : navGraph)
+		{
+			if (node.overlaps(entRect))
+			{
+				found.add(node);
+			}
+		}
 		return found;
 	}
 	
