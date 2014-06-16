@@ -105,9 +105,14 @@ public class Ogre extends Entity
 	}
 
 	@Override
-	protected void onRotate(float r)
+	protected void onRotateSprite(float r)
 	{
 		currentAnimation = spriteRotator.onRotate();
+	}
+	
+	@Override
+	protected void onRotate(float r)
+	{
 		rotation = r;
 	}
 	

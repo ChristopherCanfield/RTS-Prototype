@@ -216,20 +216,29 @@ public abstract class Entity
 //		}
 //	}
 	
-	public final void rotateToFace(int x, int y)
+	public final void rotateToFace(int x, int y, boolean rotateSprite)
 	{
 		int centerX = (int)(rect.x + rect.width / 2.f);
 		int centerY = (int)(rect.y + rect.height / 2.f);
 		float angle = GameMath.angleToFace(centerX, centerY, x, y) * MathUtils.radiansToDegrees;
-		sprite.setRotation(angle + (MathUtils.PI / 2.f * MathUtils.radiansToDegrees));
+		if (rotateSprite)
+		{
+			sprite.setRotation(angle + (MathUtils.PI / 2.f * MathUtils.radiansToDegrees));
+			onRotateSprite(angle);
+		}
 		
 		onRotate(angle);
 		setMovementVector();
 	}
 	
+	public final void rotateToFace(float x, float y, boolean rotateSprite)
+	{
+		rotateToFace((int)x, (int)y, rotateSprite);
+	}
+	
 	public final void rotateToFace(float x, float y)
 	{
-		rotateToFace((int)x, (int)y);
+		rotateToFace((int)x, (int)y, true);
 	}
 	
 	private void setMovementVector()
@@ -247,6 +256,14 @@ public abstract class Entity
 	 */
 	protected void onRotate(@SuppressWarnings("unused") float rotation)
 	{
+	}
+	
+	/**
+	 * Provides a hook into the rotateToFace method. Override this to receive notification when
+	 * the entity's sprite is rotated.
+	 */
+	protected void onRotateSprite(@SuppressWarnings("unused") float rotation)
+	{	
 	}
 	
 	public final void logRotation()
