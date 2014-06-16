@@ -6,6 +6,8 @@
 package com.divergentthoughtsgames.rts.input;
 
 import com.badlogic.gdx.InputAdapter;
+import com.divergentthoughtsgames.rts.App;
+import com.divergentthoughtsgames.rts.graphics.effect.ClickLocatorEffect;
 
 public class ClickLocator extends InputAdapter
 {
@@ -18,7 +20,8 @@ public class ClickLocator extends InputAdapter
 	@Override
 	public boolean touchUp(int screenX, int screenY, int pointer, int button)
 	{
-		// TODO (6/16/2014): implement this.
+		ClickLocatorEffect effect = new ClickLocatorEffect(screenX, screenY);
+		App.graphics.addEffect(effect);
 		return false;
 	}
 }

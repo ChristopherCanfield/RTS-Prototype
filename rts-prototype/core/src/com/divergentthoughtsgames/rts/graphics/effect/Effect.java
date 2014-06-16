@@ -5,8 +5,10 @@
  */
 package com.divergentthoughtsgames.rts.graphics.effect;
 
+import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
+
 public interface Effect
 {
-	void update();
+	void render(ShapeRenderer renderer);
 	boolean isFinished();
 }

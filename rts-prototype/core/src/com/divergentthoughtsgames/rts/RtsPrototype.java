@@ -7,6 +7,7 @@ import com.badlogic.gdx.InputMultiplexer;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.divergentthoughtsgames.rts.graphics.CameraController;
 import com.divergentthoughtsgames.rts.graphics.Graphics;
+import com.divergentthoughtsgames.rts.input.ClickLocator;
 import com.divergentthoughtsgames.rts.input.DebugKeyProcessor;
 import com.divergentthoughtsgames.rts.input.KeyboardCameraController;
 import com.divergentthoughtsgames.rts.input.MouseCameraController;
@@ -90,6 +91,7 @@ public class RtsPrototype extends ApplicationAdapter
 		inputProcessors.addProcessor(new UnitControlInputProcessor());
 		inputProcessors.addProcessor(new MouseCameraController((OrthographicCamera)graphics.getCamera()));
 		inputProcessors.addProcessor(new DebugKeyProcessor());
+		inputProcessors.addProcessor(new ClickLocator());
 		Gdx.input.setInputProcessor(inputProcessors);
 	}
 

@@ -18,6 +18,7 @@ import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.scenes.scene2d.utils.ScissorStack;
 import com.badlogic.gdx.utils.Array;
 import com.divergentthoughtsgames.rts.App;
+import com.divergentthoughtsgames.rts.graphics.effect.Effect;
 import com.divergentthoughtsgames.rts.nav.Edge;
 import com.divergentthoughtsgames.rts.nav.Node;
 import com.divergentthoughtsgames.rts.world.Entity;
@@ -26,6 +27,8 @@ import com.divergentthoughtsgames.rts.world.World;
 public class Graphics
 {
 	private final Array<Sprite> sprites = new Array<>();
+	private final Array<Effect> effects = new Array<>();
+	
 	private final SpriteBatch batch = new SpriteBatch();
 	private final ShapeRenderer shapeRenderer = new ShapeRenderer();
 	private final HashMap<String, Texture> textures = new HashMap<>();
@@ -73,6 +76,11 @@ public class Graphics
 	public void addSprite(Sprite sprite)
 	{
 		sprites.add(sprite);
+	}
+	
+	public void addEffect(Effect effect)
+	{
+		effects.add(effect);
 	}
 	
 	public void addCameraController(CameraController c)
@@ -204,8 +212,26 @@ public class Graphics
 		{
 			e.drawRect(shapeRenderer);
 		}
+		drawEffects(shapeRenderer, effects);
 		shapeRenderer.end();
 		
 		shapeRenderer.setProjectionMatrix(originalProjMatrix);
+	}
+	
+	private static void drawEffects(ShapeRenderer renderer, Array<Effect> effects)
+	{
+		Array<Effect> finished = new Array<Effect>();
+		
+		for (Effect effect : effects)
+		{
+			effect.render(renderer);
+			
+			if (effect.isFinished())
+			{
+				finished.add(effect);
+			}
+		}
+		
+		effects.removeAll(finished, true);
 	}
 }
