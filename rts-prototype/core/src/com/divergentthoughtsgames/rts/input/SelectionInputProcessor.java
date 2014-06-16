@@ -56,7 +56,6 @@ public class SelectionInputProcessor extends InputAdapter
 			else
 			{
 				isSelecting = false;
-				// Send move command(s).
 			}
 		}
 		else if (button == Buttons.RIGHT)

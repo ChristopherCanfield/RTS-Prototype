@@ -39,8 +39,6 @@ public class Graphics
 	
 	private World world;
 	
-//	private Texture tempTexture;
-	
 	private float selectionRectStartX;
 	private float selectionRectStartY;
 	private float selectionRectEndX;
@@ -49,11 +47,6 @@ public class Graphics
 	public Graphics()
 	{
 		camera = new OrthographicCamera(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
-		
-//		tempTexture = new Texture("badlogic.jpg");
-//		Sprite sprite = new Sprite(tempTexture);
-//		sprite.setPosition(0, 0);
-//		addSprite(sprite);
 		
 		batch.getProjectionMatrix().setToOrtho2D(
 				0f, 0f, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
@@ -105,11 +98,16 @@ public class Graphics
 		selectionRectStartX = selectionRectStartY = selectionRectEndX = selectionRectEndY = 0;
 	}
 	
-	public void setProjectionMatrix(Matrix4 projectionMatrix)
-	{
-		batch.setProjectionMatrix(projectionMatrix);
-		shapeRenderer.setProjectionMatrix(projectionMatrix);
-	}
+//	public void setProjectionMatrix(Matrix4 projectionMatrix)
+//	{
+//		batch.setProjectionMatrix(projectionMatrix);
+//		shapeRenderer.setProjectionMatrix(projectionMatrix);
+//	}
+	
+//	public float getZoom()
+//	{
+//		return camera.zoom;
+//	}
 	
 	public Texture getTexture(String path)
 	{
@@ -198,6 +196,9 @@ public class Graphics
 	
 	private void drawPrimitives()
 	{
+		Matrix4 originalProjMatrix = shapeRenderer.getProjectionMatrix().cpy();
+		shapeRenderer.setProjectionMatrix(camera.combined);
+		
 		shapeRenderer.setColor(Color.WHITE);
 		if (!(selectionRectStartX == 0 && selectionRectStartY == 0) &&
 				!(selectionRectEndX == 0 && selectionRectEndY == 0))
@@ -209,9 +210,6 @@ public class Graphics
 			
 			shapeRenderer.end();
 		}
-		
-		Matrix4 originalProjMatrix = shapeRenderer.getProjectionMatrix().cpy();
-		shapeRenderer.setProjectionMatrix(camera.combined);
 		
 		shapeRenderer.begin(ShapeType.Line);
 		for (Entity e : world.getEntities())
