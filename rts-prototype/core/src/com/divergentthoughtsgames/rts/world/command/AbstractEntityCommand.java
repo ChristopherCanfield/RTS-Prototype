@@ -38,4 +38,18 @@ public abstract class AbstractEntityCommand<T extends Entity> implements EntityC
 	protected void onFinished()
 	{
 	}
+	
+	@Override
+	public void cancel()
+	{
+		finished = true;
+		onCancelled();
+	}
+	
+	/**
+	 * Called when cancel() is called. Override this to hook into cancel().
+	 */
+	protected void onCancelled()
+	{
+	}
 }

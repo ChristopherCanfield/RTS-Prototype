@@ -8,5 +8,6 @@ package com.divergentthoughtsgames.rts.world.command;
 public interface EntityCommand
 {
 	void update();
+	void cancel();
 	boolean isFinished();
 }

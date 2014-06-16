@@ -45,7 +45,7 @@ public class MoveCommand extends AbstractEntityCommand<Entity>
 		}
 		
 //		if (entity.getNode().equals(nextNode))
-		if (entity.containsAtCenter(nextNode.getCenterX(), nextNode.getCenterY()))
+		if (entity.contains(nextNode.getX(), nextNode.getY()))
 		{
 			setNextNode();
 			Gdx.app.debug("Move Commmand", "Found next node");
@@ -69,8 +69,17 @@ public class MoveCommand extends AbstractEntityCommand<Entity>
 	protected void onFinished()
 	{
 		entity.stopMoving();
-		Gdx.app.debug("Move Command", "Move Command is finished");
 		entity.setCommand(NullCommand.get());
+		Gdx.app.debug("Move Command", "Move Command finished");
+	}
+	
+	@Override
+	protected void onCancelled()
+	{
+		entity.stopMoving();
+		previousNode.setPassable(true);
+		entity.setCommand(NullCommand.get());
+		Gdx.app.debug("Move Command", "Move Command cancelled");
 	}
 	
 	private void setNextNode()
@@ -92,7 +101,7 @@ public class MoveCommand extends AbstractEntityCommand<Entity>
 	{
 		if (nextNode != null)
 		{
-			entity.rotateToFace(nextNode.getX(), nextNode.getY());
+			entity.rotateToFace(nextNode.getCenterX(), nextNode.getCenterY());
 		}
 	}
 }

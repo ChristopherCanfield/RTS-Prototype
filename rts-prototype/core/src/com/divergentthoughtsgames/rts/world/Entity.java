@@ -40,7 +40,7 @@ public abstract class Entity
 	
 	/** The entity's bounding rectangle. **/
 	protected Rectangle rect;
-	protected Rectangle centerRect;
+//	protected Rectangle centerRect;
 	
 	/** The entity's max speed. **/
 	protected float maxSpeed;
@@ -99,14 +99,14 @@ public abstract class Entity
 		return rect.contains(x, y);
 	}
 	
-	public final boolean containsAtCenter(int x, int y)
-	{
-		if (centerRect == null)
-		{
-			centerRect = new Rectangle(x + rect.width / 1.9f, y + rect.width / 1.9f, 2, 2);
-		}
-		return centerRect.contains(x, y);
-	}
+//	public final boolean containsAtCenter(int x, int y)
+//	{
+//		if (centerRect == null)
+//		{
+//			centerRect = new Rectangle(x + rect.width / 2.f, y + rect.height / 2.f, 16, 16);
+//		}
+//		return centerRect.contains(x, y);
+//	}
 	
 	public final Node getNode()
 	{
@@ -117,11 +117,11 @@ public abstract class Entity
 	{
 		rect.x = x;
 		rect.y = y;
-		if (centerRect != null)
-		{
-			centerRect.x = x + rect.width / 1.9f;
-			centerRect.y = y + rect.width / 1.9f;
-		}
+//		if (centerRect != null)
+//		{
+//			centerRect.x = x + rect.width / 2.f;
+//			centerRect.y = y + rect.height / 2.f;
+//		}
 		onMove();
 	}
 	
@@ -129,11 +129,11 @@ public abstract class Entity
 	{
 		rect.x += speed * movementVector.x;
 		rect.y += speed * movementVector.y;
-		if (centerRect != null)
-		{
-			centerRect.x += speed * movementVector.x;
-			centerRect.y += speed * movementVector.y;
-		}
+//		if (centerRect != null)
+//		{
+//			centerRect.x = rect.x + rect.width / 2.f;
+//			centerRect.y = rect.y + rect.height / 2.f;
+//		}
 		
 		onMove();
 		
@@ -147,6 +147,12 @@ public abstract class Entity
 	{
 		rect.x += x;
 		rect.y += y;
+//		if (centerRect != null)
+//		{
+//			centerRect.x = rect.x + rect.width / 2.f;
+//			centerRect.y = rect.y + rect.height / 2.f;
+//		}
+		
 		onMove();
 		
 		if (App.debugEnabled())
@@ -260,6 +266,10 @@ public abstract class Entity
 	
 	public final void setCommand(EntityCommand c)
 	{
+		if (!command.isFinished())
+		{
+			command.cancel();
+		}
 		command = c;
 	}
 	
@@ -294,6 +304,11 @@ public abstract class Entity
 			if (isSelected || App.debugEnabled())
 			{
 				batch.rect(rect.x, rect.y, rect.width, rect.height);
+				
+//				if (centerRect != null && App.debugEnabled())
+//				{
+//					batch.rect(centerRect.x, centerRect.y, centerRect.width, centerRect.height);
+//				}
 			}
 			
 			if (isSelected)
