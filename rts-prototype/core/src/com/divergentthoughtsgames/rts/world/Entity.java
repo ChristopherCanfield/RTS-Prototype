@@ -1,6 +1,5 @@
 package com.divergentthoughtsgames.rts.world;
 
-import java.util.List;
 import java.util.Objects;
 import java.util.UUID;
 

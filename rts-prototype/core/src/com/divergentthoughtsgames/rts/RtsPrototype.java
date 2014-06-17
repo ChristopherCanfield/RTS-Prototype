@@ -34,7 +34,7 @@ public class RtsPrototype extends ApplicationAdapter
 	public static void buildWorld()
 	{
 		Graphics graphics = new Graphics();
-		World world = BasicWorldCreator.create(Node.SIZE * 100, Node.SIZE * 100);
+		World world = BasicWorldCreator.create(Node.SIZE * 200, Node.SIZE * 200);
 		graphics.setWorld(world);
 		
 		CameraController kcc = new KeyboardCameraController((OrthographicCamera)graphics.getCamera());
@@ -84,8 +84,7 @@ public class RtsPrototype extends ApplicationAdapter
 		world.add(humanTownCenter);
 		
 		// For debugging.
-		Gdx.app.setLogLevel(Application.LOG_DEBUG);
-		App.setDebug(true);
+		App.setDebug(false);
 	}
 	
 	private static void setInputProcessors(Graphics graphics)

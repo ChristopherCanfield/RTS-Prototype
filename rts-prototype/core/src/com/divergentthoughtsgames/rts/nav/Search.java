@@ -7,6 +7,7 @@ import java.util.LinkedList;
 import java.util.PriorityQueue;
 import java.util.Queue;
 import java.util.Set;
+import java.util.function.Predicate;
 
 import com.divergentthoughtsgames.rts.App;
 
@@ -128,6 +129,15 @@ public abstract class Search
 	 */
 	public static Node findPassableNodeBfs(Node startNode)
 	{
+		// Java 8.
+		return breadthFirstSearch(startNode, (Object goal) -> {
+			return ((Node)goal).isPassable();
+		});
+	}
+	
+	// Note: Predicate is a Java 8 interface.
+	public static Node breadthFirstSearch(Node startNode, Predicate<Object> goal)
+	{
 		Queue<Node> unexplored = new LinkedList<Node>();
 		unexplored.add(startNode);
 		
@@ -137,7 +147,7 @@ public abstract class Search
 		while (!unexplored.isEmpty())
 		{
 			Node current = unexplored.remove();
-			if (current.isPassable())
+			if (goal.test(current))
 			{
 				return current;
 			}
