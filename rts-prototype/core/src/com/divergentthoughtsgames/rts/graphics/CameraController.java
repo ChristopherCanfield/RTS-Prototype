@@ -5,6 +5,8 @@ import com.divergentthoughtsgames.rts.App;
 
 public abstract class CameraController
 {
+	private static final float maxZoomIn = 0.75f;
+	
 	private OrthographicCamera camera;
 
 	protected CameraController(OrthographicCamera camera)
@@ -38,6 +40,10 @@ public abstract class CameraController
 		else if (newZoom > maxZoomHeight)
 		{
 			camera.zoom = maxZoomHeight;
+		}
+		else if (newZoom < maxZoomIn)
+		{
+			camera.zoom = maxZoomIn;
 		}
 		else
 		{
