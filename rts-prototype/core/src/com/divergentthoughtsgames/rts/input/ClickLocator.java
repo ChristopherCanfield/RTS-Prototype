@@ -11,17 +11,32 @@ import com.divergentthoughtsgames.rts.graphics.effect.ClickLocatorEffect;
 
 public class ClickLocator extends InputAdapter
 {
+	private boolean isDragging;
+	
 	@Override
 	public boolean touchDown(int screenX, int screenY, int pointer, int button)
 	{
+		ClickLocatorEffect effect = new ClickLocatorEffect(screenX, screenY);
+		App.graphics.addEffect(effect);
+		return false;
+	}
+	
+	@Override
+	public boolean touchDragged(int screenX, int screenY, int pointer)
+	{
+		isDragging = true;
 		return false;
 	}
 
 	@Override
 	public boolean touchUp(int screenX, int screenY, int pointer, int button)
 	{
-		ClickLocatorEffect effect = new ClickLocatorEffect(screenX, screenY);
-		App.graphics.addEffect(effect);
+		if (isDragging)
+		{
+			ClickLocatorEffect effect = new ClickLocatorEffect(screenX, screenY);
+			App.graphics.addEffect(effect);
+			isDragging = false;
+		}
 		return false;
 	}
 }

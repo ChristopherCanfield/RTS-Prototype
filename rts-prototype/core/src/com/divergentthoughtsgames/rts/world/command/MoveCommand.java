@@ -18,17 +18,22 @@ import com.divergentthoughtsgames.rts.world.Entity;
 
 public class MoveCommand extends AbstractEntityCommand<Entity>
 {
-	private Node previousNode;
 	private Node nextNode;
 	private final Vector2 finalTarget;
 	private Vector2 nextTarget;
 	private Queue<Node> path;
 	
+	private final Node startNode;
+	private final boolean startNodePassable;
+	
 	public MoveCommand(Entity entity, float targetX, float targetY)
 	{
 		super(entity);
 		
-		Node startNode = Find.node(entity);
+		startNode = Find.node(entity);
+		startNodePassable = startNode.isPassable();
+		startNode.setPassable(true);
+		
 		Node targetNode = Find.node(targetX, targetY);
 		if (targetNode.isPassable())
 		{
@@ -90,6 +95,7 @@ public class MoveCommand extends AbstractEntityCommand<Entity>
 	{
 		entity.stopMoving();
 		entity.setCommand(NullCommand.get());
+		startNode.setPassable(startNodePassable);
 		Gdx.app.debug("Move Command", "Move Command finished");
 	}
 	
@@ -97,18 +103,13 @@ public class MoveCommand extends AbstractEntityCommand<Entity>
 	protected void onCancelled()
 	{
 		entity.stopMoving();
-//		previousNode.setPassable(true);
 		entity.setCommand(NullCommand.get());
+		startNode.setPassable(startNodePassable);
 		Gdx.app.debug("Move Command", "Move Command cancelled");
 	}
 	
 	private void setNextNode()
-	{
-		if (previousNode != null)
-		{
-//			previousNode.setPassable(true);
-		}
-		
+	{		
 		nextNode = path.poll();
 		if (nextNode != null)
 		{
@@ -122,9 +123,6 @@ public class MoveCommand extends AbstractEntityCommand<Entity>
 		}
 
 		entity.setSpeedMax();
-		
-		previousNode = entity.getNode();
-//		previousNode.setPassable(false);
 	}
 	
 	private static void rotateToFace(Entity entity, Vector2 nextTarget, Vector2 finalTarget)
