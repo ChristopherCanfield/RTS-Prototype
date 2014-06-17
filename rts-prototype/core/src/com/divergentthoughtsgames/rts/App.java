@@ -83,4 +83,9 @@ public abstract class App
 			Gdx.app.setLogLevel(logLevel);
 		}
 	}
+	
+	public static void reset()
+	{
+		RtsPrototype.buildWorld();
+	}
 }

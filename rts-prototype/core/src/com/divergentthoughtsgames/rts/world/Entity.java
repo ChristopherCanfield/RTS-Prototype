@@ -14,7 +14,6 @@ import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.Array;
 import com.divergentthoughtsgames.rts.App;
-import com.divergentthoughtsgames.rts.nav.NavMap;
 import com.divergentthoughtsgames.rts.nav.Node;
 import com.divergentthoughtsgames.rts.util.Find;
 import com.divergentthoughtsgames.rts.util.GameMath;
@@ -51,8 +50,6 @@ public abstract class Entity
 	private float speed;
 	
 	private final Vector2 movementVector = new Vector2();
-	
-	private List<Node> blockedNodes;
 	
 	/** Specifies whether the entity is solid. Solid entities can't overlap. **/
 	protected boolean solid;

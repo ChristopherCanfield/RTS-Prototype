@@ -28,6 +28,11 @@ public class RtsPrototype extends ApplicationAdapter
 	@Override
 	public void create()
 	{
+		buildWorld();
+	}
+	
+	public static void buildWorld()
+	{
 		Graphics graphics = new Graphics();
 		World world = BasicWorldCreator.create(Node.SIZE * 100, Node.SIZE * 100);
 		graphics.setWorld(world);

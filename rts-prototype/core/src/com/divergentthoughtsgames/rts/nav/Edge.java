@@ -103,8 +103,8 @@ public class Edge
 		{
 			if (App.getGameTime() > lastDrawn || !batch.getColor().equals(Node.DEFAULT_COLOR))
 			{
-				Vector3 node1Screen = Coords.worldToScreen(node1.getX(), node1.getY());
-				Vector3 node2Screen = Coords.worldToScreen(node2.getX(), node2.getY());
+				Vector3 node1Screen = Coords.worldToScreen(node1.getCenterX(), node1.getCenterY());
+				Vector3 node2Screen = Coords.worldToScreen(node2.getCenterX(), node2.getCenterY());
 				batch.line(node1Screen.x, node1Screen.y, node2Screen.x, node2Screen.y);
 				lastDrawn = App.getGameTime();
 			}

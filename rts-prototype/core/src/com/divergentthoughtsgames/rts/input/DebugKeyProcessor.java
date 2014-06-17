@@ -13,6 +13,10 @@ public class DebugKeyProcessor extends InputAdapter
 		{
 			App.setDebug(!App.debugEnabled());
 		}
+		else if (keycode == Keys.F2)
+		{
+			App.reset();
+		}
 		
 		return false;
 	}
