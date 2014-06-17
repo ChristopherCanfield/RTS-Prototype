@@ -8,8 +8,8 @@ package com.divergentthoughtsgames.rts.world.creator;
 import java.util.ArrayList;
 
 import com.divergentthoughtsgames.rts.nav.Edge;
+import com.divergentthoughtsgames.rts.nav.NavMap;
 import com.divergentthoughtsgames.rts.nav.Node;
-import com.divergentthoughtsgames.rts.world.NavMap;
 import com.divergentthoughtsgames.rts.world.World;
 
 /**

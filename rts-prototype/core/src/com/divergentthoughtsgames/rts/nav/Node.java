@@ -8,6 +8,7 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector3;
+import com.divergentthoughtsgames.rts.App;
 import com.divergentthoughtsgames.rts.util.Coords;
 
 public class Node
@@ -134,7 +135,9 @@ public class Node
 	{
 		Vector3 screen = Coords.worldToScreen(getX(), getY());
 		renderer.setColor(color);
-		renderer.circle(screen.x, screen.y, 5);
+		float zoom = App.graphics.getZoom();
+		renderer.circle(screen.x + HALF_SIZE / zoom, screen.y + HALF_SIZE / zoom, 5 / zoom);
+		renderer.rect(screen.x, screen.y, rect.width / zoom, rect.height / zoom);
 		for (final Edge edge : edges)
 		{
 			edge.draw(renderer);

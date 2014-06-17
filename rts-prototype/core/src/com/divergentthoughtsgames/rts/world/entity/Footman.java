@@ -29,6 +29,7 @@ public class Footman extends Entity
 		spriteOffsetY = -8;
 		selectable = true;
 		solid = true;
+		moveable = true;
 		
 		setAnimations();
 	}

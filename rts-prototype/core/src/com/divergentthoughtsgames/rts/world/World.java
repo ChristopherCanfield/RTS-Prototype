@@ -6,6 +6,7 @@ import java.util.UUID;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.utils.Array;
+import com.divergentthoughtsgames.rts.nav.NavMap;
 
 public class World
 {

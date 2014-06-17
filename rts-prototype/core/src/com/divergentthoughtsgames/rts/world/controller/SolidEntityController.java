@@ -42,7 +42,7 @@ public class SolidEntityController implements Controller
 		for (final EntityIntersection intersection : overlapping)
 		{
 			// TODO: Perform polygon bounding box tests once the intersection between the AABB's have been confirmed?
-			if (intersection.entity.isSolid())
+			if (intersection.entity.isSolid() && intersection.entity.isMoveable())
 			{
 				Rectangle entityRect = entity.getRect();
 				// Right

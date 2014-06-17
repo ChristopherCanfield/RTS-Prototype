@@ -1,5 +1,6 @@
 package com.divergentthoughtsgames.rts.world;
 
+import java.util.List;
 import java.util.Objects;
 import java.util.UUID;
 
@@ -52,6 +53,8 @@ public abstract class Entity
 	
 	/** Specifies whether the entity is solid. Solid entities can't overlap. **/
 	protected boolean solid;
+	/** Specified whether the entity can move. **/
+	protected boolean moveable;
 	
 	/** Whether the entity is selectable by the user. **/
 	protected boolean selectable;
@@ -87,6 +90,11 @@ public abstract class Entity
 	public final boolean isSolid()
 	{
 		return solid;
+	}
+	
+	public final boolean isMoveable()
+	{
+		return moveable;
 	}
 	
 	public final Rectangle getRect()

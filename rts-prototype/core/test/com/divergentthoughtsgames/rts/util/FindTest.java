@@ -15,9 +15,9 @@ import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.utils.Array;
 import com.divergentthoughtsgames.rts.App;
 import com.divergentthoughtsgames.rts.mock.MockEntity;
+import com.divergentthoughtsgames.rts.nav.NavMap;
 import com.divergentthoughtsgames.rts.nav.Node;
 import com.divergentthoughtsgames.rts.world.Entity;
-import com.divergentthoughtsgames.rts.world.NavMap;
 import com.divergentthoughtsgames.rts.world.World;
 
 public class FindTest

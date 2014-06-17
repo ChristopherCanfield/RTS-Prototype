@@ -37,6 +37,7 @@ public class Ogre extends Entity
 		spriteOffsetY = 0;
 		selectable = true;
 		solid = true;
+		moveable = true;
 		
 		maxSpeed = 3.f;
 		

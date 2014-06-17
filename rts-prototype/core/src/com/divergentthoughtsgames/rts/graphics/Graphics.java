@@ -62,6 +62,11 @@ public class Graphics
 		return camera;
 	}
 	
+	public float getZoom()
+	{
+		return camera.zoom;
+	}
+	
 	public void setWorld(World world)
 	{
 		this.world = world;

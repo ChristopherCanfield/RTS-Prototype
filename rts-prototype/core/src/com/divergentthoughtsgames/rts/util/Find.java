@@ -6,9 +6,9 @@ import java.util.List;
 import com.badlogic.gdx.math.Intersector;
 import com.badlogic.gdx.math.Rectangle;
 import com.divergentthoughtsgames.rts.App;
+import com.divergentthoughtsgames.rts.nav.NavMap;
 import com.divergentthoughtsgames.rts.nav.Node;
 import com.divergentthoughtsgames.rts.world.Entity;
-import com.divergentthoughtsgames.rts.world.NavMap;
 
 public abstract class Find
 {
