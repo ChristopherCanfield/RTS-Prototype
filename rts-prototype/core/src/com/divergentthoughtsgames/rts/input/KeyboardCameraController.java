@@ -59,6 +59,5 @@ public class KeyboardCameraController extends CameraController
 		{
 			resetZoom();
 		}
-				
 	}
 }

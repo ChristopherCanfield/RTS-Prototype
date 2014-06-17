@@ -30,7 +30,15 @@ public class MoveCommand extends AbstractEntityCommand<Entity>
 		
 		Node startNode = Find.node(entity);
 		Node targetNode = Find.node(targetX, targetY);
-		finalTarget = new Vector2(targetX, targetY);
+		if (targetNode.isPassable())
+		{
+			finalTarget = new Vector2(targetX, targetY);
+		}
+		else
+		{
+			targetNode = Search.findPassableNodeBfs(targetNode);
+			finalTarget = new Vector2(targetNode.getCenterX(), targetNode.getCenterY());
+		}
 		nextTarget = new Vector2();
 		
 //		startNode.setPassable(true);

@@ -120,4 +120,39 @@ public abstract class Search
 		}
 		return path;
 	}
+
+	/**
+	 * Finds the closest passable node to startNode.
+	 * @param startNode
+	 * @return
+	 */
+	public static Node findPassableNodeBfs(Node startNode)
+	{
+		Queue<Node> unexplored = new LinkedList<Node>();
+		unexplored.add(startNode);
+		
+		HashSet<Node> searched = new HashSet<Node>();
+		searched.add(startNode);
+		
+		while (!unexplored.isEmpty())
+		{
+			Node current = unexplored.remove();
+			if (current.isPassable())
+			{
+				return current;
+			}
+			
+			for (Edge e : current.getEdges())
+			{
+				Node adjacent = e.getOppositeNode(current);
+				if (!searched.contains(adjacent))
+				{
+					unexplored.add(adjacent);
+					searched.add(adjacent);
+				}
+			}
+		}
+		
+		return null;
+	}
 }
