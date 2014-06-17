@@ -38,39 +38,42 @@ public class SolidEntityController implements Controller
 	@Override
 	public void update(Entity entity, World world)
 	{
-		List<EntityIntersection> overlapping = Find.overlappingEntities(entity, world.getEntities());
-		for (final EntityIntersection intersection : overlapping)
-		{
-			// TODO: Perform polygon bounding box tests once the intersection between the AABB's have been confirmed?
-			boolean otherEntIsMoveable = intersection.entity.isMoveable();
-			if (intersection.entity.isSolid())
-			{
-				Rectangle entityRect = entity.getRect();
-				// Right
-				if (intersection.rect.x > entityRect.x)
-				{
-					entity.move(intersection.rect.width / 2.f, 0.f);
-					if (otherEntIsMoveable) intersection.entity.move(intersection.rect.width / -2.f, 0.f);
-				}
-				// Left
-				if (intersection.rect.x + intersection.rect.width < entityRect.x + entityRect.width)
-				{
-					entity.move(intersection.rect.width / -2.f, 0.f);
-					if (otherEntIsMoveable) intersection.entity.move(intersection.rect.width / 2.f, 0.f);
-				}
-				// Top
-				if (intersection.rect.y > entityRect.y)
-				{
-					entity.move(0.f, intersection.rect.height / -2.f);
-					if (otherEntIsMoveable) intersection.entity.move(0.f, intersection.rect.height / 2.f);
-				}
-				// Bottom
-				if (intersection.rect.y + intersection.rect.height < entityRect.y + entityRect.height)
-				{
-					entity.move(0.f, intersection.rect.height / 2.f);
-					if (otherEntIsMoveable) intersection.entity.move(0.f, intersection.rect.height / -2.f);
-				}
-			}
-		}
+		// TODO (6/17/2014): this isn't currently working properly...
+		return;
+		
+//		List<EntityIntersection> overlapping = Find.overlappingEntities(entity, world.getEntities());
+//		for (final EntityIntersection intersection : overlapping)
+//		{
+//			// TODO: Perform polygon bounding box tests once the intersection between the AABB's have been confirmed?
+//			boolean otherEntIsMoveable = intersection.entity.isMoveable();
+//			if (intersection.entity.isSolid())
+//			{
+//				Rectangle entityRect = entity.getRect();
+//				// Right
+//				if (intersection.rect.x > entityRect.x)
+//				{
+//					entity.move(intersection.rect.width / 2.f, 0.f);
+//					if (otherEntIsMoveable) intersection.entity.move(intersection.rect.width / -2.f, 0.f);
+//				}
+//				// Left
+//				if (intersection.rect.x + intersection.rect.width < entityRect.x + entityRect.width)
+//				{
+//					entity.move(intersection.rect.width / -2.f, 0.f);
+//					if (otherEntIsMoveable) intersection.entity.move(intersection.rect.width / 2.f, 0.f);
+//				}
+//				// Top
+//				if (intersection.rect.y > entityRect.y)
+//				{
+//					entity.move(0.f, intersection.rect.height / -2.f);
+//					if (otherEntIsMoveable) intersection.entity.move(0.f, intersection.rect.height / 2.f);
+//				}
+//				// Bottom
+//				if (intersection.rect.y + intersection.rect.height < entityRect.y + entityRect.height)
+//				{
+//					entity.move(0.f, intersection.rect.height / 2.f);
+//					if (otherEntIsMoveable) intersection.entity.move(0.f, intersection.rect.height / -2.f);
+//				}
+//			}
+//		}
 	}
 }
