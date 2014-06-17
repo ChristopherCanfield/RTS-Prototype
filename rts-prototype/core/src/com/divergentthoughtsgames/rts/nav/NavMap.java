@@ -27,13 +27,14 @@ public class NavMap
 	
 	public static void updateNavGraph(Entity e)
 	{
-		if (e.isSolid())
+		if (e.isSolid() && !e.isMoveable())
 		{
 			List<Node> nodes = Find.allNodes(e);
 			for (Node node : nodes)
 			{
 				node.setPassable(false);
 			}
+//			e.setBlockedNodes(nodes);
 		}
 	}
 	

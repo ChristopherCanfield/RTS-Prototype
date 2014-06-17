@@ -29,6 +29,7 @@ public class HumanFarm extends Entity
 		spriteOffsetX = 0;
 		spriteOffsetY = 0;
 		selectable = false;
+		solid = true;
 		
 		setAnimations();
 	}

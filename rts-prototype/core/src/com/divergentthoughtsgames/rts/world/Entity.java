@@ -14,6 +14,7 @@ import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.Array;
 import com.divergentthoughtsgames.rts.App;
+import com.divergentthoughtsgames.rts.nav.NavMap;
 import com.divergentthoughtsgames.rts.nav.Node;
 import com.divergentthoughtsgames.rts.util.Find;
 import com.divergentthoughtsgames.rts.util.GameMath;
@@ -50,6 +51,8 @@ public abstract class Entity
 	private float speed;
 	
 	private final Vector2 movementVector = new Vector2();
+	
+	private List<Node> blockedNodes;
 	
 	/** Specifies whether the entity is solid. Solid entities can't overlap. **/
 	protected boolean solid;
@@ -144,11 +147,7 @@ public abstract class Entity
 //		}
 		
 		onMove();
-		
-		if (App.debugEnabled())
-		{
-			Gdx.app.debug("Entity Position", toString());
-		}
+		processMove();
 	}
 	
 	public void move(float x, float y)
@@ -162,6 +161,20 @@ public abstract class Entity
 //		}
 		
 		onMove();
+		processMove();
+	}
+	
+	/**
+	 * Override this to hook into the move method.
+	 */
+	protected void onMove()
+	{
+	}
+	
+	private void processMove()
+	{
+//		clearBlockedNodes();
+//		NavMap.updateNavGraph(this);
 		
 		if (App.debugEnabled())
 		{
@@ -169,9 +182,21 @@ public abstract class Entity
 		}
 	}
 	
-	protected void onMove()
-	{
-	}
+//	public void setBlockedNodes(List<Node> blocked)
+//	{
+//		blockedNodes = blocked;
+//	}
+//	
+//	public void clearBlockedNodes()
+//	{
+//		if (blockedNodes != null)
+//		{
+//			for (Node node : blockedNodes)
+//			{
+//				node.setPassable(true);
+//			}
+//		}
+//	}
 	
 	public final int getX()
 	{

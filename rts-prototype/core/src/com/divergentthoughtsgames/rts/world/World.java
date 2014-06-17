@@ -21,6 +21,7 @@ public class World
 	{
 		entities.add(e);
 		entityMap.put(e.getId(), e);
+		NavMap.updateNavGraph(e);
 	}
 	
 	public Entity[] getEntities()

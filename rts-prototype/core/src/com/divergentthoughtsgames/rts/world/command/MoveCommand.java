@@ -33,7 +33,8 @@ public class MoveCommand extends AbstractEntityCommand<Entity>
 		finalTarget = new Vector2(targetX, targetY);
 		nextTarget = new Vector2();
 		
-		startNode.setPassable(true);
+//		startNode.setPassable(true);
+//		entity.clearBlockedNodes();
 		path = Search.aStar(startNode, targetNode, StraightLineHeuristic.get());
 		
 		// Get the next node, and face it.
@@ -88,7 +89,7 @@ public class MoveCommand extends AbstractEntityCommand<Entity>
 	protected void onCancelled()
 	{
 		entity.stopMoving();
-		previousNode.setPassable(true);
+//		previousNode.setPassable(true);
 		entity.setCommand(NullCommand.get());
 		Gdx.app.debug("Move Command", "Move Command cancelled");
 	}
@@ -97,7 +98,7 @@ public class MoveCommand extends AbstractEntityCommand<Entity>
 	{
 		if (previousNode != null)
 		{
-			previousNode.setPassable(true);
+//			previousNode.setPassable(true);
 		}
 		
 		nextNode = path.poll();
@@ -115,7 +116,7 @@ public class MoveCommand extends AbstractEntityCommand<Entity>
 		entity.setSpeedMax();
 		
 		previousNode = entity.getNode();
-		previousNode.setPassable(false);
+//		previousNode.setPassable(false);
 	}
 	
 	private static void rotateToFace(Entity entity, Vector2 nextTarget, Vector2 finalTarget)

@@ -39,6 +39,7 @@ public abstract class Find
 	 */
 	public static List<Node> allNodes(Entity entity)
 	{
+		// TODO (6/17/2014): this is far too inefficient.
 		ArrayList<Node> found = new ArrayList<>();
 		Rectangle entRect = entity.getRect();
 		Node[] navGraph = App.world.getNavMap().getNavGraph();
