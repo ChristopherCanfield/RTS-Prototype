@@ -63,7 +63,7 @@ public class MoveCommand extends AbstractEntityCommand<Entity>
 		}
 		
 //		if (entity.getNode().equals(nextNode))
-		if (entity.contains((int)nextTarget.x, (int)nextTarget.y))
+		if (entity.contains(nextTarget.x, nextTarget.y))
 		{
 			if (nextTarget == finalTarget)
 			{

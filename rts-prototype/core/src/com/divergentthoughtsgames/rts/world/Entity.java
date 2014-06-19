@@ -106,6 +106,11 @@ public abstract class Entity
 		return rect.contains(x, y);
 	}
 	
+	public final boolean contains(float x, float y)
+	{
+		return rect.contains(x, y);
+	}
+	
 //	public final boolean containsAtCenter(int x, int y)
 //	{
 //		if (centerRect == null)
