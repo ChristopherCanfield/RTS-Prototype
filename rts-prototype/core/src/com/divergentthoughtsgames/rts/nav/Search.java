@@ -130,8 +130,16 @@ public abstract class Search
 	public static Node findPassableNodeBfs(Node startNode)
 	{
 		// Java 8.
-		return breadthFirstSearch(startNode, (Object goal) -> {
-			return ((Node)goal).isPassable();
+		return breadthFirstSearch(startNode, (Object node) -> {
+			return ((Node)node).isPassable();
+		});
+	}
+	
+	public static Node findUnclaimedNodeBfs(Node startNode, HashSet<Node> claimedNodes)
+	{
+		// Java 8.
+		return breadthFirstSearch(startNode, (Object node) -> {
+			return (!claimedNodes.contains(node));
 		});
 	}
 	

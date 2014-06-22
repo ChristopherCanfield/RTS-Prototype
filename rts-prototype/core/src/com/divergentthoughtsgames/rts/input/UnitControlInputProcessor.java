@@ -5,11 +5,17 @@
  */
 package com.divergentthoughtsgames.rts.input;
 
+import java.util.HashSet;
+
+
 import com.badlogic.gdx.Input.Buttons;
 import com.badlogic.gdx.InputAdapter;
 import com.badlogic.gdx.math.Vector3;
 import com.divergentthoughtsgames.rts.App;
+import com.divergentthoughtsgames.rts.nav.Node;
+import com.divergentthoughtsgames.rts.nav.Search;
 import com.divergentthoughtsgames.rts.util.Coords;
+import com.divergentthoughtsgames.rts.util.Find;
 import com.divergentthoughtsgames.rts.world.Entity;
 import com.divergentthoughtsgames.rts.world.command.MoveCommand;
 
@@ -39,10 +45,25 @@ public class UnitControlInputProcessor extends InputAdapter
 	{
 		if (button == Buttons.LEFT && !App.selected.isEmpty())
 		{
+			final HashSet<Node> goals = new HashSet<>();
+			
 			final Vector3 worldCoords = Coords.screenToWorld(screenX, screenY);
 			App.selected.forEach((Entity e) -> {
-				e.rotateToFace(worldCoords.x, worldCoords.y);
-				e.setCommand(new MoveCommand(e, worldCoords.x, worldCoords.y));
+				Node goalNode = Find.node(worldCoords.x, worldCoords.y);
+				Node emptyNode = Search.findUnclaimedNodeBfs(goalNode, goals);
+				goals.add(emptyNode);
+				
+				if (emptyNode.equals(goalNode))
+				{
+					e.rotateToFace(worldCoords.x, worldCoords.y);
+					e.setCommand(new MoveCommand(e, worldCoords.x, worldCoords.y));
+				}
+				else
+				{
+					e.rotateToFace(emptyNode.getX(), emptyNode.getY());
+					e.setCommand(new MoveCommand(e, emptyNode.getX(), emptyNode.getY()));
+				}
+				
 				if (App.debugEnabled()) e.logRotation();
 			});
 		}

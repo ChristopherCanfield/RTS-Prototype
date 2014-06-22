@@ -13,7 +13,7 @@ import com.divergentthoughtsgames.rts.util.Coords;
 
 public class Node
 {
-	public static int SIZE = 16;
+	public static int SIZE = 24;
 	public static int HALF_SIZE = SIZE / 2;
 	
 	public static final Color DEFAULT_COLOR = Color.DARK_GRAY;
