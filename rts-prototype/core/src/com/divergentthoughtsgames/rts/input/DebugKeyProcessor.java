@@ -4,6 +4,10 @@ import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.InputAdapter;
 import com.divergentthoughtsgames.rts.App;
 
+/**
+ * Enables debugging to be turned on or off with a key press.
+ * @author Christopher D. Canfield
+ */
 public class DebugKeyProcessor extends InputAdapter
 {
 	@Override

@@ -11,12 +11,12 @@ import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 public class SearchNode extends Node implements Comparable<SearchNode>
 {
 	// The parent to this node in the path.
-	private SearchNode parent;
+	private final SearchNode parent;
 	
 	// The node's cumulative cost from the start node to this node.
-	private double g;
+	private final double g;
 	// The node's heuristic cost to the end node.
-	private double h;
+	private final double h;
 	
 	/**
 	 * Wraps a Node with additional information needed during the A* search.

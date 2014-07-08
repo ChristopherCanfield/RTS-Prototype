@@ -11,6 +11,10 @@ import com.badlogic.gdx.graphics.Color;
 import com.divergentthoughtsgames.rts.App;
 import com.divergentthoughtsgames.rts.graphics.effect.ClickLocatorEffect;
 
+/**
+ * Creates an effect in the location of a click.
+ * @author Christopher D. Canfield
+ */
 public class ClickLocator extends InputAdapter
 {
 	private boolean isDragging;

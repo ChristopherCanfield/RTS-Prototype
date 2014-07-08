@@ -29,7 +29,7 @@ public abstract class GameMath
 	 * @param num
 	 * @param min
 	 * @param max
-	 * @return
+	 * @return true if num is between min and max, inclusive.
 	 */
 	public static boolean between(float num, float min, float max)
 	{
