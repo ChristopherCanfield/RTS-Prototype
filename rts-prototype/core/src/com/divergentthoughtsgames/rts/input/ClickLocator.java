@@ -5,7 +5,9 @@
  */
 package com.divergentthoughtsgames.rts.input;
 
+import com.badlogic.gdx.Input.Buttons;
 import com.badlogic.gdx.InputAdapter;
+import com.badlogic.gdx.graphics.Color;
 import com.divergentthoughtsgames.rts.App;
 import com.divergentthoughtsgames.rts.graphics.effect.ClickLocatorEffect;
 
@@ -16,7 +18,18 @@ public class ClickLocator extends InputAdapter
 	@Override
 	public boolean touchDown(int screenX, int screenY, int pointer, int button)
 	{
-		ClickLocatorEffect effect = new ClickLocatorEffect(screenX, screenY);
+		// TODO (7/8/2014): display cancel click (red) when 2 fingers are clicked.
+		Color color = null;
+		if (App.selected.isEmpty())
+		{
+			color = Color.NAVY;
+		}
+		else
+		{
+			color = (button == Buttons.LEFT) ? Color.GREEN : Color.RED;
+		}
+		
+		ClickLocatorEffect effect = new ClickLocatorEffect(screenX, screenY, color);
 		App.graphics.addEffect(effect);
 		return false;
 	}

@@ -17,15 +17,24 @@ public class ClickLocatorEffect extends AbstractEffect
 	private static final float maxSize = 20;
 	private static final float maxTime = 1.f;
 	
-	private int locationX;
-	private int locationY;
+	private final int locationX;
+	private final int locationY;
 	private double timeRemaining;
 	
+	private static final Color defaultColor = Color.NAVY;
+	private Color color;
+	
 	public ClickLocatorEffect(int locationX, int locationY)
+	{
+		this(locationX, locationY, defaultColor);
+	}
+	
+	public ClickLocatorEffect(int locationX, int locationY, Color color)
 	{
 		this.locationX = locationX;
 		this.locationY = locationY;
 		this.timeRemaining = maxTime;
+		this.color = color.cpy();
 	}
 
 	@Override
@@ -34,7 +43,7 @@ public class ClickLocatorEffect extends AbstractEffect
 		if (!isFinished())
 		{
 			float interpolation = Interpolation.circleIn.apply((float)(timeRemaining / maxTime));
-			renderer.setColor(Color.NAVY);
+			renderer.setColor(color);
 			Vector3 adjustedLocation = Coords.screenToWorld(locationX, locationY);
 			renderer.circle(adjustedLocation.x, adjustedLocation.y, maxSize * interpolation);
 			

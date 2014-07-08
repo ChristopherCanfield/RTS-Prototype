@@ -89,12 +89,12 @@ public class RtsPrototype extends ApplicationAdapter
 	private static void setInputProcessors(Graphics graphics)
 	{
 		InputMultiplexer inputProcessors = new InputMultiplexer();
+		inputProcessors.addProcessor(new ClickLocator());
 		inputProcessors.addProcessor(new SelectionInputProcessor(graphics));
 		inputProcessors.addProcessor(new UnitGroupKeyProcessor());
 		inputProcessors.addProcessor(new UnitControlInputProcessor());
 		inputProcessors.addProcessor(new MouseCameraController((OrthographicCamera)graphics.getCamera()));
 		inputProcessors.addProcessor(new DebugKeyProcessor());
-		inputProcessors.addProcessor(new ClickLocator());
 		Gdx.input.setInputProcessor(inputProcessors);
 	}
 
