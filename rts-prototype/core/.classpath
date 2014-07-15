@@ -1,32 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
-	<classpathentry kind="src" path="src"/>
-	<classpathentry kind="src" path="test"/>
-	<classpathentry exported="true" kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
-	<classpathentry exported="true" kind="lib" path="C:/Users/Canfield/.gradle/caches/modules-2/files-2.1/com.badlogicgames.gdx/gdx/1.1.0/686f5a609c717eb0769d3b954c501a49bf4fe351/gdx-1.1.0.jar" sourcepath="C:/Users/Canfield/.gradle/caches/modules-2/files-2.1/com.badlogicgames.gdx/gdx/1.1.0/abdb14d6d21978e13055b14f834108e4c8dd8cba/gdx-1.1.0-sources.jar"/>
-	<classpathentry exported="true" kind="lib" path="C:/Users/Canfield/.gradle/caches/modules-2/files-2.1/com.badlogicgames.gdx/gdx-box2d/1.1.0/919bff3c5e92062ee3413f86076c089bd810b5b3/gdx-box2d-1.1.0.jar" sourcepath="C:/Users/Canfield/.gradle/caches/modules-2/files-2.1/com.badlogicgames.gdx/gdx-box2d/1.1.0/4a031279bbde63fafdcc6b487c4c85aa4dd1207b/gdx-box2d-1.1.0-sources.jar"/>
-	<classpathentry exported="true" kind="lib" path="C:/Users/Canfield/.gradle/caches/modules-2/files-2.1/com.badlogicgames.gdx/gdx-freetype/1.1.0/dcd25348942c431ab6353c02870fc2e4756ff259/gdx-freetype-1.1.0.jar" sourcepath="C:/Users/Canfield/.gradle/caches/modules-2/files-2.1/com.badlogicgames.gdx/gdx-freetype/1.1.0/abc0ac0dec17dfd72850b71fbc7878abeb152175/gdx-freetype-1.1.0-sources.jar"/>
-	<classpathentry exported="true" kind="lib" path="C:/Users/Canfield/.gradle/caches/modules-2/files-2.1/com.badlogicgames.box2dlights/box2dlights/1.2/8b3baf8bd6d5fdf7052d9798977133f46a9e7a05/box2dlights-1.2.jar" sourcepath="C:/Users/Canfield/.gradle/caches/modules-2/files-2.1/com.badlogicgames.box2dlights/box2dlights/1.2/50b3097b9588b328c53bc2e21fd115e89fc06265/box2dlights-1.2-sources.jar"/>
-	<classpathentry kind="lib" path="lib/apache-commons-io/commons-io-2.4.jar">
-		<attributes>
-			<attribute name="javadoc_location" value="jar:platform:/resource/rts-prototype-core/lib/apache-commons-io/commons-io-2.4-javadoc.jar!/"/>
-		</attributes>
-	</classpathentry>
-	<classpathentry kind="lib" path="lib/apache-commons-lang/commons-lang3-3.3.2.jar">
-		<attributes>
-			<attribute name="javadoc_location" value="jar:platform:/resource/rts-prototype-core/lib/apache-commons-lang/commons-lang3-3.3.2-javadoc.jar!/"/>
-		</attributes>
-	</classpathentry>
-	<classpathentry kind="lib" path="lib/google-guava/guava-17.0.jar">
-		<attributes>
-			<attribute name="javadoc_location" value="http://docs.guava-libraries.googlecode.com/git-history/v14.0.1/javadoc/"/>
-		</attributes>
-	</classpathentry>
-	<classpathentry kind="lib" path="lib/mockito/mockito-all-1.9.5.jar">
-		<attributes>
-			<attribute name="javadoc_location" value="http://docs.mockito.googlecode.com/hg/"/>
-		</attributes>
-	</classpathentry>
-	<classpathentry kind="con" path="org.eclipse.jdt.junit.JUNIT_CONTAINER/4"/>
 	<classpathentry kind="output" path="bin"/>
+	<classpathentry kind="src" path="src"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER" exported="true"/>
+	<classpathentry sourcepath="C:/Users/Canfield/.gradle/caches/modules-2/files-2.1/com.badlogicgames.gdx/gdx/1.2.1-SNAPSHOT/203e8d0156dc0a2aa187ab55985ca5c563c42593/gdx-1.2.1-SNAPSHOT-sources.jar" kind="lib" path="C:/Users/Canfield/.gradle/caches/modules-2/files-2.1/com.badlogicgames.gdx/gdx/1.2.1-SNAPSHOT/82cdf50931ba7d05165bb0f1d0d8d8dc66169af0/gdx-1.2.1-SNAPSHOT.jar" exported="true"/>
+	<classpathentry sourcepath="C:/Users/Canfield/.gradle/caches/modules-2/files-2.1/com.badlogicgames.gdx/gdx-box2d/1.2.1-SNAPSHOT/8cc7343e00cfa3e4e7b622d4df105c97ed3a964d/gdx-box2d-1.2.1-SNAPSHOT-sources.jar" kind="lib" path="C:/Users/Canfield/.gradle/caches/modules-2/files-2.1/com.badlogicgames.gdx/gdx-box2d/1.2.1-SNAPSHOT/55c005c8742a4ad8d7b8d71b010e32b87199b430/gdx-box2d-1.2.1-SNAPSHOT.jar" exported="true"/>
+	<classpathentry sourcepath="C:/Users/Canfield/.gradle/caches/modules-2/files-2.1/com.badlogicgames.gdx/gdx-freetype/1.2.1-SNAPSHOT/76f2034a8390b657eba6800b6ca56720b4249312/gdx-freetype-1.2.1-SNAPSHOT-sources.jar" kind="lib" path="C:/Users/Canfield/.gradle/caches/modules-2/files-2.1/com.badlogicgames.gdx/gdx-freetype/1.2.1-SNAPSHOT/15c6e79d159de86ce500ee8888cd2a53bf5f153/gdx-freetype-1.2.1-SNAPSHOT.jar" exported="true"/>
+	<classpathentry sourcepath="C:/Users/Canfield/.gradle/caches/modules-2/files-2.1/com.badlogicgames.box2dlights/box2dlights/1.2/50b3097b9588b328c53bc2e21fd115e89fc06265/box2dlights-1.2-sources.jar" kind="lib" path="C:/Users/Canfield/.gradle/caches/modules-2/files-2.1/com.badlogicgames.box2dlights/box2dlights/1.2/8b3baf8bd6d5fdf7052d9798977133f46a9e7a05/box2dlights-1.2.jar" exported="true"/>
 </classpath>
