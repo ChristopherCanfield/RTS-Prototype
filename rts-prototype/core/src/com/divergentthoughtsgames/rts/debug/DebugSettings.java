@@ -1,5 +1,8 @@
 package com.divergentthoughtsgames.rts.debug;
 
+import com.divergentthoughtsgames.rts.App;
+import com.divergentthoughtsgames.rts.world.controller.KeyboardEntityMoveController;
+
 
 public class DebugSettings
 {
@@ -76,11 +79,19 @@ public class DebugSettings
 		navGraphVisible = !navGraphVisible;
 	}
 
+	/**
+	 * Specifies whether unit paths are visible.
+	 * @return true if unit paths are visible.
+	 */
 	public boolean isPathVisible()
 	{
 		return pathVisible;
 	}
 
+	/**
+	 * Sets whether unit paths are visible. If the paths were previously visible, they will now be
+	 * hidden, and vice-versa.
+	 */
 	public void setPathVisible()
 	{
 		pathVisible = !pathVisible;
@@ -94,6 +105,11 @@ public class DebugSettings
 	public void possessUnitOnClick(boolean value)
 	{
 		possessUnit = value;
+		if (!possessUnit && App.possessedEntity != null)
+		{
+			App.possessedEntity.removeController(KeyboardEntityMoveController.class);
+			App.possessedEntity = null;
+		}
 	}
 
 	public boolean centerCameraOnPossessedUnit()

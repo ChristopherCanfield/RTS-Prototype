@@ -2,6 +2,7 @@ package com.divergentthoughtsgames.rts;
 
 import com.divergentthoughtsgames.rts.debug.DebugSettings;
 import com.divergentthoughtsgames.rts.graphics.Graphics;
+import com.divergentthoughtsgames.rts.world.Entity;
 import com.divergentthoughtsgames.rts.world.SelectedEntities;
 import com.divergentthoughtsgames.rts.world.UnitGroups;
 import com.divergentthoughtsgames.rts.world.World;
@@ -62,8 +63,13 @@ public abstract class App
 		world = w;
 	}
 
-	public static SelectedEntities selected = new SelectedEntities();
-	public static UnitGroups unitGroups = new UnitGroups();
+	public static final SelectedEntities selected = new SelectedEntities();
+	public static final UnitGroups unitGroups = new UnitGroups();
+
+	/**
+	 * The entity that is currently possessed.
+	 */
+	public static Entity possessedEntity;
 
 	public static void reset()
 	{

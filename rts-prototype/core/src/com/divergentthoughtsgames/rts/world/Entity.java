@@ -45,6 +45,12 @@ public abstract class Entity
 	/** The entity's max speed. **/
 	protected float maxSpeed;
 
+	/** The entity's deceleration rate. **/
+	protected float decelerationRate;
+
+	/** The entity's acceleration rate. **/
+	protected float accelerationRate;
+
 	// The entity's current speed.
 	private float speed;
 
@@ -139,16 +145,11 @@ public abstract class Entity
 
 	public void move()
 	{
-		rect.x += speed * movementVector.x;
-		rect.y += speed * movementVector.y;
-//		if (centerRect != null)
-//		{
-//			centerRect.x = rect.x + rect.width / 2.f;
-//			centerRect.y = rect.y + rect.height / 2.f;
-//		}
-
-		onMove();
-		processMove();
+		if (App.possessedEntity != this)
+		{
+			speed = maxSpeed;
+			move(speed * movementVector.x, speed * movementVector.y);
+		}
 	}
 
 	public void move(float x, float y)
@@ -165,6 +166,26 @@ public abstract class Entity
 		processMove();
 	}
 
+	public void moveNorth()
+	{
+		move(0, maxSpeed);
+	}
+
+	public void moveSouth()
+	{
+		move(0, -maxSpeed);
+	}
+
+	public void moveEast()
+	{
+		move(maxSpeed, 0);
+	}
+
+	public void moveWest()
+	{
+		move(-maxSpeed, 0);
+	}
+
 	/**
 	 * Override this to hook into the move method.
 	 */
@@ -176,6 +197,8 @@ public abstract class Entity
 	{
 //		clearBlockedNodes();
 //		NavMap.updateNavGraph(this);
+
+//		speed = ((speed - decelerationRate) < 0) ? 0 : speed - decelerationRate;
 
 		Gdx.app.debug("Entity Position", toString());
 	}
@@ -307,9 +330,20 @@ public abstract class Entity
 		return sprite.getRotation();
 	}
 
-	protected final void addController(Controller controller)
+	public final void addController(Controller controller)
 	{
 		controllers.add(controller);
+	}
+
+	public final void removeController(Class<? extends Controller> controllerType)
+	{
+		for (final Controller controller : controllers)
+		{
+			if (controller.getClass().equals(controllerType))
+			{
+				controllers.removeValue(controller, true);
+			}
+		}
 	}
 
 	public final void setCommand(EntityCommand c)

@@ -62,6 +62,8 @@ public class DebugWindow
 				FormFactory.RELATED_GAP_ROWSPEC,
 				RowSpec.decode("top:default"),
 				FormFactory.RELATED_GAP_ROWSPEC,
+				FormFactory.DEFAULT_ROWSPEC,
+				FormFactory.RELATED_GAP_ROWSPEC,
 				FormFactory.DEFAULT_ROWSPEC,}));
 
 				JLabel lblEnabledisableDebugging = new JLabel("Enable/disable debugging");
@@ -126,6 +128,31 @@ public class DebugWindow
 				});
 				comboBox.setModel(new DefaultComboBoxModel(new String[] {"None", "Error", "Info", "Debug"}));
 				frame.getContentPane().add(comboBox, "4, 10, fill, default");
+
+				JLabel lblPossessUnit = new JLabel("Possess unit");
+				frame.getContentPane().add(lblPossessUnit, "2, 12");
+
+				JButton btnPossessUnit = new JButton("Disabled");
+				btnPossessUnit.addMouseListener(new MouseAdapter() {
+					@Override
+					public void mouseClicked(MouseEvent e) {
+						if (App.debug.possessUnitOnClick())
+						{
+							btnPossessUnit.setText("Disabled");
+							Gdx.app.postRunnable(() -> {
+								App.debug.possessUnitOnClick(false);
+							});
+						}
+						else
+						{
+							btnPossessUnit.setText("Enabled");
+							Gdx.app.postRunnable(() -> {
+								App.debug.possessUnitOnClick(true);
+							});
+						}
+					}
+				});
+				frame.getContentPane().add(btnPossessUnit, "4, 12");
 	}
 
 	private static int logStringToInt(String logLevel)
