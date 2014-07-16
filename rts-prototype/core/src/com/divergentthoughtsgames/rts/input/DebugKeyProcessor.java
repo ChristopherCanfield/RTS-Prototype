@@ -15,13 +15,13 @@ public class DebugKeyProcessor extends InputAdapter
 	{
 		if (keycode == Keys.F1)
 		{
-			App.setDebug(!App.debugEnabled());
+			App.debug.setEnabled();
 		}
 		else if (keycode == Keys.F2)
 		{
 			App.reset();
 		}
-		
+
 		return false;
 	}
 }

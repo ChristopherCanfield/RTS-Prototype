@@ -18,14 +18,14 @@ public class SelectionInputProcessor extends InputAdapter
 {
 	private final Graphics graphics;
 	private final Rectangle rect = new Rectangle();
-	
+
 	private boolean isSelecting;
-	
+
 	public SelectionInputProcessor(Graphics graphics)
 	{
 		this.graphics = graphics;
 	}
-	
+
 	@Override
 	public boolean keyDown(int keycode)
 	{
@@ -33,18 +33,18 @@ public class SelectionInputProcessor extends InputAdapter
 		{
 			App.selected.clear();
 		}
-		
+
 		return false;
 	}
-	
+
 	@Override
 	public boolean touchDown(int x, int y, int pointer, int button)
 	{
 		Gdx.app.debug("SELECTION", "touchDown " + x + "," + y);
-		
+
 		if (button == Buttons.LEFT)
 		{
-			if (App.selected.isEmpty() || 
+			if (App.selected.isEmpty() ||
 					Gdx.input.isKeyPressed(Keys.SHIFT_LEFT) || Gdx.input.isKeyPressed(Keys.SHIFT_RIGHT))
 			{
 				Vector3 adjusted = Coords.screenToWorld(x, y);
@@ -65,7 +65,7 @@ public class SelectionInputProcessor extends InputAdapter
 			resetRect();
 			graphics.resetSelectionRect();
 		}
-		
+
 		return false;
 	}
 
@@ -76,34 +76,34 @@ public class SelectionInputProcessor extends InputAdapter
 		{
 			Gdx.app.debug("SELECTION", "touchUp " + x + "," + y);
 			graphics.resetSelectionRect();
-			
+
 			Vector3 adjusted = Coords.screenToWorld(x, y);
 			setRectWidthHeight(adjusted.x, adjusted.y);
 			List<Entity> newSelected = Find.allIntersections(rect, App.world.getEntities());
 			resetRect();
-			
+
 			if (!newSelected.isEmpty())
 			{
 				App.selected.addAll(newSelected);
-				
+
 				// Debug.
-				if (App.debugEnabled())
+				if (App.debug.isEnabled())
 				{
 					for (Entity e : App.selected.get())
 					{
 						Gdx.app.debug("Selection Test", e.toString());
 					}
 				}
-				
+
 				isSelecting = false;
 				return true;
 			}
 		}
-		
+
 		isSelecting = false;
 		return false;
 	}
-	
+
 	private void setRectWidthHeight(float endX, float endY)
 	{
 		if (endX - rect.x < 0)
@@ -115,7 +115,7 @@ public class SelectionInputProcessor extends InputAdapter
 		{
 			rect.width = endX - rect.x;
 		}
-		
+
 		if (endY - rect.y < 0)
 		{
 			rect.height = rect.y - endY;
@@ -126,7 +126,7 @@ public class SelectionInputProcessor extends InputAdapter
 			rect.height = endY - rect.y;
 		}
 	}
-	
+
 	private void resetRect()
 	{
 		rect.x = rect.y = rect.width = rect.height = 0;
