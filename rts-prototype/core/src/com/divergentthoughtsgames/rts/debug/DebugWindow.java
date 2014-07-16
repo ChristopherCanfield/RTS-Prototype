@@ -6,6 +6,7 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
 import javax.swing.DefaultComboBoxModel;
+import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
@@ -42,7 +43,7 @@ public class DebugWindow
 	private void initialize()
 	{
 		frame = new JFrame();
-		frame.setBounds(100, 100, 565, 538);
+		frame.setBounds(100, 100, 628, 538);
 		frame.getContentPane().setLayout(new FormLayout(new ColumnSpec[] {
 				FormFactory.UNRELATED_GAP_COLSPEC,
 				ColumnSpec.decode("left:max(200dlu;min)"),
@@ -59,58 +60,72 @@ public class DebugWindow
 				FormFactory.RELATED_GAP_ROWSPEC,
 				RowSpec.decode("top:default"),
 				FormFactory.RELATED_GAP_ROWSPEC,
-				RowSpec.decode("top:default"),}));
+				RowSpec.decode("top:default"),
+				FormFactory.RELATED_GAP_ROWSPEC,
+				FormFactory.DEFAULT_ROWSPEC,}));
 
-								JLabel lblEnabledisableDebugging = new JLabel("Enable/disable debugging");
-								frame.getContentPane().add(lblEnabledisableDebugging, "2, 2");
+				JLabel lblEnabledisableDebugging = new JLabel("Enable/disable debugging");
+				frame.getContentPane().add(lblEnabledisableDebugging, "2, 2");
 
-								JCheckBox debuggingEnabledCheckBox = new JCheckBox("");
-								debuggingEnabledCheckBox.addMouseListener(new MouseAdapter() {
-									@Override
-									public void mouseClicked(MouseEvent e) {
-										Gdx.app.postRunnable(() -> {
-											App.debug.setEnabled();
-										});
-									}
-								});
-								frame.getContentPane().add(debuggingEnabledCheckBox, "4, 2, center, default");
+				JCheckBox debuggingEnabledCheckBox = new JCheckBox("");
+				debuggingEnabledCheckBox.addMouseListener(new MouseAdapter() {
+					@Override
+					public void mouseClicked(MouseEvent e) {
+						Gdx.app.postRunnable(() -> {
+							App.debug.setEnabled();
+						});
+					}
+				});
+				frame.getContentPane().add(debuggingEnabledCheckBox, "4, 2, center, default");
 
-								JLabel lblShowhideNavigationGraph = new JLabel("Show/hide navigation graph");
-								frame.getContentPane().add(lblShowhideNavigationGraph, "2, 4");
+				JLabel lblShowhideNavigationGraph = new JLabel("Show/hide navigation graph");
+				frame.getContentPane().add(lblShowhideNavigationGraph, "2, 4");
 
-								JCheckBox navGraphVisibleCheckBox = new JCheckBox("");
-								navGraphVisibleCheckBox.addMouseListener(new MouseAdapter() {
-									@Override
-									public void mouseClicked(MouseEvent e) {
-										Gdx.app.postRunnable(() -> {
-											App.debug.setNavGraphVisible();
-										});
-									}
-								});
-								frame.getContentPane().add(navGraphVisibleCheckBox, "4, 4, center, default");
+				JCheckBox navGraphVisibleCheckBox = new JCheckBox("");
+				navGraphVisibleCheckBox.addMouseListener(new MouseAdapter() {
+					@Override
+					public void mouseClicked(MouseEvent e) {
+						Gdx.app.postRunnable(() -> {
+							App.debug.setNavGraphVisible();
+						});
+					}
+				});
+				frame.getContentPane().add(navGraphVisibleCheckBox, "4, 4, center, default");
 
-						JLabel lblMakeNodePassableImpassable = new JLabel("Make node passable/impassable");
-						frame.getContentPane().add(lblMakeNodePassableImpassable, "2, 6");
+				JLabel lblShowhideUnitPath = new JLabel("Show/hide unit path");
+				frame.getContentPane().add(lblShowhideUnitPath, "2, 6");
 
-						JCheckBox nodePassableCheckBox = new JCheckBox("");
-						frame.getContentPane().add(nodePassableCheckBox, "4, 6, center, default");
+				JCheckBox showHidePathCheckBox = new JCheckBox("");
+				showHidePathCheckBox.addMouseListener(new MouseAdapter() {
+					@Override
+					public void mouseClicked(MouseEvent e) {
+						Gdx.app.postRunnable(() -> App.debug.setPathVisible());
+					}
+				});
+				frame.getContentPane().add(showHidePathCheckBox, "4, 6, center, default");
+
+				JLabel lblMakeNodePassableImpassable = new JLabel("Make node passable/impassable");
+				frame.getContentPane().add(lblMakeNodePassableImpassable, "2, 8");
+
+				JButton btnClickThenClick = new JButton("Click, then click node");
+				frame.getContentPane().add(btnClickThenClick, "4, 8");
 
 				JLabel lblLogOutputLevel = new JLabel("Log output level");
-				frame.getContentPane().add(lblLogOutputLevel, "2, 8, left, default");
+				frame.getContentPane().add(lblLogOutputLevel, "2, 10, left, default");
 
-						final JComboBox comboBox = new JComboBox();
-						comboBox.addActionListener(new ActionListener() {
-							@Override
-							public void actionPerformed(ActionEvent e) {
-								final int logLevel = logStringToInt(comboBox.getSelectedItem().toString());
+				final JComboBox comboBox = new JComboBox();
+				comboBox.addActionListener(new ActionListener() {
+					@Override
+					public void actionPerformed(ActionEvent e) {
+						final int logLevel = logStringToInt(comboBox.getSelectedItem().toString());
 
-								Gdx.app.postRunnable(() -> {
-									Gdx.app.setLogLevel(logLevel);
-								});
-							}
+						Gdx.app.postRunnable(() -> {
+							Gdx.app.setLogLevel(logLevel);
 						});
-						comboBox.setModel(new DefaultComboBoxModel(new String[] {"None", "Error", "Info", "Debug"}));
-						frame.getContentPane().add(comboBox, "4, 8, fill, default");
+					}
+				});
+				comboBox.setModel(new DefaultComboBoxModel(new String[] {"None", "Error", "Info", "Debug"}));
+				frame.getContentPane().add(comboBox, "4, 10, fill, default");
 	}
 
 	private static int logStringToInt(String logLevel)

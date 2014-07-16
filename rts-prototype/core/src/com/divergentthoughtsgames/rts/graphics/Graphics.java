@@ -138,22 +138,25 @@ public class Graphics
 	 */
 	public void drawPath(Node nextNode, Queue<Node> path)
 	{
-		shapeRenderer.begin(ShapeType.Line);
-		shapeRenderer.setColor(Color.YELLOW);
-		Node previous = nextNode;
-
-		for (Node node : path)
+		if (App.debug.isPathVisible())
 		{
-			for(Edge edge : node.getEdges())
+			shapeRenderer.begin(ShapeType.Line);
+			shapeRenderer.setColor(Color.YELLOW);
+			Node previous = nextNode;
+
+			for (Node node : path)
 			{
-				if (edge.getOppositeNode(node).equals(previous))
+				for(Edge edge : node.getEdges())
 				{
-					edge.draw(shapeRenderer);
+					if (edge.getOppositeNode(node).equals(previous))
+					{
+						edge.draw(shapeRenderer);
+					}
 				}
+				previous = node;
 			}
-			previous = node;
+			shapeRenderer.end();
 		}
-		shapeRenderer.end();
 	}
 
 	public void render()
@@ -161,6 +164,7 @@ public class Graphics
 		Gdx.gl.glClearColor(0.1f, 0.8f, 0.25f, 1.f);
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
+		// Update the camera controller(s).
 		for (CameraController c : cameraControllers)
 		{
 			c.update();
@@ -168,8 +172,10 @@ public class Graphics
 		camera.update();
 		batch.setProjectionMatrix(camera.combined);
 
+		// Clip out objects that are not within the camera's bounds.
 		setClipBounds();
 
+		// Draw the navigation graph, depending on settings.
 		if (App.debug.isNavGraphVisible())
 		{
 			shapeRenderer.begin(ShapeType.Line);

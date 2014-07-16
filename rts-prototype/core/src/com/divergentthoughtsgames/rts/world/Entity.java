@@ -372,11 +372,13 @@ public abstract class Entity
 	{
 		onUpdate();
 
+		// Process the command, if it is not finished.
 		if (!command.isFinished())
 		{
 			command.update();
 		}
 
+		// Update all entity controllers.
 		for (final Controller c : controllers)
 		{
 			c.update(this, world);

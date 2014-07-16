@@ -3,11 +3,23 @@ package com.divergentthoughtsgames.rts.debug;
 
 public class DebugSettings
 {
+	// Whether debugging is enabled.
 	private boolean debugEnabled;
 
+	// Whether bounding boxes are always visible.
 	private boolean boundingBoxesAlwaysVisible;
 
+	// Whether the navigation graph is visible.
 	private boolean navGraphVisible;
+
+	// Whether unit paths are visible.
+	private boolean pathVisible;
+
+	// Whether to possess a unit when clicked.
+	private boolean possessUnit;
+
+	// Whether to center the camera on the possessed unit.
+	private boolean centerCameraOnPossessedUnit;
 
 	/**
 	 * Whether debugging is currently enabled. Debugging adds additional logging and visualizations.
@@ -62,5 +74,35 @@ public class DebugSettings
 	public void setNavGraphVisible()
 	{
 		navGraphVisible = !navGraphVisible;
+	}
+
+	public boolean isPathVisible()
+	{
+		return pathVisible;
+	}
+
+	public void setPathVisible()
+	{
+		pathVisible = !pathVisible;
+	}
+
+	public boolean possessUnitOnClick()
+	{
+		return possessUnit;
+	}
+
+	public void possessUnitOnClick(boolean value)
+	{
+		possessUnit = value;
+	}
+
+	public boolean centerCameraOnPossessedUnit()
+	{
+		return centerCameraOnPossessedUnit;
+	}
+
+	public void centerCameraOnPossessedUnit(boolean value)
+	{
+		centerCameraOnPossessedUnit = value;
 	}
 }
