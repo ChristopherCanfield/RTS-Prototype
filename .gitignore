@@ -21,6 +21,7 @@ tmp/
 local.properties
 .settings/
 .metadata
+.recommenders
 
 # External tool builders
 .externalToolBuilders/

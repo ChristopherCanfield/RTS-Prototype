@@ -22,18 +22,18 @@ public class MoveCommand extends AbstractEntityCommand<Entity>
 	private final Vector2 finalTarget;
 	private Vector2 nextTarget;
 	private Queue<Node> path;
-	
+
 	private final Node startNode;
 	private final boolean startNodePassable;
-	
+
 	public MoveCommand(Entity entity, float targetX, float targetY)
 	{
 		super(entity);
-		
+
 		startNode = Find.node(entity);
 		startNodePassable = startNode.isPassable();
 		startNode.setPassable(true);
-		
+
 		Node targetNode = Find.node(targetX, targetY);
 		if (targetNode.isPassable())
 		{
@@ -45,11 +45,11 @@ public class MoveCommand extends AbstractEntityCommand<Entity>
 			finalTarget = new Vector2(targetNode.getCenterX(), targetNode.getCenterY());
 		}
 		nextTarget = new Vector2();
-		
+
 //		startNode.setPassable(true);
 //		entity.clearBlockedNodes();
 		path = Search.aStar(startNode, targetNode, StraightLineHeuristic.get());
-		
+
 		// Get the next node, and face it.
 		setNextNode();
 	}
@@ -61,7 +61,7 @@ public class MoveCommand extends AbstractEntityCommand<Entity>
 		{
 			return;
 		}
-		
+
 //		if (entity.getNode().equals(nextNode))
 		if (entity.contains(nextTarget.x, nextTarget.y))
 		{
@@ -80,8 +80,8 @@ public class MoveCommand extends AbstractEntityCommand<Entity>
 			rotateToFace(entity, nextTarget, finalTarget);
 			entity.move();
 		}
-		
-		if (App.debugEnabled())
+
+		if (App.debug.isEnabled())
 		{
 			Node entityNode = entity.getNode();
 			Gdx.app.debug("Entity Node", entityNode.toString());
@@ -89,7 +89,7 @@ public class MoveCommand extends AbstractEntityCommand<Entity>
 			App.graphics.drawPath(nextNode, path);
 		}
 	}
-	
+
 	@Override
 	protected void onFinished()
 	{
@@ -98,7 +98,7 @@ public class MoveCommand extends AbstractEntityCommand<Entity>
 		startNode.setPassable(startNodePassable);
 		Gdx.app.debug("Move Command", "Move Command finished");
 	}
-	
+
 	@Override
 	protected void onCancelled()
 	{
@@ -107,9 +107,9 @@ public class MoveCommand extends AbstractEntityCommand<Entity>
 		startNode.setPassable(startNodePassable);
 		Gdx.app.debug("Move Command", "Move Command cancelled");
 	}
-	
+
 	private void setNextNode()
-	{		
+	{
 		nextNode = path.poll();
 		if (nextNode != null)
 		{
@@ -124,7 +124,7 @@ public class MoveCommand extends AbstractEntityCommand<Entity>
 
 		entity.setSpeedMax();
 	}
-	
+
 	private static void rotateToFace(Entity entity, Vector2 nextTarget, Vector2 finalTarget)
 	{
 		entity.rotateToFace(nextTarget.x, nextTarget.y, nextTarget != finalTarget);

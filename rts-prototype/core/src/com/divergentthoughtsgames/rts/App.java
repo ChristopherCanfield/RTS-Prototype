@@ -1,7 +1,6 @@
 package com.divergentthoughtsgames.rts;
 
-import com.badlogic.gdx.Application;
-import com.badlogic.gdx.Gdx;
+import com.divergentthoughtsgames.rts.debug.DebugSettings;
 import com.divergentthoughtsgames.rts.graphics.Graphics;
 import com.divergentthoughtsgames.rts.world.SelectedEntities;
 import com.divergentthoughtsgames.rts.world.UnitGroups;
@@ -18,6 +17,8 @@ public abstract class App
 
 	private static double gameTime;
 	private static double deltaTime;
+
+	public static final DebugSettings debug = new DebugSettings();
 
 	/**
 	 * The amount of time since the game has begun.
@@ -63,31 +64,6 @@ public abstract class App
 
 	public static SelectedEntities selected = new SelectedEntities();
 	public static UnitGroups unitGroups = new UnitGroups();
-
-	private static boolean debug = false;
-
-	/**
-	 * Whether debugging is currently enabled. Debugging adds additional logging and visualizations.
-	 * @return true if debugging is enabled.
-	 */
-	public static boolean debugEnabled()
-	{
-		return debug;
-	}
-
-	/**
-	 * Sets whether debugging is enabled.
-	 * @param val true to enable debugging, or false otherwise.
-	 */
-	public static void setDebug(boolean val)
-	{
-		debug = val;
-		int logLevel = (val) ? Application.LOG_DEBUG : Application.LOG_NONE;
-		if (Gdx.app != null)
-		{
-			Gdx.app.setLogLevel(logLevel);
-		}
-	}
 
 	public static void reset()
 	{
