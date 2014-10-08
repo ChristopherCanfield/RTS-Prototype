@@ -1,4 +1,4 @@
 RTS-Prototype
 =============
 
-A prototyping library for real-time strategy games. This is a work in progress, and is under active development.
+A prototyping library for real-time strategy games. This is a work in progress.
